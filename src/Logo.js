@@ -3,5 +3,5 @@ import { Image} from '@chakra-ui/react';
 import logo from './image/logo.svg';
 
 export const Logo = props => {
-  return <Image  src={logo} {...props} marginTop={'100%'}/>;
+  return <Image  src={logo} {...props} />
 };
