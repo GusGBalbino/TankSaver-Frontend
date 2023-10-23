@@ -8,9 +8,13 @@ import {
   Code,
   Grid,
   theme,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
+import { AlertaBotao } from './components/Alerta/AlertaBotao';
+import { AlertaDiario } from './components/Alerta/AlertaDiario';
 
 function App() {
   return (

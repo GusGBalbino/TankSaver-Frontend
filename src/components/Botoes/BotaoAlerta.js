@@ -2,14 +2,14 @@ import React from 'react';
 import { Button } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
 
-const textoOpcoes = ['Nome Button']
+const textoOpcoes = ['Atualizar']
 
-export const OpcoesSidebar = props => {
+export const BotaoAlerta = props => {
     return (
         
-        <Button leftIcon={<EmailIcon color={'#FFBB0D'} />} variant='outline' textColor={'white'} borderColor={'#8D7843'} >
+        <Button variant='solid' textColor={'white'} bg={'#131328'} >
             {textoOpcoes.map((texto) => (
-            <p>{texto}</p>
+            <p >{texto}</p>
           ))} 
         </Button>
 
@@ -17,4 +17,3 @@ export const OpcoesSidebar = props => {
     )
 
 }
-

@@ -9,7 +9,7 @@ import {
   Flex
 } from '@chakra-ui/react';
 import { Logo } from '../Logo';
-import { OpcoesSidebar } from '../components/OpcoesSidebar/OpcoesSidebar';
+import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
 import FotoPosto from '../image/foto-posto.jpg'
 
 function Sidebar() {
@@ -36,11 +36,11 @@ function Sidebar() {
             Posto Fulano de Tal
           </Text>
 
-          <OpcoesSidebar />
-          <OpcoesSidebar />
-          <OpcoesSidebar />
-          <OpcoesSidebar />
-          <OpcoesSidebar />
+          <OpcoesSidebar nome={"Teste1"} />
+          <OpcoesSidebar nome={"Teste1"}/>
+          <OpcoesSidebar nome={"Teste1"}/>
+          <OpcoesSidebar nome={"Teste1"}/>
+          <OpcoesSidebar nome={"Teste1"}/>
         </VStack>
 
         <Logo marginTop={'100%'} />

@@ -7,13 +7,14 @@ import * as serviceWorker from './serviceWorker';
 import Sidebar from './Pages/Sidebar';
 
 
+
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
     <ColorModeScript />
-    {/*<App />*/}
+    {/* <App /> */}
     < Sidebar />
   </StrictMode>
 );
