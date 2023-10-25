@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import Sidebar from './Pages/Sidebar';
+import Perfil from './Pages/Perfil';
 
 
 
@@ -15,7 +16,8 @@ root.render(
   <StrictMode>
     <ColorModeScript />
     {/* <App /> */}
-    < Sidebar />
+    {/* < Sidebar /> */}
+    < Perfil></Perfil>
   </StrictMode>
 );
 

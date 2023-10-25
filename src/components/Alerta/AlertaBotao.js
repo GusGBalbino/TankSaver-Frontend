@@ -1,39 +1,49 @@
 import React from "react"
-import { VStack, useDisclosure } from '@chakra-ui/react'
-import { Alert, AlertIcon, Box, AlertTitle, AlertDescription, CloseButton, Button} from '@chakra-ui/react';
-import { OpcoesSidebar } from "../Botoes/OpcoesSidebar";
+import { useDisclosure } from '@chakra-ui/react'
+import { Alert, AlertTitle, AlertDescription, CloseButton, Button } from '@chakra-ui/react';
 import { BotaoAlerta } from "../Botoes/BotaoAlerta";
 
-export function AlertaBotao() {
-    const {
-      isOpen: isVisible,
-      onClose,
-      onOpen,
-    } = useDisclosure({ defaultIsOpen: true })
-  
-    return isVisible ? (
-        <Alert borderRadius={'18px'} bg={'#FFBB0D'} textColor={'#131328'} status='warning' variant='solid'>
+const ButtonProps = [
+  { title: String },
+  { description: String }
+]
 
-        <VStack spacing={8}>
-          <AlertTitle>COMPRA DE COMBUSTÍVEIS</AlertTitle>
+export function AlertaBotao(props = ButtonProps) {
+  const {
+    isOpen: isVisible,
+    onClose,
+    onOpen,
+  } = useDisclosure({ defaultIsOpen: true })
 
-          <AlertDescription>
-            Comprou mais combustível?
-          </AlertDescription>
+  return isVisible ? (
+    <Alert
+      flexDirection='column'
+      alignItems='center'
+      justifyContent='center'
+      textAlign='center'
+      maxH='50vh'
+      borderRadius={'18px'}
+      bg={'#FFBB0D'}
+      textColor={'#131328'}
+      status='warning'
+      variant='solid'
+      maxW='30vw'
+      gap='20px'
+    >
+      <CloseButton alignSelf='flex-end' onClick={onClose}/>
 
-          <BotaoAlerta/>
-        </VStack>
+      <AlertTitle mt={-5} mb={1} fontSize='lg'>
+        {props.title}
+      </AlertTitle>
 
-        <CloseButton
-          alignSelf='flex-start'
-          position='relative'
-          right={-1}
-          top={-1}
-          onClick={onClose}
-        />
-      </Alert>
+      <AlertDescription maxWidth='sm'>
+        {props.description}
+      </AlertDescription>
 
-    ) : (
-      <Button onClick={onOpen}>Aqui vai a condição de quando o botao vai aparecer</Button>
-    )
-  }
+      <BotaoAlerta />
+    </Alert>
+
+  ) : (
+    <Button onClick={onOpen}>Aqui vai a condição de quando o botao vai aparecer</Button>
+  )
+}
