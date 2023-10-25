@@ -1,6 +1,6 @@
 import React from "react"
 import { useDisclosure } from '@chakra-ui/react'
-import { Alert, AlertTitle, AlertDescription, CloseButton, Button } from '@chakra-ui/react';
+import { Alert, AlertTitle, AlertDescription, AlertIcon, CloseButton, Button } from '@chakra-ui/react';
 import { BotaoAlerta } from "../Botoes/BotaoAlerta";
 
 const ButtonProps = [
@@ -32,7 +32,7 @@ export function AlertaBotao(props = ButtonProps) {
     >
       <CloseButton alignSelf='flex-end' onClick={onClose}/>
 
-      <AlertTitle mt={-5} mb={1} fontSize='lg'>
+      <AlertTitle mt={-25} mb={1} fontSize='lg'>
         {props.title}
       </AlertTitle>
 

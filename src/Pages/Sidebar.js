@@ -6,45 +6,54 @@ import {
   Grid,
   theme,
   Avatar,
-  Flex
+  Flex,
+  GridItem
 } from '@chakra-ui/react';
 
-import { EmailIcon } from '@chakra-ui/icons';
+import { AiOutlineFundProjectionScreen, AiOutlineDollarCircle, AiFillCalculator, AiOutlineSliders, AiOutlineUser } from "react-icons/ai";
 import { Logo } from '../Logo';
 import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
-import FotoPosto from '../image/foto-posto.jpg'
 
 function Sidebar() {
   return (
     <ChakraProvider theme={theme}>
 
       <Grid
+        templateAreas={`"header header"
+      "main"
+      "footer"`}
+        gap='75px'
         display={'flex'}
         flexDirection={'column'}
         width="13%"
         minHeight="100vh"
         p={8}
-        bgColor={'#131328'}>
+        bgColor={'#131328'}
+        fontSize={'xl'}>
 
-        <VStack spacing={5} >
+        <GridItem area={'header'}>
           <Text
             align={'center'}
-            fontSize='xl'
-            color={'#FFBB0D'}>
+            as={'b'}
+            fontSize='2xl'
+            color={'#FFBB0D'}
+            marginBottom={'70px'}>
             Posto Fulano de Tal
           </Text>
+        </GridItem>
 
-          <OpcoesSidebar icon={<EmailIcon color={'#FFBB0D'} />} name={"Dashboard"} />
-          <OpcoesSidebar icon={<EmailIcon color={'#FFBB0D'} />} name={"Ganhos"}/>
-          <OpcoesSidebar icon={<EmailIcon color={'#FFBB0D'} />} name={"Custos"}/>
-          <OpcoesSidebar icon={<EmailIcon color={'#FFBB0D'} />} name={"Variáveis"}/>
-          <OpcoesSidebar icon={<EmailIcon color={'#FFBB0D'} />} name={"Perfil"}/>
-        </VStack>
+        <GridItem area={'main'}>
+          <OpcoesSidebar icon={<AiOutlineFundProjectionScreen color={'#FFBB0D'} />} name={"Dashboard"} />
+          <OpcoesSidebar icon={<AiOutlineDollarCircle color={'#FFBB0D'} />} name={"Ganhos"} />
+          <OpcoesSidebar icon={<AiFillCalculator color={'#FFBB0D'} />} name={"Custos"} />
+          <OpcoesSidebar icon={<AiOutlineSliders color={'#FFBB0D'} />} name={"Variáveis"} />
+          <OpcoesSidebar icon={<AiOutlineUser color={'#FFBB0D'} />} name={"Perfil"} />
+        </GridItem>
 
-        <Logo marginTop={'100%'} />
-
+        <GridItem area={'footer'} marginTop={'90%'}>
+          <Logo />
+        </GridItem>
       </Grid>
-
     </ChakraProvider>
   );
 }

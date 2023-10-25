@@ -7,9 +7,9 @@ const ButtonProps = [
     {icon: String}
 ]
 
-export function OpcoesSidebar(props = ButtonProps) {
+export function BotaoAlteracao(props = ButtonProps) {
     return (
-        <Button leftIcon={props.icon} minW='10vw' marginBottom={'15px'} variant='outline' textColor={'white'} borderColor={'#8D7843'} >
+        <Button leftIcon={props.icon} minW='10vw' marginBottom={'15px'} variant='outline' textColor={'#131328'} borderColor={'#8D7843'} >
                 {props.name}
         </Button>
     )

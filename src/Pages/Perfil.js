@@ -5,10 +5,12 @@ import {
     Grid,
     theme,
 } from '@chakra-ui/react';
+import { EditIcon, CheckIcon } from '@chakra-ui/icons'
 
 import { AlertaBotao } from '../components/Alerta/AlertaBotao';
 import { AlertaDiario } from '../components/Alerta/AlertaDiario';
 import { AlertaAtualizacao } from '../components/Alerta/AlertaAtualizacao';
+import { BotaoAlteracao } from '../components/Botoes/BotaoAlteracao';
 
 
 function Perfil() {
@@ -23,8 +25,10 @@ function Perfil() {
                 bgColor={'#F5F5F5'}>
                 <VStack spacing={5}>
                     <AlertaBotao title={'Atualização de Dados'} description={'Lembre-se de atualizar os dados diáriamente, semanalmente e mensalmente.'}/>
-                    <AlertaDiario />
-                    <AlertaAtualizacao />
+                    <AlertaDiario title={'Atualização de Dados'} description={'Seus dados estão desatualizados, para continuar é necessário que atualize-os.'} />
+                    <AlertaAtualizacao dataHora={'dia tal hora tal'} description={'Os dados de volume e custo total de venda são referentes à semana anterior.'} />
+                    <BotaoAlteracao icon={<EditIcon/>} name={"Editar"} />
+                    <BotaoAlteracao icon={<CheckIcon/>} name={"Salvar Alterações"} />
                 </VStack>
             </Grid>
         </ChakraProvider>

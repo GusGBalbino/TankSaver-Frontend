@@ -1,10 +1,14 @@
 import React from "react"
-import { VStack, useDisclosure } from '@chakra-ui/react'
-import { Alert, AlertIcon, Box, AlertTitle, AlertDescription, CloseButton, Button } from '@chakra-ui/react';
-import { OpcoesSidebar } from "../Botoes/OpcoesSidebar";
+import { useDisclosure } from '@chakra-ui/react'
+import { Alert, AlertTitle, AlertDescription, AlertIcon, CloseButton, Button } from '@chakra-ui/react';
 import { BotaoAlerta } from "../Botoes/BotaoAlerta";
 
-export function AlertaDiario() {
+const ButtonProps = [
+    { title: String },
+    { description: String }
+]
+
+export function AlertaDiario(props = ButtonProps) {
     const {
         isOpen: isVisible,
         onClose,
@@ -12,20 +16,31 @@ export function AlertaDiario() {
     } = useDisclosure({ defaultIsOpen: true })
 
     return isVisible ? (
-        <Alert borderRadius={'18px'} bg={'#FFBB0D'} textColor={'#131328'} status='warning' variant='solid'>
+        <Alert
+            flexDirection='column'
+            alignItems='center'
+            justifyContent='center'
+            textAlign='center'
+            maxH='50vh'
+            borderRadius={'18px'}
+            bg={'#FFBB0D'}
+            textColor={'#131328'}
+            status='warning'
+            variant='solid'
+            maxW='30vw'
+            gap='20px'
+        >
+            <AlertIcon color={'#131328'} boxSize={30} marginBottom={5}/>
 
-            <AlertIcon color={'#131328'}/>
-            <VStack spacing={8}>
-                <AlertTitle>COMPRA DE COMBUSTÍVEIS </AlertTitle>
+            <AlertTitle mt={-25} mb={1} fontSize='lg'>
+                {props.title}
+            </AlertTitle>
 
+            <AlertDescription maxWidth='sm'>
+                {props.description}
+            </AlertDescription>
 
-                <AlertDescription>
-                    Comprou mais combustível?
-                </AlertDescription>
-
-                <BotaoAlerta />
-            </VStack>
-
+            <BotaoAlerta />
         </Alert>
 
     ) : (
