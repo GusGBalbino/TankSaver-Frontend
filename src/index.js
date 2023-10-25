@@ -17,9 +17,9 @@ root.render(
   <StrictMode>
     <ColorModeScript />
     {/* <App /> */}
-    {/* < Sidebar /> */}
-    {/*< Perfil></Perfil>*/}
-    < Login />
+    < Sidebar />
+    {/* < Perfil />*/}
+    {/*< Login />*/}
 
   </StrictMode>
 );
