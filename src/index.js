@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import Sidebar from './Pages/Sidebar';
 import Perfil from './Pages/Perfil';
+import Login from './Pages/Login';
 
 
 
@@ -17,7 +18,9 @@ root.render(
     <ColorModeScript />
     {/* <App /> */}
     {/* < Sidebar /> */}
-    < Perfil></Perfil>
+    {/*< Perfil></Perfil>*/}
+    < Login />
+
   </StrictMode>
 );
 
