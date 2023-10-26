@@ -1,16 +1,19 @@
 import React from 'react';
 import {
   ChakraProvider,
-  Text,
+  Box,
   VStack,
-  Grid,
   theme,
   Image,
-  Flex,
-  GridItem
 } from '@chakra-ui/react';
 
-import { AiOutlineFundProjectionScreen, AiOutlineDollarCircle, AiFillCalculator, AiOutlineSliders, AiOutlineUser } from "react-icons/ai";
+import {
+  AiOutlineFundProjectionScreen,
+  AiOutlineDollarCircle,
+  AiFillCalculator,
+  AiOutlineSliders,
+  AiOutlineUser,
+} from 'react-icons/ai';
 import { Logo } from '../Logo';
 import Logo2 from '../image/Logo2.svg';
 import logo from '../image/logo.svg';
@@ -19,40 +22,56 @@ import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
 function Sidebar() {
   return (
     <ChakraProvider theme={theme}>
-
-      <Grid
-        templateAreas={`"header header"
-      "main"
-      "footer"`}
-        gap={5}
-        display={'flex'}
-        flexDirection={'column'}
-        width="13%"
-        minHeight="100vh"
+      <Box
+        position="fixed"
+        top={0}
+        left={0}
+        width="10rem"
+        height="100%" 
         p={8}
         bgColor={'#131328'}
-        fontSize={'xl'}>
+        fontSize={['xl', 'md']}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        overflowY="auto"
+        overflowX="hidden"
+        zIndex={10} 
+      >
+        <VStack spacing={5} alignItems="center" justifyContent="center">
+          <Image src={Logo2} boxSize={['2.5rem', '4rem']} alt="Logo TankSaver" />
 
-          <VStack>
-          <Image
-            src={Logo2}
-            boxSize={'50px'}
-            marginBottom={'25px'}
-            alt="Logo TankSaver"/>
-        
-          <OpcoesSidebar icon={<AiOutlineFundProjectionScreen color={'#FFBB0D'} />} name={"Dashboard"} />
-          <OpcoesSidebar icon={<AiOutlineDollarCircle color={'#FFBB0D'} />} name={"Ganhos"} />
-          <OpcoesSidebar icon={<AiFillCalculator color={'#FFBB0D'} />} name={"Custos"} />
-          <OpcoesSidebar icon={<AiOutlineSliders color={'#FFBB0D'} />} name={"Variáveis"} />
-          <OpcoesSidebar icon={<AiOutlineUser color={'#FFBB0D'} />} name={"Perfil"} />
+          <OpcoesSidebar
+            icon={<AiOutlineFundProjectionScreen color={'#FFBB0D'} />}
+            name={'Dashboard'}
+          />
+          <OpcoesSidebar
+            icon={<AiOutlineDollarCircle color={'#FFBB0D'} />}
+            name={'Ganhos'}
+          />
+          <OpcoesSidebar
+            icon={<AiFillCalculator color={'#FFBB0D'} />}
+            name={'Custos'}
+          />
+          <OpcoesSidebar
+            icon={<AiOutlineSliders color={'#FFBB0D'} />}
+            name={'Variáveis'}
+          />
+          <OpcoesSidebar
+            icon={<AiOutlineUser color={'#FFBB0D'} />}
+            name={'Perfil'}
+          />
+        </VStack>
 
-          <Image
-            src={logo}
-            boxSize={'150px'}
-            marginBottom={'25px'}
-            alt="Logo TankSaver"/>
-          </VStack>
-      </Grid>
+        <Box
+          position="absolute"
+          bottom={0}
+          width="100%"
+          textAlign="center"
+        >
+          <Image src={logo} boxSize={['10rem', '15rem']} alt="Logo TankSaver" />
+        </Box>
+      </Box>
     </ChakraProvider>
   );
 }

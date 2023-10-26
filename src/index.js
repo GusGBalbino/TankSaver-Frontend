@@ -8,8 +8,6 @@ import Sidebar from './Pages/Sidebar';
 import Perfil from './Pages/Perfil';
 import Login from './Pages/Login';
 
-
-
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
