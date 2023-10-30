@@ -1,18 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from 'src/Pages/Login';
 import Perfil from '/src/Pages/Perfil'; 
+import SideBar from 'src/Pages/Sidebar';
 
-function Rotas() {
+const AppRoutes = () => {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/src/Pages/Login.js" component={Login} />
-        <Route path="/src/Pages/Sidebar.js" component={Perfil} />
-      </Switch>
+      <Routes>
+        <Route path = "/" element={<Login/>}></Route>
+        <Route path = "/" element={<Perfil/>}></Route>
+        <Route path = "/" element={<SideBar/>}></Route>
+      </Routes>  
     </Router>
-  );
+  )
 }
 
-export default Rotas;
+export default AppRoutes;

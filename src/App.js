@@ -10,11 +10,17 @@ import {
   theme,
   Alert,
   AlertIcon,
+  AppRoutes,
+  Router,
+  Routes,
+  Route
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import { AlertaBotao } from './components/Alerta/AlertaBotao';
 import { AlertaDiario } from './components/Alerta/AlertaDiario';
+import './Routes/Rotas';
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
@@ -24,7 +30,12 @@ function App() {
           
         </Grid>
       </Box>
+
+      <Router>
+        <AppRoutes/>
+      </Router>
     </ChakraProvider>
+
   );
 }
 
