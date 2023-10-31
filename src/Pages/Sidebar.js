@@ -6,6 +6,7 @@ import {
   theme,
   Image,
 } from '@chakra-ui/react';
+import { Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import {
   AiOutlineFundProjectionScreen,
@@ -41,26 +42,40 @@ function Sidebar() {
         <VStack spacing={5} alignItems="center" justifyContent="center">
           <Image src={Logo2} boxSize={['2.5rem', '4rem']} alt="Logo TankSaver" />
 
-          <OpcoesSidebar
-            icon={<AiOutlineFundProjectionScreen color={'#FFBB0D'} />}
-            name={'Dashboard'}
-          />
-          <OpcoesSidebar
-            icon={<AiOutlineDollarCircle color={'#FFBB0D'} />}
-            name={'Ganhos'}
-          />
-          <OpcoesSidebar
-            icon={<AiFillCalculator color={'#FFBB0D'} />}
-            name={'Custos'}
-          />
-          <OpcoesSidebar
-            icon={<AiOutlineSliders color={'#FFBB0D'} />}
-            name={'Variáveis'}
-          />
-          <OpcoesSidebar
-            icon={<AiOutlineUser color={'#FFBB0D'} />}
-            name={'Perfil'}
-          />
+          <Link to="/dashboard">
+            <OpcoesSidebar
+              icon={<AiOutlineFundProjectionScreen color={'#FFBB0D'} />}
+              name={'Dashboard'}
+            />
+          </Link>
+
+          <Link to="/ganhos">
+            <OpcoesSidebar
+              icon={<AiOutlineDollarCircle color={'#FFBB0D'} />}
+              name={'Ganhos'}
+            />
+          </Link>
+
+          <Link to="/custos">
+            <OpcoesSidebar
+              icon={<AiFillCalculator color={'#FFBB0D'} />}
+              name={'Custos'}
+            />
+          </Link>
+
+          <Link to="/variaveis">
+            <OpcoesSidebar
+              icon={<AiOutlineSliders color={'#FFBB0D'} />}
+              name={'Variáveis'}
+            />
+          </Link>
+
+          <Link to="/perfil">
+            <OpcoesSidebar
+              icon={<AiOutlineUser color={'#FFBB0D'}  />}
+              name={'Perfil'}
+            />
+          </Link>
         </VStack>
 
         <Box

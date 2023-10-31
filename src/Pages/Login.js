@@ -54,7 +54,7 @@ function Login() {
             <Input type="password" placeholder="Digite sua senha..." color="black" _placeholder={{ color: 'gray.500' }} bg="white" />
           </FormControl>
           <Box mt="4" display="flex" flexDirection="column" alignItems="center">
-          <Link alignSelf="flex-end" marginRight="1px" marginLeft="220px" color="blue.600">Esqueci a senha.</Link>
+          <Link alignSelf="flex-end" marginRight="1px" marginLeft="220px" color="blue.600" to='/dashboard'>Esqueci a senha.</Link>
             <Button bg="blue.900" color="white" mt="8" _hover={{ bg: 'gray.700' }}>
               Entrar
             </Button>

@@ -11,7 +11,7 @@ import { AlertaBotao } from '../components/Alerta/AlertaBotao';
 import { AlertaDiario } from '../components/Alerta/AlertaDiario';
 import { AlertaAtualizacao } from '../components/Alerta/AlertaAtualizacao';
 import { BotaoAlteracao } from '../components/Botoes/BotaoAlteracao';
-
+import Sidebar from './Sidebar';
 
 function Perfil() {
     return (
@@ -30,6 +30,7 @@ function Perfil() {
                     <BotaoAlteracao icon={<EditIcon/>} name={"Editar"} />
                     <BotaoAlteracao icon={<CheckIcon/>} name={"Salvar Alterações"} />
                 </VStack>
+                <Sidebar />
             </Grid>
         </ChakraProvider>
     );

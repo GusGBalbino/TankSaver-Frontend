@@ -4,10 +4,11 @@ import {
     VStack,
     Grid,
     theme,
+    Box
 } from '@chakra-ui/react';
 import { EditIcon, CheckIcon } from '@chakra-ui/icons'
 import { Text } from '@chakra-ui/react';
-
+import Sidebar from './Sidebar';
 
 function Custo() {
     return (
@@ -19,7 +20,12 @@ function Custo() {
                 minHeight="100vh"
                 p={8}
                 bgColor={'#F5F5F5'}>
-                <Text fontSize='6xl'> Custo</Text>
+            <Sidebar />
+            <Box marginLeft="150px">
+                <Text fontSize="6xl" mb={4}>
+                    CUSTOS
+                </Text>
+            </Box>
             </Grid>
         </ChakraProvider>
     );

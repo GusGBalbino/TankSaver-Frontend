@@ -3,8 +3,10 @@ import {
     ChakraProvider,
     Grid,
     theme,
+    Box
 } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/react';
+import Sidebar from './Sidebar';
 
 function Ganhos() {
     return (
@@ -16,7 +18,12 @@ function Ganhos() {
                 minHeight="100vh"
                 p={8}
                 bgColor={'#F5F5F5'}>
-                <Text fontSize='6xl'> Ganhos</Text>
+            <Sidebar />
+            <Box marginLeft="150px">
+                <Text fontSize="6xl" mb={4}>
+                    GANHOS
+                </Text>
+                </Box>
             </Grid>
         </ChakraProvider>
     );
