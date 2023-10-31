@@ -1,18 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from 'src/Pages/Login';
-import Perfil from '/src/Pages/Perfil'; 
-import SideBar from 'src/Pages/Sidebar';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Perfil from '../Pages/Perfil';
+import Login from '../Pages/Login';
+import Variaveis from '../Pages/Variaveis';
+import Ganhos from '../Pages/Ganhos';
+import Custo from '../Pages/Custos';
+import Dashboard from '../Pages/Dashboard';
 
 const AppRoutes = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path = "/" element={<Login/>}></Route>
-        <Route path = "/" element={<Perfil/>}></Route>
-        <Route path = "/" element={<SideBar/>}></Route>
-      </Routes>  
-    </Router>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/custos" element={<Custo />}></Route>
+        <Route path="/ganhos" element={<Ganhos />}></Route>
+        <Route path="/variaveis" element={<Variaveis />}></Route>
+        <Route path="/perfil" element={<Perfil />}></Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
