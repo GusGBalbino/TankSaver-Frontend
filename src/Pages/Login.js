@@ -13,6 +13,20 @@ import {
 import logo from '../image/logo.svg';
 
 function Login() {
+  /*
+  const history = useHistory();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+
+  const handleLogin = () => {
+    if (username === 'seu_usuario' && password === 'sua_senha') {
+      history.push('/dashboard');
+    } else {
+      setError('Credenciais inválidas. Tente novamente.');
+    }
+  };
+  */
   return (
     <ChakraProvider theme={theme}>
       <Box

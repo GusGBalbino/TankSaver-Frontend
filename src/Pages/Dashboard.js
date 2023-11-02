@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     ChakraProvider,
-    VStack,
     Grid,
     theme,
     Box
@@ -22,7 +21,7 @@ function Dashboard() {
                 bgColor={'#F5F5F5'}>
             
             <Sidebar />
-            <Box marginLeft="150px" >
+            <Box marginLeft="150px" alignItems="center" >
                 <Text fontSize="6xl" mb={4}>
                     DASHBOARD
                 </Text>

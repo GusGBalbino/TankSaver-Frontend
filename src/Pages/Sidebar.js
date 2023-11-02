@@ -28,7 +28,7 @@ function Sidebar() {
         top={0}
         left={0}
         width="10rem"
-        height="100%" 
+        height="100%"
         p={8}
         bgColor={'#131328'}
         fontSize={['xl', 'md']}
@@ -37,7 +37,7 @@ function Sidebar() {
         alignItems="center"
         overflowY="auto"
         overflowX="hidden"
-        zIndex={10} 
+        zIndex={10}
       >
         <VStack spacing={5} alignItems="center" justifyContent="center">
           <Image src={Logo2} boxSize={['2.5rem', '4rem']} alt="Logo TankSaver" />
@@ -72,20 +72,22 @@ function Sidebar() {
 
           <Link to="/perfil">
             <OpcoesSidebar
-              icon={<AiOutlineUser color={'#FFBB0D'}  />}
+              icon={<AiOutlineUser color={'#FFBB0D'} />}
               name={'Perfil'}
             />
           </Link>
         </VStack>
 
-        <Box
-          position="absolute"
-          bottom={0}
-          width="100%"
-          textAlign="center"
-        >
-          <Image src={logo} boxSize={['10rem', '15rem']} alt="Logo TankSaver" />
-        </Box>
+        {/* Adicione a imagem diretamente dentro da Box da Sidebar */}
+        <Image
+          src={logo}
+          boxSize={['10rem', '15rem']}
+          alt="Logo TankSaver"
+          style={{
+            position: 'sticky',
+            bottom: 0,
+          }}
+        />
       </Box>
     </ChakraProvider>
   );

@@ -4,13 +4,16 @@ import {
     VStack,
     Grid,
     theme,
-    Box
 } from '@chakra-ui/react';
 import { EditIcon, CheckIcon } from '@chakra-ui/icons'
-import { Text } from '@chakra-ui/react';
+
+import { AlertaBotao } from '../components/Alerta/AlertaBotao';
+import { AlertaDiario } from '../components/Alerta/AlertaDiario';
+import { AlertaAtualizacao } from '../components/Alerta/AlertaAtualizacao';
+import { BotaoAlteracao } from '../components/Botoes/BotaoAlteracao';
 import Sidebar from './Sidebar';
 
-function Custo() {
+function Custos() {
     return (
         <ChakraProvider theme={theme}>
             <Grid
@@ -20,15 +23,17 @@ function Custo() {
                 minHeight="100vh"
                 p={8}
                 bgColor={'#F5F5F5'}>
-            <Sidebar />
-            <Box marginLeft="150px">
-                <Text fontSize="6xl" mb={4}>
-                    CUSTOS
-                </Text>
-            </Box>
+                <VStack spacing={5}>
+                    <AlertaBotao title={'Atualização de Dados'} description={'Lembre-se de atualizar os dados diáriamente, semanalmente e mensalmente.'}/>
+                    <AlertaDiario title={'Atualização de Dados'} description={'Seus dados estão desatualizados, para continuar é necessário que atualize-os.'} />
+                    <AlertaAtualizacao dataHora={'dia tal hora tal'} description={'Os dados de volume e custo total de venda são referentes à semana anterior.'} />
+                    <BotaoAlteracao icon={<EditIcon/>} name={"Editar"} />
+                    <BotaoAlteracao icon={<CheckIcon/>} name={"Salvar Alterações"} />
+                </VStack>
+                <Sidebar />
             </Grid>
         </ChakraProvider>
     );
 }
 
-export default Custo;
+export default Custos;
