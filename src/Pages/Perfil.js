@@ -16,7 +16,6 @@ import {
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
 
-
 function Perfil() {
     return (
         <ChakraProvider theme={theme}>
