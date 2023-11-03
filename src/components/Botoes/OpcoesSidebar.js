@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, VStack } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+
 
 export function OpcoesSidebar(props) {
     return (
@@ -12,8 +12,9 @@ export function OpcoesSidebar(props) {
                 marginBottom={'15px'}
                 variant='outline'
                 textColor={'white'}
-                borderColor={'#8D7843'}
+                borderColor={'#131328'}
                 justifyContent="flex-start"
+                _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
             >
                 {props.name}
 

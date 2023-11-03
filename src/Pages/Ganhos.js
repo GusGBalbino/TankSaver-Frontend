@@ -3,29 +3,42 @@ import {
     ChakraProvider,
     Grid,
     theme,
-    Box
+    SimpleGrid,
+    Flex,
+    Heading,
+    Divider,
 } from '@chakra-ui/react';
-import { Text } from '@chakra-ui/react';
+import { AlertaAtualizacao } from '../components/Alerta/AlertaAtualizacao';
 import Sidebar from './Sidebar';
+import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
+import Rodape from '../components/Rodape/Rodape';
 
 function Ganhos() {
     return (
         <ChakraProvider theme={theme}>
-            <Grid
-                display={'flex'}
-                flexDirection={'column'}
-                width={'100vw'}
-                minHeight="100vh"
-                p={8}
-                bgColor={'#F5F5F5'}>
+
+        <Grid
+            display={'flex'}
+            flexDirection={'column'}
+            templateColumns={{ base: '1fr', md: '1fr 2fr' }}
+            minHeight="100vh"
+            p={8}
+            bgColor={'#F5F5F5'}
+            zIndex="1"
+            marginLeft="10rem"
+        >
+
             <Sidebar />
-            <Box marginLeft="150px">
-                <Text fontSize="6xl" mb={4}>
-                    GANHOS
-                </Text>
-                </Box>
-            </Grid>
-        </ChakraProvider>
+            <Heading textAlign={'center'}>Ganhos</Heading>
+            <Divider marginTop={'1rem'} />
+
+            <Heading textAlign={'center'}>CONTEÚDO</Heading>
+
+            <Divider marginTop={'1rem'}  marginBottom={'3rem'} />
+            <Rodape/>
+
+        </Grid>
+    </ChakraProvider>
     );
 }
 

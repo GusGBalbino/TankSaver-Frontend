@@ -44,6 +44,6 @@ export function AlertaBotao(props = ButtonProps) {
     </Alert>
 
   ) : (
-    <Button onClick={onOpen}>Aqui vai a condição de quando o botao vai aparecer</Button>
+    <Button _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }} onClick={onOpen}>Aqui vai a condição de quando o botao vai aparecer</Button>
   )
 }

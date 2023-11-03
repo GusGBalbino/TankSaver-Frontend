@@ -4,36 +4,24 @@ import {
     Grid,
     theme,
     Box,
-    Text,
     FormControl,
     FormLabel,
     Input,
     HStack,
-    Flex
+    Flex,
+    Heading,
+    Divider,
+
 } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
-import logo from '../image/logo.svg';
+import Rodape from '../components/Rodape/Rodape';
+
 
 function Perfil() {
     return (
         <ChakraProvider theme={theme}>
-            <Box
-                position="fixed"
-                bottom="0"
-                left="50%"
-                transform="translateX(-50%)"
-                p="2"
-                zIndex="0"
-            >
-                <img
-                    src={logo}
-                    alt="Logo TankSaver"
-                    style={{
-                        width: '200px',
-                        height: 'auto',
-                    }}
-                />
-            </Box>
+            <Rodape />
+
             <Grid
                 display={'flex'}
                 flexDirection={'column'}
@@ -42,8 +30,11 @@ function Perfil() {
                 p={8}
                 bgColor={'#F5F5F5'}
                 zIndex="1"
-                marginBottom="20px"
+                marginLeft="10rem"
             >
+                <Heading textAlign={'center'}>Perfil</Heading>
+                <Divider marginTop={'1rem'}></Divider>
+                
                 <Flex
                     justifyContent="center"
                     alignItems="center"
@@ -53,9 +44,6 @@ function Perfil() {
                         width={{ base: '100%', md: 'auto' }}
                         maxW={{ base: '100%', md: '600px' }}
                     >
-                        <Text fontSize={{ base: '4xl', md: '5xl' }} mb={4} textAlign="center">
-                            PERFIL
-                        </Text>
 
                         <FormControl isRequired mb={2}>
                             <FormLabel bg="#131328" color="white" borderRadius="4" >Nome Fantasia</FormLabel>

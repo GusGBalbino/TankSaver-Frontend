@@ -38,48 +38,49 @@ function Sidebar() {
         overflowY="auto"
         overflowX="hidden"
         zIndex={10}
+        gap={50}
       >
-        <VStack spacing={5} alignItems="center" justifyContent="center">
-          <Image src={Logo2} boxSize={['2.5rem', '4rem']} alt="Logo TankSaver" />
+        <Image src={Logo2} boxSize={['2.5rem', '4rem']} alt="Logo TankSaver" />
 
+        <VStack spacing={2} alignItems="center" justifyContent="center">
           <Link to="/dashboard">
             <OpcoesSidebar
-              icon={<AiOutlineFundProjectionScreen color={'#FFBB0D'} />}
+              icon={<AiOutlineFundProjectionScreen />}
               name={'Dashboard'}
             />
           </Link>
 
           <Link to="/ganhos">
             <OpcoesSidebar
-              icon={<AiOutlineDollarCircle color={'#FFBB0D'} />}
+              icon={<AiOutlineDollarCircle />}
               name={'Ganhos'}
             />
           </Link>
 
           <Link to="/custos">
             <OpcoesSidebar
-              icon={<AiFillCalculator color={'#FFBB0D'} />}
+              icon={<AiFillCalculator/>}
               name={'Custos'}
             />
           </Link>
 
           <Link to="/variaveis">
             <OpcoesSidebar
-              icon={<AiOutlineSliders color={'#FFBB0D'} />}
+              icon={<AiOutlineSliders />}
               name={'Variáveis'}
             />
           </Link>
 
           <Link to="/perfil">
             <OpcoesSidebar
-              icon={<AiOutlineUser color={'#FFBB0D'} />}
+              icon={<AiOutlineUser  />}
               name={'Perfil'}
             />
           </Link>
         </VStack>
 
         {/* Adicione a imagem diretamente dentro da Box da Sidebar */}
-        <Image
+        {/* <Image
           src={logo}
           boxSize={['10rem', '15rem']}
           alt="Logo TankSaver"
@@ -87,7 +88,7 @@ function Sidebar() {
             position: 'sticky',
             bottom: 0,
           }}
-        />
+        /> */}
       </Box>
     </ChakraProvider>
   );

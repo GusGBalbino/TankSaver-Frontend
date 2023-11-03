@@ -1,36 +1,78 @@
 import React from 'react';
 import {
     ChakraProvider,
-    VStack,
     Grid,
     theme,
+    SimpleGrid,
+    Flex,
+    Heading,
+    Divider,
 } from '@chakra-ui/react';
-import { EditIcon, CheckIcon } from '@chakra-ui/icons'
-
-import { AlertaBotao } from '../components/Alerta/AlertaBotao';
-import { AlertaDiario } from '../components/Alerta/AlertaDiario';
 import { AlertaAtualizacao } from '../components/Alerta/AlertaAtualizacao';
-import { BotaoAlteracao } from '../components/Botoes/BotaoAlteracao';
 import Sidebar from './Sidebar';
+import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
+import Rodape from '../components/Rodape/Rodape';
 
 function Custos() {
     return (
         <ChakraProvider theme={theme}>
+
             <Grid
                 display={'flex'}
                 flexDirection={'column'}
-                width={'100vw'}
+                templateColumns={{ base: '1fr', md: '1fr 2fr' }}
                 minHeight="100vh"
                 p={8}
-                bgColor={'#F5F5F5'}>
-                <VStack spacing={5}>
-                    <AlertaBotao title={'Atualização de Dados'} description={'Lembre-se de atualizar os dados diáriamente, semanalmente e mensalmente.'}/>
-                    <AlertaDiario title={'Atualização de Dados'} description={'Seus dados estão desatualizados, para continuar é necessário que atualize-os.'} />
-                    <AlertaAtualizacao dataHora={'dia tal hora tal'} description={'Os dados de volume e custo total de venda são referentes à semana anterior.'} />
-                    <BotaoAlteracao icon={<EditIcon/>} name={"Editar"} />
-                    <BotaoAlteracao icon={<CheckIcon/>} name={"Salvar Alterações"} />
-                </VStack>
+                bgColor={'#F5F5F5'}
+                zIndex="1"
+                marginLeft="10rem"
+            >
+
                 <Sidebar />
+
+                <Heading textAlign={'center'}>Custos</Heading>
+
+                <Divider marginTop={'1rem'} />
+
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de compra</Heading>
+                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}></CaixaInfo>
+                </SimpleGrid>
+
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Volume de compra</Heading>
+                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}></CaixaInfo>
+                </SimpleGrid>
+
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Impostos</Heading>
+                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+                    <CaixaInfo title={'IBAMA'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'IBRAN'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'AGEFIS'} info={'Informação que virá do back'}></CaixaInfo>
+                </SimpleGrid>
+
+
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Taxas de cartão</Heading>
+                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+                    <CaixaInfo title={'Débito'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Crédito'} info={'Informação que virá do back'}></CaixaInfo>
+                </SimpleGrid>
+
+                <Flex marginTop={'10'} justifyContent={'flex-end'}>
+                    <AlertaAtualizacao dataHora={'dia tal hora tal'} />
+                </Flex>
+
+                <Divider marginTop={'1rem'} marginBottom={'3rem'} />
+                <Rodape />
+
             </Grid>
         </ChakraProvider>
     );
