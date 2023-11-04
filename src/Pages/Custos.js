@@ -8,10 +8,11 @@ import {
     Heading,
     Divider,
 } from '@chakra-ui/react';
-import { AlertaAtualizacao } from '../components/Alerta/AlertaAtualizacao';
+import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
+import { BotaoEditar } from '../components/Botoes/BotaoEditar';
 
 function Custos() {
     return (
@@ -36,38 +37,38 @@ function Custos() {
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de compra</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Volume de compra</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Impostos</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'IBAMA'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'IBRAN'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'AGEFIS'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'IBAMA'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'IBRAN'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'AGEFIS'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
                 </SimpleGrid>
 
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Taxas de cartão</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Débito'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Crédito'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Débito'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Crédito'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
                 </SimpleGrid>
 
                 <Flex marginTop={'10'} justifyContent={'flex-end'}>
-                    <AlertaAtualizacao dataHora={'dia tal hora tal'} />
+                    <AlertaUltimaAtualizacao dataHora={'dia tal hora tal'} />
                 </Flex>
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />

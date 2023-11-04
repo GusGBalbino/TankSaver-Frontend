@@ -8,9 +8,7 @@ import {
     Heading,
     Divider,
 } from '@chakra-ui/react';
-import { AlertaAtualizacao } from '../components/Alerta/AlertaAtualizacao';
 import Sidebar from './Sidebar';
-import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
 
 function Dashboard() {

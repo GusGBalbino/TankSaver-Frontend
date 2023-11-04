@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import {
   ChakraProvider,
   Box,
@@ -6,7 +6,7 @@ import {
   theme,
   Image,
 } from '@chakra-ui/react';
-import { Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Link, BrowserRouter as Router } from 'react-router-dom';
 
 import {
   AiOutlineFundProjectionScreen,
@@ -15,14 +15,22 @@ import {
   AiOutlineSliders,
   AiOutlineUser,
 } from 'react-icons/ai';
-import { Logo } from '../Logo';
 import Logo2 from '../image/Logo2.svg';
-import logo from '../image/logo.svg';
 import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
+import { AlertaAtualizarDados } from '../components/Alerta/AlertaAtualizarDados';
 
 function Sidebar() {
+  const [message, setMessage] = useState('false');
+  const handleClick = () => {
+    setMessage('Button was clicked! Waiting...');
+    setTimeout(() => {
+      setMessage(<AlertaAtualizarDados/>);
+    }, 2000);
+  };
+
   return (
     <ChakraProvider theme={theme}>
+      <AlertaAtualizarDados title={'ATUALIZAÇÃO DE DADOS'} description={'Lembre-se de atualizar os dados diáriamente, semanalmente e mensalmente.'} />
       <Box
         position="fixed"
         top={0}
@@ -40,6 +48,11 @@ function Sidebar() {
         zIndex={10}
         gap={50}
       >
+        <div style={{backgroundColor: 'purple'}}>
+          <button onClick={handleClick}>Click Me</button>
+          <p>{message}</p>
+        </div>
+
         <Image src={Logo2} boxSize={['2.5rem', '4rem']} alt="Logo TankSaver" />
 
         <VStack spacing={2} alignItems="center" justifyContent="center">
@@ -59,7 +72,7 @@ function Sidebar() {
 
           <Link to="/custos">
             <OpcoesSidebar
-              icon={<AiFillCalculator/>}
+              icon={<AiFillCalculator />}
               name={'Custos'}
             />
           </Link>
@@ -73,7 +86,7 @@ function Sidebar() {
 
           <Link to="/perfil">
             <OpcoesSidebar
-              icon={<AiOutlineUser  />}
+              icon={<AiOutlineUser />}
               name={'Perfil'}
             />
           </Link>

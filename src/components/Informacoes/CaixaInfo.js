@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text, IconButton, Card, CardHeader, CardBody,  Flex } from '@chakra-ui/react';
-import { EditIcon } from '@chakra-ui/icons'
+import { Text, Card, CardHeader, CardBody} from '@chakra-ui/react';
 
 const InfoProps = [
     { title: String },
-    { info: String }
+    { info: String },
+    { editor: String }
 ]
 
 export function CaixaInfo(props = InfoProps) {
@@ -18,15 +18,10 @@ export function CaixaInfo(props = InfoProps) {
                 <CardBody>
                     <Text>{props.info}</Text>
 
-                    <Flex marginTop={'2'} justifyContent={'flex-end'}>
-                        <IconButton size={'sm'} aria-label='Search database' icon={<EditIcon />} />
-                    </Flex>
+                    {props.editor}
                 </CardBody>
             </Card>
       
 
     )
 }
-
-// <Text>Ultima atualização: {props.title}</Text>
-//             <Text>{props.info}</Text>

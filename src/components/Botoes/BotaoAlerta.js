@@ -1,16 +1,25 @@
 import React from 'react';
 import { Button } from '@chakra-ui/react';
-import { EmailIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 
-const textoOpcoes = ['Atualizar Agora']
+const ButtonProps = [
+    { name: String },
+    { link: String }
+]
 
-export const BotaoAlerta = props => {
+export function BotaoAlerta(props = ButtonProps)  {
     return (
-        <Button variant='solid' textColor={'white'} bg={'#131328'} _hover={{ bg: '#24244A', borderColor: '#131328' }} >
-            {textoOpcoes.map((texto) => (
-                <p >{texto}</p>
-            ))}
-        </Button>
+        <Link to={props.link}>
+            <Button 
+                minW={['10rem', '10rem']}
+                maxW={['10rem', '10rem']}
+                variant='solid' 
+                textColor={'white'} 
+                bg={'#131328'} 
+                _hover={{ bg: '#24244A', borderColor: '#131328' }} >
+                {props.name}
+            </Button>
+        </Link>
     )
 
 }

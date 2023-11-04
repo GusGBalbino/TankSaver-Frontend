@@ -8,10 +8,11 @@ import {
     Heading,
     Divider,
 } from '@chakra-ui/react';
-import { AlertaAtualizacao } from '../components/Alerta/AlertaAtualizacao';
+import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
+import { BotaoEditar } from '../components/Botoes/BotaoEditar';
 
 function Ganhos() {
     return (
@@ -30,41 +31,37 @@ function Ganhos() {
                 <Sidebar />
 
                 <Heading textAlign={'center'}>Ganhos</Heading>
-
                 <Divider marginTop={'1rem'} />
-
-                <Heading textAlign={'center'}>CONTEÚDO</Heading>
-                <Divider marginTop={'1rem'}  marginBottom={'3rem'} />
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de venda atual</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Volume de venda semanal</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Total de lucros semanal</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}></CaixaInfo>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}></CaixaInfo>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}/>
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}/>
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}/>
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}/>
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}/>
                 </SimpleGrid>
 
                 <Flex marginTop={'10'} justifyContent={'flex-end'}>
-                    <AlertaAtualizacao dataHora={'dia tal hora tal'} />
+                    <AlertaUltimaAtualizacao dataHora={'dia tal hora tal'} />
                 </Flex>
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />

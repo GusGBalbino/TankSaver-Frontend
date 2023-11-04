@@ -6,7 +6,7 @@ const DataProps = [
     {description: String}
 ]
 
-export function AlertaAtualizacao(props = DataProps){
+export function AlertaUltimaAtualizacao(props = DataProps){
     return (
         <Alert borderRadius={'18px'} bg={'#131328'} status='warning' variant='solid' maxW='35vw'>
             <AlertIcon color={'#FFBB0D'} />
