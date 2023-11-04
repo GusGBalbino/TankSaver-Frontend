@@ -15,6 +15,12 @@ import Rodape from '../components/Rodape/Rodape';
 import { BotaoEditar } from '../components/Botoes/BotaoEditar';
 
 function Custos() {
+    const handleEditClick = () => {
+        // Implemente a lógica para editar as informações aqui
+        console.log('Botão de edição clicado!');
+    }
+
+
     return (
         <ChakraProvider theme={theme}>
 
@@ -37,7 +43,7 @@ function Custos() {
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de compra</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} editor={<BotaoEditar onEditClick={handleEditClick}/>}/>
                     <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
                     <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
                     <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>

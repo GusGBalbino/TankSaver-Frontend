@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -20,14 +20,6 @@ import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
 import { AlertaAtualizarDados } from '../components/Alerta/AlertaAtualizarDados';
 
 function Sidebar() {
-  const [message, setMessage] = useState('false');
-  const handleClick = () => {
-    setMessage('Button was clicked! Waiting...');
-    setTimeout(() => {
-      setMessage(<AlertaAtualizarDados/>);
-    }, 2000);
-  };
-
   return (
     <ChakraProvider theme={theme}>
       <AlertaAtualizarDados title={'ATUALIZAÇÃO DE DADOS'} description={'Lembre-se de atualizar os dados diáriamente, semanalmente e mensalmente.'} />
@@ -48,11 +40,6 @@ function Sidebar() {
         zIndex={10}
         gap={50}
       >
-        <div style={{backgroundColor: 'purple'}}>
-          <button onClick={handleClick}>Click Me</button>
-          <p>{message}</p>
-        </div>
-
         <Image src={Logo2} boxSize={['2.5rem', '4rem']} alt="Logo TankSaver" />
 
         <VStack spacing={2} alignItems="center" justifyContent="center">
@@ -91,17 +78,6 @@ function Sidebar() {
             />
           </Link>
         </VStack>
-
-        {/* Adicione a imagem diretamente dentro da Box da Sidebar */}
-        {/* <Image
-          src={logo}
-          boxSize={['10rem', '15rem']}
-          alt="Logo TankSaver"
-          style={{
-            position: 'sticky',
-            bottom: 0,
-          }}
-        /> */}
       </Box>
     </ChakraProvider>
   );

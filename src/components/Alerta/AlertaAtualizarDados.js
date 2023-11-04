@@ -1,32 +1,39 @@
-import React, { useState } from "react"
-import { Box, HStack, useDisclosure } from '@chakra-ui/react'
-import { Alert, AlertTitle, AlertDescription, CloseButton, Button } from '@chakra-ui/react';
+import React, { useState, useEffect } from "react"
+import { Box, useDisclosure, HStack } from '@chakra-ui/react'
+import { Alert, AlertTitle, AlertDescription, CloseButton } from '@chakra-ui/react';
 import { BotaoAlerta } from "../Botoes/BotaoAlerta";
 
-const ButtonProps = [
-  { title: String },
-  { description: String }
-]
-
+const ButtonProps = {
+  title: String,
+  description: String
+}
 
 export function AlertaAtualizarDados(props = ButtonProps) {
   const {
     isOpen: isVisible,
-    onClose,
     onOpen,
-  } = useDisclosure({ defaultIsOpen: false })
+    onClose,
+  } = useDisclosure({ defaultIsOpen: false });
 
-  return  isVisible ? (
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      isVisible || onClose(); 
+      isVisible || onOpen(); 
+    }, 720000); 
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isVisible]);
+
+  return isVisible ? (
     <Box position={'fixed'} top={0} bottom={0} right={0} left={0} bg={'rgb(0,0,0, 0.7)'} zIndex={'1000'}>
-         <Alert
+      <Alert
         position={'fixed'}
         top={'50%'}
         left={'50%'}
         transform={'translate(-50%, -50%)'}
-
         flexDirection='column'
-
-
         alignItems='center'
         justifyContent='center'
         textAlign='center'
@@ -56,7 +63,5 @@ export function AlertaAtualizarDados(props = ButtonProps) {
         </HStack>
       </Alert>
     </Box>
-  ) : (
-    <Button id={'submit-btn'} _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }} onClick={onOpen}>Aqui vai a condição de quando o botao vai aparecer</Button>
-    )
+  ) : null;
 }
