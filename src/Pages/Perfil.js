@@ -17,6 +17,10 @@ import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
 
 function Perfil() {
+    function cadastrarUsuario(e) {
+        e.preventDefault()
+        console.log('Cadastrou o usuário!')
+    }
     return (
         <ChakraProvider theme={theme}>
             <Rodape />
@@ -44,63 +48,85 @@ function Perfil() {
                         maxW={{ base: '100%', md: '600px' }}
                     >
 
-                        <FormControl isRequired mb={2}>
-                            <FormLabel bg="#131328" color="white" borderRadius="4" >Nome Fantasia</FormLabel>
+                        <FormControl isRequired mb={2} onSubmit={cadastrarUsuario}>
+                            <FormLabel bg="#131328" color="white" borderRadius="4">
+                                <span style={{ paddingLeft: '5px' }}>Nome Fantasia</span>
+                            </FormLabel>
                             <Input placeholder="Nome Fantasia..." color="#F5F5F5" _placeholder={{ color: 'black.500' }} bg="white" />
                         </FormControl>
 
                         <HStack align="center" spacing={{ base: 0, md: 4 }}>
                             <FormControl isRequired mb={2}>
-                                <FormLabel bg="#131328" color="white" borderRadius="3">Usuário</FormLabel>
+                                <FormLabel bg="#131328" color="white" borderRadius="3">
+                                    <span style={{ paddingLeft: '5px' }}>Usuário</span>
+                                </FormLabel>
                                 <Input placeholder="Usuário..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                             </FormControl>
 
                             <FormControl isRequired mb={2}>
-                                <FormLabel bg="#131328" color="white" borderRadius="3">CNPJ</FormLabel>
+                                <FormLabel bg="#131328" color="white" borderRadius="3">
+                                    <span style={{ paddingLeft: '5px' }}>CNPJ</span>
+                                </FormLabel>
                                 <Input placeholder="CNPJ..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                             </FormControl>
 
                             <FormControl isRequired mb={2}>
-                                <FormLabel bg="#131328" color="white" borderRadius="3">Telefone Empresarial</FormLabel>
+                                <FormLabel bg="#131328" color="white" borderRadius="3">
+                                    <span style={{ paddingLeft: '5px'}}>Telefone Empresarial</span>
+                                </FormLabel>
                                 <Input placeholder="(XX) X XXXX-XXXX..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                             </FormControl>
                         </HStack>
 
                         <FormControl isRequired mb={2}>
-                            <FormLabel bg="#131328" color="white" borderRadius="3">Endereço</FormLabel>
+                            <FormLabel bg="#131328" color="white" borderRadius="3">
+                                <span style={{ paddingLeft: '5px' }}>Endereço</span>
+                            </FormLabel>
                             <Input placeholder="Endereço..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                         </FormControl>
 
                         <HStack align="center" spacing={{ base: 0, md: 4 }}>
                             <FormControl isRequired mb={2}>
-                                <FormLabel bg="#131328" color="white" borderRadius="3">CEP</FormLabel>
+                                <FormLabel bg="#131328" color="white" borderRadius="3">
+                                    <span style={{ paddingLeft: '5px' }}>CEP</span>
+                                </FormLabel>
                                 <Input placeholder="CEP..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                             </FormControl>
 
                             <FormControl isRequired mb={2}>
-                                <FormLabel bg="#131328" color="white" borderRadius="3">MUNICÍPIO</FormLabel>
+                                <FormLabel bg="#131328" color="white" borderRadius="3">
+                                    <span style={{ paddingLeft: '5px' }}>MUNICÍPIO</span>
+                                </FormLabel>
                                 <Input placeholder="MUNICÍPIO..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                             </FormControl>
 
                             <FormControl isRequired mb={2}>
-                                <FormLabel bg="#131328" color="white" borderRadius="3">UF</FormLabel>
+                                <FormLabel bg="#131328" color="white" borderRadius="3">
+                                    <span style={{ paddingLeft: '5px' }}>UF</span>
+                                </FormLabel>
                                 <Input placeholder="UF..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                             </FormControl>
                         </HStack>
 
                         <FormControl isRequired mb={2}>
-                            <FormLabel bg="#131328" color="white" borderRadius="3">E-mail</FormLabel>
+                            <FormLabel bg="#131328" color="white" borderRadius="3">
+                                <span style={{ paddingLeft: '5px' }}>E-mail</span>
+                            </FormLabel>
                             <Input type="email" placeholder="E-mail..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                         </FormControl>
 
                         <HStack align="center" spacing={{ base: 0, md: 4 }}>
                             <FormControl isRequired mb={2}>
-                                <FormLabel bg="#131328" color="white" borderRadius="3">Responsável pela empresa</FormLabel>
-                                <Input placeholder="Responsável pela empresa..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                <FormLabel bg="#131328" color="white" borderRadius="3">
+                                    <span style={{ paddingLeft: '5px' }}>Responsável pela Empresa</span>
+                                </FormLabel>
+                                <Input placeholder="Responsável pela Empresa..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                             </FormControl>
 
                             <FormControl isRequired mb={2}>
-                                <FormLabel bg="#131328" color="white" borderRadius="3">Telefone</FormLabel>
+                                <FormLabel bg="#131328" color="white" borderRadius="3">
+                                    <span style={{ paddingLeft: '5px' }}>Telefone</span>
+                                </FormLabel>
                                 <Input placeholder="(XX) X XXXX-XXXX..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                             </FormControl>
                         </HStack>

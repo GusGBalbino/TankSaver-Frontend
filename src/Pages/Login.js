@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import {
   Box,
   FormControl,
@@ -13,20 +15,24 @@ import {
 import logo from '../image/logo.svg';
 
 function Login() {
-  /*
-  const history = useHistory();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const history = useNavigate();
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
 
-  const handleLogin = () => {
-    if (username === 'seu_usuario' && password === 'sua_senha') {
-      history.push('/dashboard');
-    } else {
-      setError('Credenciais inválidas. Tente novamente.');
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('/api/login', { email, senha }); // Solicitação para a API
+      const { access_token } = response.data;
+
+      if (access_token) {
+        // Se a autenticação for bem-sucedida vai redirecionar para a página de DashBoard
+        history.push('/dashboard');
+      }
+    } catch (error) {
+      // Trata erros de autenticação.
     }
-  };
-  */
+  }
+
   return (
     <ChakraProvider theme={theme}>
       <Box

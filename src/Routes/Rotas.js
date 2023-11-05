@@ -8,12 +8,17 @@ import Ganhos from '../Pages/Ganhos';
 import Custo from '../Pages/Custos';
 import Dashboard from '../Pages/Dashboard';
 
+const Private = ({ Item }) => {
+  const Login = true;
+  return Login > 0 ? <Item /> : <Login />;
+};
+
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />}></Route>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/dashboard" element={< Private Item ={Dashboard} />}></Route>
         <Route path="/custos" element={<Custo />}></Route>
         <Route path="/ganhos" element={<Ganhos />}></Route>
         <Route path="/variaveis" element={<Variaveis />}></Route>
