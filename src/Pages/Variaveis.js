@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
+import { CardCadastro } from '../components/Cadastro/CardCadastro';
 
 function Variaveis() {
     return (
@@ -25,7 +26,13 @@ function Variaveis() {
             >
 
                 <Sidebar />
-                <Heading textAlign={'center'}>Variáveis</Heading>
+                <Heading textAlign={'center'}>Cadastramento de Variávies</Heading>
+                <Divider marginTop={'1rem'} marginBottom={'3rem'} />
+                <CardCadastro
+                    title={'Cadastro de Compra'}
+                    info={'Selecione o tipo de combustível'}
+                    infoSelect={'option1'} />
+
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 <Rodape />
