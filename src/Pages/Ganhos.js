@@ -25,7 +25,7 @@ function Ganhos() {
                 p={8}
                 bgColor={'#F5F5F5'}
                 zIndex="1"
-                marginLeft="10rem"
+                marginLeft="13rem"
             >
 
                 <Sidebar />
@@ -35,20 +35,20 @@ function Ganhos() {
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de venda atual</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Volume de venda semanal</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} editor={<BotaoEditar/>}/>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Total de lucros semanal</Heading>

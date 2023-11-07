@@ -27,7 +27,7 @@ function Sidebar() {
         position="fixed"
         top={0}
         left={0}
-        width="10rem"
+        width="13rem"
         height="100%"
         p={8}
         bgColor={'#131328'}
@@ -67,7 +67,7 @@ function Sidebar() {
           <Link to="/variaveis">
             <OpcoesSidebar
               icon={<AiOutlineSliders />}
-              name={'Variáveis'}
+              name={'Cadastro'}
             />
           </Link>
 

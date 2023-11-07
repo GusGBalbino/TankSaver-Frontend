@@ -23,7 +23,7 @@ function Dashboard() {
             p={8}
             bgColor={'#F5F5F5'}
             zIndex="1"
-            marginLeft="10rem"
+            marginLeft="13rem"
         >
 
             <Sidebar />

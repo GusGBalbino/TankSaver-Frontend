@@ -14,15 +14,11 @@ import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
 import { BotaoEditar } from '../components/Botoes/BotaoEditar';
 import { BotaoAlteracao } from '../components/Botoes/BotaoAlteracao';
+import { CardCadastroCompra } from '../components/Cadastro/CardCadastroCompra';
 
 
 function Custos() {
-    const handleEditClick = () => {
-        // Implemente a lógica para editar as informações aqui
-        console.log('Botão de edição clicado!');
-    }
-
-
+    
     return (
         <ChakraProvider theme={theme}>
             <Grid
@@ -33,7 +29,7 @@ function Custos() {
                 p={8}
                 bgColor={'#F5F5F5'}
                 zIndex="1"
-                marginLeft="10rem"
+                marginLeft="13rem"
             >
 
                 <Sidebar />
@@ -43,7 +39,7 @@ function Custos() {
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de compra</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} editor={<BotaoEditar onEditClick={handleEditClick}/>}/>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}/>
                     <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}/>
                     <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}/>
                     <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}/>
@@ -73,7 +69,8 @@ function Custos() {
                     <CaixaInfo title={'Crédito'} info={'Informação que virá do back'}/>
                 </SimpleGrid>
 
-                <Flex marginTop={'10'} justifyContent={'flex-end'}>
+                <Flex marginTop={'10'} justifyContent={'space-between'}>
+                    <CardCadastroCompra/>
                     <AlertaUltimaAtualizacao dataHora={'dia tal hora tal'} />
                 </Flex>
 

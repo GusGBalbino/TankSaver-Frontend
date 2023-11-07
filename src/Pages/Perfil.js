@@ -33,7 +33,7 @@ function Perfil() {
                 p={8}
                 bgColor={'#F5F5F5'}
                 zIndex="1"
-                marginLeft="10rem"
+                marginLeft="13rem"
             >
                 <Heading textAlign={'center'}>Perfil</Heading>
                 <Divider marginTop={'1rem'}></Divider>

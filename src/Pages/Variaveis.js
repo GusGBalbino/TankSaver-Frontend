@@ -5,10 +5,12 @@ import {
     theme,
     Heading,
     Divider,
+    SimpleGrid,
 } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
-import { CardCadastro } from '../components/Cadastro/CardCadastro';
+import { CardCadastro, CardCadastroCompra } from '../components/Cadastro/CardCadastroCompra';
+import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 
 function Variaveis() {
     return (
@@ -22,17 +24,21 @@ function Variaveis() {
                 p={8}
                 bgColor={'#F5F5F5'}
                 zIndex="1"
-                marginLeft="10rem"
-            >
+                marginLeft="13rem"
+                >
 
                 <Sidebar />
-                <Heading textAlign={'center'}>Cadastramento de Variávies</Heading>
+                <Heading textAlign={'center'}>Atualização de Dados </Heading>
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
-                <CardCadastro
-                    title={'Cadastro de Compra'}
-                    info={'Selecione o tipo de combustível'}
-                    infoSelect={'option1'} />
 
+                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+
+                <CaixaInfo title={'Cadastramento de Compras'} info={<CardCadastroCompra/>} />
+                
+                <CaixaInfo title={'Compras'} info={<CardCadastroCompra/>} />
+                
+                <CaixaInfo title={'Compras'} info={<CardCadastroCompra/>} />
+                </SimpleGrid>
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 <Rodape />
