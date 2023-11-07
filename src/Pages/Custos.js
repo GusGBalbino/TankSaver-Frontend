@@ -7,9 +7,11 @@ import {
     Flex,
     Heading,
     Divider,
+    Tooltip
 } from '@chakra-ui/react';
 import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
+import {QuestionOutlineIcon} from '@chakra-ui/icons';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
 import { BotaoEditar } from '../components/Botoes/BotaoEditar';
@@ -34,10 +36,16 @@ function Custos() {
 
                 <Sidebar />
 
-                <Heading textAlign={'center'}>Custos</Heading>
+                <Heading textAlign={'center'}>
+                Custos
+                <Tooltip label="Direcione-se à opção de Cadastro." fontSize="md" >
+                    <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
+                </Tooltip>
+                </Heading> 
                 <Divider marginTop={'1rem'} />
-
+                
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de compra</Heading>
+                
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}/>
                     <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}/>

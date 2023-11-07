@@ -11,10 +11,12 @@ import {
     Flex,
     Heading,
     Divider,
-
 } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
+import { BotaoAlteracao } from '../components/Botoes/BotaoAlteracao';
+import { EditIcon } from '@chakra-ui/icons';
+import { CardPerfil } from '../components/EditarDados/CardPerfil';
 
 function Perfil() {
     function cadastrarUsuario(e) {
@@ -24,7 +26,6 @@ function Perfil() {
     return (
         <ChakraProvider theme={theme}>
             <Rodape />
-
             <Grid
                 display={'flex'}
                 flexDirection={'column'}
@@ -130,7 +131,11 @@ function Perfil() {
                                 <Input placeholder="(XX) X XXXX-XXXX..." color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                             </FormControl>
                         </HStack>
+                        <Divider marginTop={'1rem'}></Divider>
+                        <BotaoAlteracao icon = {<EditIcon/>} name={'Editar Dados'}/>
+                        <CardPerfil/>
                     </Box>
+                    
                 </Flex>
             </Grid>
 
