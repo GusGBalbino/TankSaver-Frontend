@@ -10,15 +10,13 @@ const InfoProps = [
 export function CaixaInfo(props = InfoProps) {
     return (
         
-            <Card size={'sm'}>
-                <CardHeader bg={'#131328'} textColor={'white'} borderRadius='md'>
+            <Card size={'sm'} >
+                <CardHeader align={'center'} bg={'#131328'} textColor={'white'} borderRadius='md'>
                     <Text size='sm'>{props.title}</Text>
                 </CardHeader>
 
-                <CardBody>
-                    <Text>{props.info}</Text>
-
-                    {props.editor}
+                <CardBody align={'center'}>
+                    {props.info}
                 </CardBody>
             </Card>
       

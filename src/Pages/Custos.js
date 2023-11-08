@@ -14,9 +14,6 @@ import Sidebar from './Sidebar';
 import {QuestionOutlineIcon} from '@chakra-ui/icons';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
-import { BotaoEditar } from '../components/Botoes/BotaoEditar';
-import { BotaoAlteracao } from '../components/Botoes/BotaoAlteracao';
-import { CardCadastroCompra } from '../components/Cadastro/CardCadastroCompra';
 
 
 function Custos() {
@@ -44,7 +41,7 @@ function Custos() {
                 </Heading> 
                 <Divider marginTop={'1rem'} />
                 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de compra</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor da última compra de combustíveis</Heading>
                 
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}/>
@@ -77,8 +74,8 @@ function Custos() {
                     <CaixaInfo title={'Crédito'} info={'Informação que virá do back'}/>
                 </SimpleGrid>
 
-                <Flex marginTop={'10'} justifyContent={'space-between'}>
-                    <CardCadastroCompra/>
+                <Flex marginTop={'10'} justifyContent={'flex-end'}>
+                  
                     <AlertaUltimaAtualizacao dataHora={'dia tal hora tal'} />
                 </Flex>
 

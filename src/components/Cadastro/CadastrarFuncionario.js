@@ -24,28 +24,15 @@ import {
     NumberIncrementStepper,
     Divider,
     VStack,
-    Heading,
+    InputLeftAddon,
 } from '@chakra-ui/react';
 import { BotaoAlteracao } from '../Botoes/BotaoAlteracao';
 
-const InfoProps = [
-    { title: String },
-    { info: String },
-    { editor: String },
-    { infoSelect: String },
-]
 
-
-
-export function CardCadastroCompra(props = InfoProps) {
-    //FORMATAÇÃO PARA RECEBER EM REAIS
+export function CadastrarFuncionario() {
     const format = (val) => `$ ` + val.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-    // const parse = (val) => val.replace(/^\$/, '')
-    // var format = atual.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-
-    const [valueCompra, setValueCompra] = React.useState('')
-
-    // LÓGICA DE APARIÇÃO DO MODAL
+    const [valueSalario, setValueSalario] = React.useState('')
+        // LÓGICA DE APARIÇÃO DO MODAL
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const initialRef = React.useRef(null)
@@ -84,41 +71,29 @@ export function CardCadastroCompra(props = InfoProps) {
             >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Cadastro de compra</ModalHeader>
+                    <ModalHeader>Cadastro de funcionário</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
-                            <FormLabel>Selecione o tipo de combustível</FormLabel>
+                            
+                        <FormLabel>Nome</FormLabel>
+                        <Input marginBottom={'15px'} variant='filled' />
 
-                            <Select marginBottom={'15px'} value={props.infoSelect} variant='filled' placeholder='Selecione' >
-                                <option value='option1'>Option 1</option>
-
-                            </Select>
-
-                            <FormLabel>Volume de compra</FormLabel>
-                            <NumberInput marginBottom={'15px'} variant='filled' placeholder='Insira o volume da compra em litros'>
-                                 <NumberInputField />
-                            </NumberInput>
-
-                            <FormLabel>Valor de compra por litro</FormLabel>
-                            <NumberInput
+                        <FormLabel>Cargo</FormLabel>
+                        <Input marginBottom={'15px'} variant='filled' />
+                        
+                        <FormLabel>Salário Bruto</FormLabel>
+                        <NumberInput
                                 variant='filled'
-                                onChange={setValueCompra}
-                                value={format(valueCompra)}
+                                onChange={setValueSalario}
+                                value={format(valueSalario)}
                                 max={50}
                                 marginBottom={'15px'}
                             >
                                 <NumberInputField />
                             </NumberInput>
+                          
 
-                            <FormLabel>Data da compra</FormLabel>
-                            <Input
-                                marginBottom={'15px'}
-                                variant='filled'
-                                placeholder="Select Date and Time"
-                                size="md"
-                                type="datetime-local"
-                            />
                         </FormControl>
                     </ModalBody>
 

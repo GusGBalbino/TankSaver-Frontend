@@ -12,7 +12,6 @@ export function AlertaUltimaAtualizacao(props = DataProps){
             <AlertIcon color={'#FFBB0D'} />
             <VStack>
             <Text>Ultima atualização: {props.dataHora}</Text>
-            <Text>{props.description}</Text>
             </VStack>
         </Alert>
 

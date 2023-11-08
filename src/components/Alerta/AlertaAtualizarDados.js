@@ -58,8 +58,6 @@ export function AlertaAtualizarDados(props = ButtonProps) {
 
         <HStack>
           <BotaoAlerta link={'/variaveis'} name={'Atualizar dados'} />
-          {/* <BotaoAlerta link={'/ganhos'} name={'Atualizar ganhos'} /> */}
-          {/* <BotaoAlerta link={'/perfil'} name={'Atualizar variáveis'} /> */}
         </HStack>
       </Alert>
     </Box>

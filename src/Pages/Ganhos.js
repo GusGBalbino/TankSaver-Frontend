@@ -7,12 +7,14 @@ import {
     Flex,
     Heading,
     Divider,
+    Tooltip,
+    
 } from '@chakra-ui/react';
 import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
+import {QuestionOutlineIcon} from '@chakra-ui/icons';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
-import { BotaoEditar } from '../components/Botoes/BotaoEditar';
 
 function Ganhos() {
     return (
@@ -30,7 +32,11 @@ function Ganhos() {
 
                 <Sidebar />
 
-                <Heading textAlign={'center'}>Ganhos</Heading>
+                <Heading textAlign={'center'}>
+                    Ganhos
+                    <Tooltip label="Direcione-se à opção de Cadastro." fontSize="md" >
+                        <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
+                    </Tooltip></Heading>
                 <Divider marginTop={'1rem'} />
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de venda atual</Heading>
@@ -53,11 +59,11 @@ function Ganhos() {
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Total de lucros semanal</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}/>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
                 </SimpleGrid>
 
                 <Flex marginTop={'10'} justifyContent={'flex-end'}>
