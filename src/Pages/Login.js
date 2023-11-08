@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 import {
   Box,
   FormControl,
@@ -14,24 +15,48 @@ import {
 } from '@chakra-ui/react';
 import logo from '../image/logo.svg';
 
-function Login() {
+
+function Login({ onLoginSuccess }) {
   const history = useNavigate();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Defina a URL da sua API de login
+    const loginUrl = 'http://localhost:8000/login/';
+
     try {
-      const response = await axios.post('/api/login', { email, senha }); // Solicitação para a API
-      const { access_token } = response.data;
+      const response = await fetch(loginUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, senha: senha }),
+      });
 
-      if (access_token) {
-        // Se a autenticação for bem-sucedida vai redirecionar para a página de DashBoard
-        history.push('/dashboard');
+      if (response.ok) {
+        const data = await response.json();
+        // Salva o token no localStorage ou sessionStorage
+        localStorage.setItem('accessToken', data.access_token);
+        navigate('/dashboard');
+        // Chama a função de sucesso de login, se necessário
+        if (onLoginSuccess) {
+          onLoginSuccess(data.access_token);
+        }
+      } else {
+        // Se a resposta não for bem-sucedida, trata o erro
+        console.error('Falha no login');
+        // Aqui você pode definir uma mensagem de erro para mostrar ao usuário
       }
     } catch (error) {
-      // Trata erros de autenticação.
+      console.error('Erro na requisição:', error);
+      // Tratar exceção de erro na requisição
     }
-  }
+  };
+
 
   return (
     <ChakraProvider theme={theme}>
@@ -60,22 +85,41 @@ function Login() {
           bgColor="#FFBB0D"
           position="relative"
           zIndex="1"
-          marginBottom="50px" 
+          marginBottom="50px"
         >
           <Text fontSize="40px" fontWeight="bold" color="black" textAlign="center">
             Login
           </Text>
-          <FormControl id="username" mt="4"  color="black" focusBorderColor="green.500">
+
+          <FormControl id="username" mt="4" color="black" focusBorderColor="green.500">
             <FormLabel color="black">Usuário</FormLabel>
-            <Input type="text" placeholder="Digite seu usuário..."  color="black" _placeholder={{ color: 'gray.500' }}  bg="white" />
+            <Input
+              type="text"
+              placeholder="Digite seu usuário..."
+              color="black"
+              _placeholder={{ color: 'gray.500' }}
+              bg="white"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </FormControl>
+
           <FormControl id="password" mt="4" isRequired color="black">
             <FormLabel color="black">Senha</FormLabel>
-            <Input type="password" placeholder="Digite sua senha..." color="black" _placeholder={{ color: 'gray.500' }} bg="white" />
+            <Input
+              type="password"
+              placeholder="Digite sua senha..."
+              color="black"
+              _placeholder={{ color: 'gray.500' }}
+              bg="white"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+            />
           </FormControl>
+
           <Box mt="4" display="flex" flexDirection="column" alignItems="center">
-          <Link alignSelf="flex-end" marginRight="1px" marginLeft="220px" color="blue.600" to='/dashboard'>Esqueci a senha.</Link>
-            <Button bg="blue.900" color="white" mt="8" _hover={{ bg: 'gray.700' }}>
+            <Link alignSelf="flex-end" marginRight="1px" marginLeft="220px" color="blue.600" to='/dashboard'>Esqueci a senha.</Link>
+            <Button onClick={handleSubmit} bg="blue.900" color="white" mt="8" _hover={{ bg: 'gray.700' }}>
               Entrar
             </Button>
           </Box>
