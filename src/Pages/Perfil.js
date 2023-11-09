@@ -42,6 +42,7 @@ function Perfil() {
                 <Flex
                     justifyContent="center"
                     alignItems="center"
+                    as='form'
                 >
                     <Box
                         p={4}
@@ -132,8 +133,10 @@ function Perfil() {
                             </FormControl>
                         </HStack>
                         <Divider marginTop={'1rem'}></Divider>
-                        <BotaoAlteracao icon = {<EditIcon/>} name={'Editar Dados'}/>
-                        <CardPerfil/>
+                        <Box marginBox='left'>
+                            <CardPerfil/>
+                        </Box>
+
                     </Box>
                     
                 </Flex>

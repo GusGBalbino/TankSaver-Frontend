@@ -97,7 +97,7 @@ export function CardCadastroCompra(props = InfoProps) {
 
                             <FormLabel>Volume de compra</FormLabel>
                             <NumberInput marginBottom={'15px'} variant='filled' placeholder='Insira o volume da compra em litros'>
-                                 <NumberInputField />
+                                <NumberInputField />
                             </NumberInput>
 
                             <FormLabel>Valor de compra por litro</FormLabel>

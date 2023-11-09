@@ -5,59 +5,20 @@ import {
     ModalBody,
     ModalCloseButton,
     ModalContent,
-    ModalFooter,
     ModalHeader,
     FormControl,
     useDisclosure,
     ModalOverlay,
     FormLabel,
-    Text,
-    Card,
-    CardHeader,
-    CardBody,
-    Select,
     Input,
-    NumberInputField,
-    NumberInput,
-    NumberDecrementStepper,
-    NumberInputStepper,
-    NumberIncrementStepper,
+    Select,
     Divider,
-    VStack,
-    Heading,
+    Flex
 } from '@chakra-ui/react';
-import { BotaoAlteracao } from '../Botoes/BotaoAlteracao';
+import { EditIcon } from '@chakra-ui/icons';
 
-const InfoProps = [
-    { title: String },
-    { info: String },
-    { editor: String },
-    { infoSelect: String },
-]
-
-export function CardPerfil(props = InfoProps) {
-    //FORMATAÇÃO PARA RECEBER EM REAIS
-    const format = (val) => `R$ ` + val
-    const parse = (val) => val.replace(/^\$/, '')
-
-    const [value, setValue] = React.useState('0.0')
-
-    // LÓGICA DE APARIÇÃO DO MODAL
-    const { isOpen, onOpen, onClose } = useDisclosure()
-
-    const initialRef = React.useRef(null)
-    const finalRef = React.useRef(null)
-
-    //FILTRO DO MODAL
-    const OverlayOne = () => (
-        <ModalOverlay
-            bg='blackAlpha.300'
-            backdropFilter='blur(10px) hue-rotate(90deg)'
-        />
-    )
-
-    const [overlay, setOverlay] = React.useState(<OverlayOne />)
-
+export function CardPerfil() {
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <>
@@ -70,73 +31,65 @@ export function CardPerfil(props = InfoProps) {
                 borderColor={'#131328'}
                 justifyContent="flex-start"
                 _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
-
-                onClick={() => {
-                    setOverlay(<OverlayOne />)
-                    onOpen()
-                }}
-            >Editar Dados</Button>
-            <Modal
-                initialFocusRef={initialRef}
-                finalFocusRef={finalRef}
-                isOpen={isOpen}
-                onClose={onClose}
+                onClick={onOpen}
             >
+                <Flex align="center"> {/* Use o Flex para alinhar o ícone e o texto */}
+                    <EditIcon mr={2} /> {/* Adicione margem à direita (mr) para separar o ícone do texto */}
+                    Editar Dados
+                </Flex>
+            </Button>
+
+
+            <Modal isOpen={isOpen} onClose={onClose} size={'md'}>
                 <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Cadastro de compra</ModalHeader>
-                    <ModalCloseButton />
-                      <FormControl>
-                        <FormLabel>First name</FormLabel>
-                        <Input ref={initialRef} placeholder='First name' />
-                      </FormControl>
+                <ModalContent >
+                    <ModalHeader>Editar Dados</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        <FormControl>
-                            <FormLabel>Selecione o tipo de combustível</FormLabel>
-                            <Select value={props.infoSelect} variant='filled' placeholder='Selecione'>
-                                <option value='option1'>Option 1</option>
-                                <option value='option2'>Option 2</option>
-                                <option value='option3'>Option 3</option>
-                            </Select>
+                        <FormControl mb={2}>
+                            <FormLabel bg="#131328" color="white" borderRadius="3">Nome Fantasia</FormLabel>
+                            <Input placeholder='Nome Fantasia...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
 
-                            <FormLabel>Volume de compra</FormLabel>
-                            <Input variant='filled' placeholder='Filled' />
+                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>Usuário</FormLabel>
+                            <Input placeholder='Usuário...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
 
-                            <FormLabel>Valor de compra por litro</FormLabel>
-                            <NumberInput
-                                variant='filled'
-                                onChange={(valueString) => setValue(parse(valueString))}
-                                value={format(value)}
-                                max={50}
-                            >
-                                <NumberInputField />
-                                <NumberInputStepper>
-                                    <NumberIncrementStepper />
-                                    <NumberDecrementStepper />
-                                </NumberInputStepper>
-                            </NumberInput>
+                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>CNPJ</FormLabel>
+                            <Input placeholder='CNPJ...' color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
 
-                            <FormLabel>Data da compra</FormLabel>
-                            <Input
-                                variant='filled'
-                                placeholder="Select Date and Time"
-                                size="full"
-                                type="datetime-local"
-                            />
+                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>Telefone Empresarial</FormLabel>
+                            <Input placeholder='(XX) X XXXX-XXXX...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+
+                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>Endereço</FormLabel>
+                            <Input placeholder='Endereço...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+
+                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>CEP</FormLabel>
+                            <Input placeholder='CEP...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+
+                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>Município</FormLabel>
+                            <Input placeholder='Município...' color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
+
+                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>UF</FormLabel>
+                            <Input placeholder='UF...' color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
+
+                            <FormLabel bg="#131328" color="white" borderRadius="3" mb={2}>E-mail</FormLabel>
+                            <Input type='email' placeholder='E-mail...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+
+                            <FormLabel bg="#131328" color="white" borderRadius="3" mb={2}>Responsável pela Empresa</FormLabel>
+                            <Input placeholder='Responsável pela Empresa...'  color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
+
+                            <FormLabel bg="#131328" color="white" borderRadius="3" mb={2}>Telefone</FormLabel>
+                            <Input placeholder='(XX) X XXXX-XXXX...'  color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
                         </FormControl>
                     </ModalBody>
-
-                    <ModalFooter>
+                    <Divider marginTop={'1rem'} />
+                    <Flex justifyContent="flex-end">
                         <Button colorScheme='blue' mr={3}>
                             Salvar
                         </Button>
                         <Button onClick={onClose}>Cancelar</Button>
-                    </ModalFooter>
+                    </Flex>
                 </ModalContent>
             </Modal>
         </>
-
-
-    )
+    );
 }
