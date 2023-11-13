@@ -21,23 +21,14 @@ import { BotaoAlteracao } from '../Botoes/BotaoAlteracao';
 
 
 export function CadastrarFuncionario() {
+
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
-    const [total_folha, setSalario] = useState(0);
+    const [total_folha, setTotalFolha] = useState(0);
     // const [valueSalario, setValueSalario] = React.useState('')
     const [posto, setPosto] = useState(''); // Estado para armazenar o posto selecionado
     const [postos, setPostos] = useState([]); // Estado para armazenar a lista de postos
 
-    useEffect(() => {
-        // Busque os postos da API do Django ao carregar o componente
-        axios.get('http://localhost:8000/posto_list')
-            .then((response) => {
-                setPostos(response.data);
-            })
-            .catch((error) => {
-                console.error('Erro ao buscar os postos:', error);
-            });
-    }, []); // O segundo argumento vazio assegura que essa solicitação seja feita apenas uma vez
 
 
 
@@ -59,25 +50,31 @@ export function CadastrarFuncionario() {
     const [overlay, setOverlay] = React.useState(<OverlayOne />)
 
     const handleSalvarClick = () => {
-        // Crie um objeto com os dados a serem enviados para o backend
-        const data = {
+        const token = localStorage.getItem('accessToken');
+        if (!token) {
+            console.error('No token found');
+            return;
+        }
+
+        const funcionarioData = {
             nome,
             cargo,
             total_folha,
             posto,
         };
-
-        // Faça uma solicitação POST para o endpoint do seu backend
-        axios.post('http://localhost:8000/funcionario/', data)
-            .then((response) => {
-                // Se a solicitação for bem-sucedida, você pode realizar alguma ação, se necessário
-                console.log('Dados salvos com sucesso!', response.data);
-                onClose(); // Feche o modal após salvar
-            })
-            .catch((error) => {
-                // Se ocorrer um erro na solicitação, você pode tratar o erro aqui
-                console.error('Erro ao salvar os dados:', error);
-            });
+        
+        axios.post('http://localhost:8000/funcionario/', funcionarioData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            console.log('Dados salvos com sucesso!', response.data);
+            onClose(); // Fechar o modal após salvar
+        })
+        .catch(error => {
+            console.error('Erro ao salvar os dados:', error);
+        });
     };
 
 
@@ -123,10 +120,9 @@ export function CadastrarFuncionario() {
                                 variant='filled'
                                 onChange={(valueString) => {
                                     const numericValue = parseFloat(valueString.replace(/[^0-9.-]+/g, ''));
-                                    setSalario(numericValue);
+                                    setTotalFolha(numericValue);
                                 }}
                                 value={total_folha}
-                                max={50}
                                 marginBottom={'15px'}
                             >
                                 <NumberInputField />
@@ -134,17 +130,18 @@ export function CadastrarFuncionario() {
 
                             {/* Campo de seleção para o posto */}
                             <FormLabel>Posto</FormLabel>
-                            <select
+                            <Input value={posto} onChange={(e) => setPosto(e.target.value)} marginBottom={'15px'} variant='filled' />
+                            {/* <select
                                 value={posto}
                                 onChange={(e) => setPosto(e.target.value)}
                             >
                                 <option value="">Selecione um posto</option>
-                                {postos.map((posto) => (
-                                    <option key={posto.id} value={posto.id}>
-                                        {posto.nome}
+                                {postos.map((p) => (
+                                    <option key={p.id} value={p.id}>
+                                        {p.nome_fantasia}
                                     </option>
                                 ))}
-                            </select>
+                            </select> */}
 
 
                         </FormControl>
