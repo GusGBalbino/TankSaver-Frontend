@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-import axios from 'axios'; // Importe a biblioteca axios
+import axios from 'axios';
 import {
     Button,
     Modal,
@@ -14,72 +13,51 @@ import {
     ModalOverlay,
     FormLabel,
     Input,
-    NumberInputField,
     NumberInput,
+    NumberInputField
 } from '@chakra-ui/react';
-import { BotaoAlteracao } from '../Botoes/BotaoAlteracao';
 
+axios.defaults.baseURL = "http://localhost:8000";
 
 export function CadastrarFuncionario() {
-
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
-    const [total_folha, setTotalFolha] = useState(0);
-    // const [valueSalario, setValueSalario] = React.useState('')
-    const [posto, setPosto] = useState(''); // Estado para armazenar o posto selecionado
-    const [postos, setPostos] = useState([]); // Estado para armazenar a lista de postos
+    const [totalFolha, setTotalFolha] = useState(0);
+    const [postoId, setPostoId] = useState('');
+    const [postoName, setPostoNome] = useState('');
 
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
-
-
-    // const format = (val) => `$ ` + val.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
-
-    // LÓGICA DE APARIÇÃO DO MODAL
-    const { isOpen, onOpen, onClose } = useDisclosure()
-
-    const initialRef = React.useRef(null)
-    const finalRef = React.useRef(null)
-
-    //FILTRO DO MODAL
-    const OverlayOne = () => (
-        <ModalOverlay
-            bg='blackAlpha.300'
-            backdropFilter='blur(10px) hue-rotate(90deg)'
-        />
-    )
-    const [overlay, setOverlay] = React.useState(<OverlayOne />)
-
-    const handleSalvarClick = () => {
-        const token = localStorage.getItem('accessToken');
-        if (!token) {
-            console.error('No token found');
-            return;
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
         }
+    }, []);
 
-        const funcionarioData = {
-            nome,
-            cargo,
-            total_folha,
-            posto,
-        };
-        
-        axios.post('http://localhost:8000/funcionario/', funcionarioData, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then(response => {
-            console.log('Dados salvos com sucesso!', response.data);
-            onClose(); // Fechar o modal após salvar
-        })
-        .catch(error => {
-            console.error('Erro ao salvar os dados:', error);
-        });
+    const adicionarFuncionario = async () => {
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
+        console.log('Request Data:', { nome, cargo, totalFolha, posto: postoId });
+
+        try {
+            const response = await axios.post('http://localhost:8000/funcionario/', {
+                nome, cargo, total_folha: totalFolha, posto: postoId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log('Funcionário criado com sucesso:', response.data);
+        } catch (error) {
+            console.error('Erro ao adicionar funcionário:', error);
+            console.log('Erro na resposta:', error.response);
+        }
     };
-
-
-
-
     return (
         <>
             <Button
@@ -90,15 +68,13 @@ export function CadastrarFuncionario() {
                 textColor={'black'}
                 borderColor={'#131328'}
                 _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
-
-                onClick={() => {
-                    setOverlay(<OverlayOne />)
-                    onOpen()
-                }}
-            >Cadastrar</Button>
+                onClick={onOpen}
+            >
+                Cadastrar
+            </Button>
             <Modal
-                initialFocusRef={initialRef}
-                finalFocusRef={finalRef}
+                initialFocusRef={null}
+                finalFocusRef={null}
                 isOpen={isOpen}
                 onClose={onClose}
             >
@@ -108,12 +84,21 @@ export function CadastrarFuncionario() {
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
-
                             <FormLabel>Nome</FormLabel>
-                            <Input value={nome} onChange={(e) => setNome(e.target.value)} marginBottom={'15px'} variant='filled' />
+                            <Input 
+                                value={nome} 
+                                onChange={(e) => setNome(e.target.value)} 
+                                marginBottom={'15px'} 
+                                variant='filled' 
+                            />
 
                             <FormLabel>Cargo</FormLabel>
-                            <Input value={cargo} onChange={(e) => setCargo(e.target.value)} marginBottom={'15px'} variant='filled' />
+                            <Input 
+                                value={cargo} 
+                                onChange={(e) => setCargo(e.target.value)} 
+                                marginBottom={'15px'} 
+                                variant='filled' 
+                            />
 
                             <FormLabel>Salário Bruto</FormLabel>
                             <NumberInput
@@ -122,33 +107,24 @@ export function CadastrarFuncionario() {
                                     const numericValue = parseFloat(valueString.replace(/[^0-9.-]+/g, ''));
                                     setTotalFolha(numericValue);
                                 }}
-                                value={total_folha}
+                                value={totalFolha}
                                 marginBottom={'15px'}
                             >
                                 <NumberInputField />
                             </NumberInput>
 
-                            {/* Campo de seleção para o posto */}
                             <FormLabel>Posto</FormLabel>
-                            <Input value={posto} onChange={(e) => setPosto(e.target.value)} marginBottom={'15px'} variant='filled' />
-                            {/* <select
-                                value={posto}
-                                onChange={(e) => setPosto(e.target.value)}
-                            >
-                                <option value="">Selecione um posto</option>
-                                {postos.map((p) => (
-                                    <option key={p.id} value={p.id}>
-                                        {p.nome_fantasia}
-                                    </option>
-                                ))}
-                            </select> */}
-
-
+                            <Input 
+                                value={postoName} 
+                                isReadOnly 
+                                marginBottom={'15px'} 
+                                variant='filled' 
+                            />
                         </FormControl>
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button onClick={handleSalvarClick} colorScheme='blue' mr={3}>
+                        <Button onClick={adicionarFuncionario} colorScheme='blue' mr={3}>
                             Salvar
                         </Button>
                         <Button onClick={onClose}>Cancelar</Button>
@@ -156,7 +132,5 @@ export function CadastrarFuncionario() {
                 </ModalContent>
             </Modal>
         </>
-
-
-    )
+    );
 }

@@ -16,46 +16,29 @@ import {
 import logo from '../image/logo.svg';
 
 
-function Login({ onLoginSuccess }) {
+function Login() {
   const history = useNavigate();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    // Defina a URL da sua API de login
-    const loginUrl = 'http://localhost:8000/login/';
-
+  const handleLogin = async () => {
     try {
-      const response = await fetch(loginUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, senha: senha }),
-      });
+      const response = await axios.post('http://localhost:8000/login/', { email, senha }); // Atualize a URL conforme necessário
+      const { access_token, postoId, postoName } = response.data;
 
-      if (response.ok) {
-        const data = await response.json();
-        // Salva o token no localStorage ou sessionStorage
-        localStorage.setItem('accessToken', data.access_token);
-        navigate('/dashboard');
-        // Chama a função de sucesso de login, se necessário
-        if (onLoginSuccess) {
-          onLoginSuccess(data.access_token);
-        }
-      } else {
-        // Se a resposta não for bem-sucedida, trata o erro
-        console.error('Falha no login');
-        // Aqui você pode definir uma mensagem de erro para mostrar ao usuário
+      if (access_token) {
+        localStorage.setItem('token', access_token);  
+        localStorage.setItem('postoId', postoId);   
+        localStorage.setItem('postoName', postoName);
+        history('/dashboard'); // Redirecionamento para a Dashboard
+        console.log(postoId);
+        console.log(postoName);
       }
     } catch (error) {
-      console.error('Erro na requisição:', error);
-      // Tratar exceção de erro na requisição
+      console.error("Erro de login:", error);
+      // Aqui você pode adicionar algum feedback para o usuário em caso de falha no login
     }
-  };
+  }
 
 
   return (
@@ -119,7 +102,7 @@ function Login({ onLoginSuccess }) {
 
           <Box mt="4" display="flex" flexDirection="column" alignItems="center">
             <Link alignSelf="flex-end" marginRight="1px" marginLeft="220px" color="blue.600" to='/dashboard'>Esqueci a senha.</Link>
-            <Button onClick={handleSubmit} bg="blue.900" color="white" mt="8" _hover={{ bg: 'gray.700' }}>
+            <Button onClick={handleLogin} bg="blue.900" color="white" mt="8" _hover={{ bg: 'gray.700' }}>
               Entrar
             </Button>
           </Box>
