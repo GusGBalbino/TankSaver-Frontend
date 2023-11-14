@@ -45,12 +45,8 @@ export function CadastrarFuncionario() {
         console.log('Request Data:', { nome, cargo, totalFolha, posto: postoId });
 
         try {
-            const response = await axios.post('http://localhost:8000/funcionario/', {
+            const response = await axios.post('/funcionario/', {
                 nome, cargo, total_folha: totalFolha, posto: postoId
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
             });
             console.log('Funcionário criado com sucesso:', response.data);
         } catch (error) {
