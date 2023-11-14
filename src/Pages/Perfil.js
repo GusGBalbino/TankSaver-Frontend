@@ -11,12 +11,14 @@ import {
     Flex,
     Heading,
     Divider,
+    SimpleGrid,
 } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
 import { BotaoAlteracao } from '../components/Botoes/BotaoAlteracao';
 import { EditIcon } from '@chakra-ui/icons';
 import { CardPerfil } from '../components/EditarDados/CardPerfil';
+import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 
 function Perfil() {
     function cadastrarUsuario(e) {
@@ -38,6 +40,15 @@ function Perfil() {
             >
                 <Heading textAlign={'center'}>Perfil</Heading>
                 <Divider marginTop={'1rem'}></Divider>
+
+                <CaixaInfo title={'Nome Fantasia'} info={'Informação que virá do back'} />
+                <Divider margin={'1rem'}/>
+                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+                    <CaixaInfo title={'Usuário'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'CNPJ'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Telefone'} info={'Informação que virá do back'} />
+                </SimpleGrid>
+
                 
                 <Flex
                     justifyContent="center"

@@ -13,6 +13,8 @@ import {
     ModalOverlay,
     FormLabel,
     Input,
+    InputGroup,
+    InputLeftElement,
     NumberInput,
     NumberInputField
 } from '@chakra-ui/react';
@@ -23,6 +25,7 @@ export function CadastrarFuncionario() {
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
     const [totalFolha, setTotalFolha] = useState(0);
+    const [formattedTotalFolha, setFormattedTotalFolha] = useState('');
     const [postoId, setPostoId] = useState('');
     const [postoName, setPostoNome] = useState('');
 
@@ -54,6 +57,7 @@ export function CadastrarFuncionario() {
             console.log('Erro na resposta:', error.response);
         }
     };
+
     return (
         <>
             <Button
@@ -81,41 +85,31 @@ export function CadastrarFuncionario() {
                     <ModalBody pb={6}>
                         <FormControl>
                             <FormLabel>Nome</FormLabel>
-                            <Input 
-                                value={nome} 
-                                onChange={(e) => setNome(e.target.value)} 
-                                marginBottom={'15px'} 
-                                variant='filled' 
+                            <Input
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
+                                marginBottom={'15px'}
+                                variant='filled'
                             />
 
                             <FormLabel>Cargo</FormLabel>
-                            <Input 
-                                value={cargo} 
-                                onChange={(e) => setCargo(e.target.value)} 
-                                marginBottom={'15px'} 
-                                variant='filled' 
+                            <Input
+                                value={cargo}
+                                onChange={(e) => setCargo(e.target.value)}
+                                marginBottom={'15px'}
+                                variant='filled'
                             />
 
                             <FormLabel>Salário Bruto</FormLabel>
-                            <NumberInput
-                                variant='filled'
-                                onChange={(valueString) => {
-                                    const numericValue = parseFloat(valueString.replace(/[^0-9.-]+/g, ''));
-                                    setTotalFolha(numericValue);
-                                }}
-                                value={totalFolha}
-                                marginBottom={'15px'}
-                            >
-                                <NumberInputField />
-                            </NumberInput>
-
-                            <FormLabel>Posto</FormLabel>
-                            <Input 
-                                value={postoName} 
-                                isReadOnly 
-                                marginBottom={'15px'} 
-                                variant='filled' 
-                            />
+                            <InputGroup>
+                                <InputLeftElement
+                                    pointerEvents='none'
+                                    children='R$'
+                                />
+                                <Input 
+                                bg={'gray.100'}  
+                                onChange={(e) => setTotalFolha(e.target.value)} />
+                            </InputGroup>
                         </FormControl>
                     </ModalBody>
 

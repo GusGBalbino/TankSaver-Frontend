@@ -40,7 +40,7 @@ export function CardPerfil() {
             </Button>
 
 
-            <Modal isOpen={isOpen} onClose={onClose} size={'md'}>
+            <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
                 <ModalOverlay />
                 <ModalContent >
                     <ModalHeader>Editar Dados</ModalHeader>
