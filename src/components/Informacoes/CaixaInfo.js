@@ -19,7 +19,6 @@ export function CaixaInfo(props = InfoProps) {
                     {props.info}
                 </CardBody>
             </Card>
-      
 
     )
 }

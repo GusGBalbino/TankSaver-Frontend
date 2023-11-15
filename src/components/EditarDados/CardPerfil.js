@@ -11,9 +11,12 @@ import {
     ModalOverlay,
     FormLabel,
     Input,
-    Select,
     Divider,
-    Flex
+    Flex,
+    HStack,
+    Spacer,
+    Box,
+    ModalFooter
 } from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
 
@@ -22,23 +25,24 @@ export function CardPerfil() {
 
     return (
         <>
-            <Button
-                minW={['10rem', '10rem']}
-                maxW={['10rem', '10rem']}
-                marginBottom={'15px'}
-                variant='outline'
-                textColor={'black'}
-                borderColor={'#131328'}
-                justifyContent="flex-start"
-                _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
-                onClick={onOpen}
-            >
-                <Flex align="center"> {/* Use o Flex para alinhar o ícone e o texto */}
-                    <EditIcon mr={2} /> {/* Adicione margem à direita (mr) para separar o ícone do texto */}
+            <HStack spacing={4} justifyContent="flex-end">
+                <Spacer />
+                <Button
+                    minW={['10rem', '10rem']}
+                    maxW={['10rem', '10rem']}
+                    variant='outline'
+                    textColor={'black'}
+                    borderColor={'#131328'}
+                    justifyContent="flex-start"
+                    _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
+                    onClick={onOpen}
+                >
+                    <Flex align="center"> 
+                        <EditIcon mr={2} /> 
                     Editar Dados
-                </Flex>
-            </Button>
-
+                    </Flex>
+                </Button>
+            </HStack>
 
             <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
                 <ModalOverlay />
@@ -46,48 +50,116 @@ export function CardPerfil() {
                     <ModalHeader>Editar Dados</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        <FormControl mb={2}>
-                            <FormLabel bg="#131328" color="white" borderRadius="3">Nome Fantasia</FormLabel>
-                            <Input placeholder='Nome Fantasia...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                        <FormControl mb={2} >
+                            <Box mb={4} >
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3"  mb={1} mr={1} paddingLeft={4}>
+                                        Nome Fantasia
+                                    </FormLabel>
+                                    <Input placeholder='Nome Fantasia...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>Usuário</FormLabel>
-                            <Input placeholder='Usuário...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        Usuário
+                                    </FormLabel>
+                                    <Input placeholder='Usuário...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>CNPJ</FormLabel>
-                            <Input placeholder='CNPJ...' color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        CNPJ
+                                    </FormLabel>
+                                    <Input placeholder='CNPJ...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>Telefone Empresarial</FormLabel>
-                            <Input placeholder='(XX) X XXXX-XXXX...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        Telefone Empresarial
+                                    </FormLabel>
+                                    <Input placeholder='Telefone Empresarial...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>Endereço</FormLabel>
-                            <Input placeholder='Endereço...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        CEP
+                                    </FormLabel>
+                                    <Input placeholder='CEP...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>CEP</FormLabel>
-                            <Input placeholder='CEP...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        Endereço
+                                    </FormLabel>
+                                    <Input placeholder='Endereço...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>Município</FormLabel>
-                            <Input placeholder='Município...' color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        Município
+                                    </FormLabel>
+                                    <Input placeholder='Município...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3"  mb={2}>UF</FormLabel>
-                            <Input placeholder='UF...' color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        UF
+                                    </FormLabel>
+                                    <Input placeholder='UF...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3" mb={2}>E-mail</FormLabel>
-                            <Input type='email' placeholder='E-mail...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        E-mail
+                                    </FormLabel>
+                                    <Input placeholder='E-mail...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3" mb={2}>Responsável pela Empresa</FormLabel>
-                            <Input placeholder='Responsável pela Empresa...'  color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        Responsável pela Empresa
+                                    </FormLabel>
+                                    <Input placeholder='Responsável pela Empresa...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
 
-                            <FormLabel bg="#131328" color="white" borderRadius="3" mb={2}>Telefone</FormLabel>
-                            <Input placeholder='(XX) X XXXX-XXXX...'  color="black" _placeholder={{ color: 'black.500' }} bg="white"/>
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        Telefone
+                                    </FormLabel>
+                                    <Input placeholder='Telefone...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                </FormControl>
+                            </Box>
                         </FormControl>
                     </ModalBody>
                     <Divider marginTop={'1rem'} />
-                    <Flex justifyContent="flex-end">
-                        <Button colorScheme='blue' mr={3}>
+                    <ModalFooter>
+                        <Button bg="#131328" color="white" mr={2} _hover={{ bg: '#131328', color: 'white' }} onClick={onClose}>
                             Salvar
                         </Button>
-                        <Button onClick={onClose}>Cancelar</Button>
-                    </Flex>
+                        <Button borderColor={isOpen ? '#FFBB0D' : '#131328'}  onClick={onClose} _hover={{ color: '#131328', borderColor: '#FFBB0D' }}borderWidth="2px">
+                            Cancelar
+                        </Button>
+                    </ModalFooter>
                 </ModalContent>
             </Modal>
         </>
