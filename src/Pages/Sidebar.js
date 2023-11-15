@@ -12,8 +12,9 @@ import {
   AiOutlineFundProjectionScreen,
   AiOutlineDollarCircle,
   AiFillCalculator,
-  AiOutlineSliders,
+  AiOutlineForm,
   AiOutlineUser,
+  AiOutlineFileSearch
 } from 'react-icons/ai';
 import Logo2 from '../image/Logo2.svg';
 import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
@@ -66,16 +67,24 @@ function Sidebar() {
 
           <Link to="/variaveis">
             <OpcoesSidebar
-              icon={<AiOutlineSliders />}
+              icon={<AiOutlineForm  />}
               name={'Cadastro'}
             />
           </Link>
 
-          <Link to="/perfil">
+          <Link to="/dados">
             <OpcoesSidebar
-              icon={<AiOutlineUser />}
-              name={'Perfil'}
+              icon={<AiOutlineFileSearch  />}
+              name={'Dados'}
             />
+
+            <Link to="/perfil">
+              <OpcoesSidebar
+                icon={<AiOutlineUser />}
+                name={'Perfil'}
+              />
+            </Link>
+
           </Link>
         </VStack>
       </Box>

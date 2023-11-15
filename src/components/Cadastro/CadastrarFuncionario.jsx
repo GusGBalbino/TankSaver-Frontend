@@ -25,7 +25,6 @@ export function CadastrarFuncionario() {
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
     const [totalFolha, setTotalFolha] = useState(0);
-    const [formattedTotalFolha, setFormattedTotalFolha] = useState('');
     const [postoId, setPostoId] = useState('');
     const [postoName, setPostoNome] = useState('');
 

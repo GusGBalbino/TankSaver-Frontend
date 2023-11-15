@@ -14,16 +14,30 @@ import {
     Input,
 } from '@chakra-ui/react';
 
+axios.defaults.baseURL = "http://localhost:8000";
+
+
 export function AlterarResponsavel() {
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const [nome, setNome] = useState('');
     const [cpf, setCpf] = useState('');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
-    const [telefoneFormatado, setTelefoneFormatado] = useState('');
-
+    const [postoName, setPostoNome] = useState('');
+    
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
+    
     const formatarTelefone = (value) => {
         const numericValue = value.replace(/\D/g, '');
 
@@ -31,11 +45,11 @@ export function AlterarResponsavel() {
         if (match) {
             const formattedValue = match.slice(1).filter(Boolean).join('');
             if (formattedValue.length <= 2) {
-                setTelefoneFormatado(`(${formattedValue}`);
+                setTelefone(`(${formattedValue}`);
             } else if (formattedValue.length <= 7) {
-                setTelefoneFormatado(`(${formattedValue.slice(0, 2)}) ${formattedValue.slice(2)}`);
+                setTelefone(`(${formattedValue.slice(0, 2)}) ${formattedValue.slice(2)}`);
             } else {
-                setTelefoneFormatado(`(${formattedValue.slice(0, 2)}) ${formattedValue.slice(2, 7)}-${formattedValue.slice(7)}`);
+                setTelefone(`(${formattedValue.slice(0, 2)}) ${formattedValue.slice(2, 7)}-${formattedValue.slice(7)}`);
             }
         }
     };
@@ -58,27 +72,14 @@ export function AlterarResponsavel() {
         formatarCPF(event.target.value);
     };
 
-    useEffect(() => {
-        const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        console.log('Stored Posto ID:', storedPostoId);
-        console.log('Stored Posto Name:', storedPostoName);
-        if (storedPostoId && storedPostoName) {
-            setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
-        }
-    }, []);
-
-
-
     const adicionarResponsavel = async () => {
         const token = localStorage.getItem('token');
         console.log('Token:', token);
-        console.log('Request Data:', { nome, cpf, email, telefoneFormatado, posto: postoId });
+        console.log('Request Data:', { nome, cpf, email, telefone, posto: postoId });
 
         try {
             const response = await axios.post('/responsavel/', {
-                nome, cpf, email, telefoneFormatado, posto: postoId
+                nome, cpf, email, telefone, posto: postoId
             });
             console.log('Responsável adicionado com sucesso:', response.data);
         } catch (error) {
@@ -112,7 +113,8 @@ export function AlterarResponsavel() {
                             <FormLabel>CPF</FormLabel>
                             <Input
                                 value={cpf}
-                                onChange={handleChangeCPF}
+                                // onChange={handleChangeCPF}
+                                onChange={(e) => setEmail(e.target.value)}
                                 marginBottom={'15px'}
                                 variant='filled'
                             />
@@ -122,7 +124,7 @@ export function AlterarResponsavel() {
 
                             <FormLabel>Telefone</FormLabel>
                             <Input
-                                value={telefoneFormatado}
+                                value={telefone}
                                 onChange={handleChangeTelefone}
                                 marginBottom={'15px'}
                                 variant='filled'

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
     ChakraProvider,
     Grid,
@@ -11,13 +12,29 @@ import {
 } from '@chakra-ui/react';
 import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
-import {QuestionOutlineIcon} from '@chakra-ui/icons';
+import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
 
+axios.defaults.baseURL = "http://localhost:8000";
 
 function Custos() {
-    
+    const [dadosCustos, setDadosCustos] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const resposta = await axios.get('/funcionario/'); // Ajuste o URL conforme necessário
+                setDadosCustos(resposta.data);
+            } catch (error) {
+                console.error('Erro ao obter dados de custos:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+
     return (
         <ChakraProvider theme={theme}>
             <Grid
@@ -34,48 +51,56 @@ function Custos() {
                 <Sidebar />
 
                 <Heading textAlign={'center'}>
-                Custos
-                <Tooltip label="Direcione-se à opção de Cadastro." fontSize="md" >
-                    <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
-                </Tooltip>
-                </Heading> 
+                    Custos
+                    <Tooltip label="Direcione-se à opção de Cadastro." fontSize="md" >
+                        <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
+                    </Tooltip>
+                </Heading>
                 <Divider marginTop={'1rem'} />
-                
+
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor da última compra de combustíveis</Heading>
-                
+
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}/>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
+
+                    {dadosCustos.map((custo) => (
+                        <CaixaInfo
+                            key={custo.id} // Certifique-se de ter um identificador único
+                            title={custo.nome} // Substitua com o campo correto do seu banco de dados
+                            info={`R$ ${custo.valor}`} // Substitua com o campo correto do seu banco de dados
+                        />
+                    ))}
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Volume de compra</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'}/>
+                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Impostos</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'IBAMA'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'IBRAN'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'AGEFIS'} info={'Informação que virá do back'}/>
+                    <CaixaInfo title={'IBAMA'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'IBRAN'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'AGEFIS'} info={'Informação que virá do back'} />
                 </SimpleGrid>
 
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Taxas de cartão</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Débito'} info={'Informação que virá do back'}/>
-                    <CaixaInfo title={'Crédito'} info={'Informação que virá do back'}/>
+                    <CaixaInfo title={'Débito'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Crédito'} info={'Informação que virá do back'} />
                 </SimpleGrid>
 
                 <Flex marginTop={'10'} justifyContent={'flex-end'}>
-                  
+
                     <AlertaUltimaAtualizacao dataHora={'dia tal hora tal'} />
                 </Flex>
 

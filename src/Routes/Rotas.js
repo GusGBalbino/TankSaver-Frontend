@@ -7,6 +7,7 @@ import Variaveis from '../Pages/Variaveis';
 import Ganhos from '../Pages/Ganhos';
 import Custo from '../Pages/Custos';
 import Dashboard from '../Pages/Dashboard';
+import Dados from '../Pages/InfoBack';
 
 const Private = ({ Item }) => {
   const Login = true;
@@ -23,6 +24,7 @@ const AppRoutes = () => {
         <Route path="/ganhos" element={<Ganhos />}></Route>
         <Route path="/variaveis" element={<Variaveis />}></Route>
         <Route path="/perfil" element={<Perfil />}></Route>
+        <Route path='/dados' element={<Dados />}></Route>
       </Routes>
     </BrowserRouter>
   )
