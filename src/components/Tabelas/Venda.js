@@ -14,7 +14,7 @@ import { DeleteIcon } from '@chakra-ui/icons';
 
 
 function TabelaVenda() {
-    const [dadosCompra, setDadosCompra] = useState([]);
+    const [dadosVenda, setDadosvenda] = useState([]);
 
     const getNomeCombustivelById = async (id) => {
         try {
@@ -40,7 +40,7 @@ function TabelaVenda() {
         try {
             await axios.delete(`/venda/${id}`);
             const resposta = await axios.get('/venda/');
-            setDadosCompra(resposta.data);
+            setDadosvenda(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir funcionário:', error);
         }
@@ -60,7 +60,7 @@ function TabelaVenda() {
                     })
                 );
     
-                setDadosCompra(comprasComNomes);
+                setDadosvenda(comprasComNomes);
             } catch (error) {
                 console.error('Erro ao obter dados de venda:', error);
             }
@@ -87,7 +87,7 @@ function TabelaVenda() {
                 </Thead>
 
                 <Tbody>
-                    {dadosCompra.map((venda) => (
+                    {dadosVenda.map((venda) => (
                         <Tr key={venda.id}>
                             <Td>{venda.nome_combustivel ? venda.nome_combustivel : 'Nome do Combustível Indisponível'}</Td>
                             <Td>{venda.nome_pagamento ? venda.nome_pagamento : 'Nome do pagamento Indisponível'}</Td>

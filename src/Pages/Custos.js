@@ -19,6 +19,82 @@ import Rodape from '../components/Rodape/Rodape';
 axios.defaults.baseURL = "http://localhost:8000";
 
 function Custos() {
+    const [dadosCompra, setDadosCompra] = useState([]);
+    const [dadosCusto, setDadosCusto] = useState([]);
+    const [dadosTaxas, setDadosTaxas] = useState([]);
+    const [dadosFuncionario, setDadosFuncionario] = useState([]);
+
+    useEffect(() => {
+        const fetchDataCompra = async () => {
+            try {
+                const resposta = await axios.get('/compra/');
+                setDadosCompra(resposta.data);
+            } catch (error) {
+                console.error('Erro ao obter dados de compra:', error);
+            }
+        };
+
+        const fetchDataCusto = async () => {
+            try {
+                const resposta = await axios.get('/custos/');
+                setDadosCusto(resposta.data);
+            } catch (error) {
+                console.error('Erro ao obter dados de compra:', error);
+            }
+        };
+
+        const fetchDataTaxa = async () => {
+            try {
+                const resposta = await axios.get('/taxas/');
+                setDadosTaxas(resposta.data);
+            } catch (error) {
+                console.error('Erro ao obter dados de compra:', error);
+            }
+        };
+
+        const fetchDataFuncionario = async () => {
+            try {
+                const resposta = await axios.get('/funcionario/');
+                setDadosFuncionario(resposta.data);
+            } catch (error) {
+                console.error('Erro ao obter dados de compra:', error);
+            }
+        };
+
+        fetchDataCompra();
+        fetchDataCusto();
+        fetchDataTaxa();
+        fetchDataFuncionario();
+    }, []);
+
+    const ultimosCustos = dadosCusto.length > 0
+        ? dadosCusto.slice().reverse().find((custo) => custo.iptu)
+        : null;
+
+    const ultimasTaxas = dadosTaxas.length > 0
+        ? dadosTaxas.slice().reverse().find((taxas) => taxas)
+        : null;
+
+    const ultimaCompraGasolina = dadosCompra.length > 0
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 3)
+        : null;
+
+    const ultimaCompraEtanol = dadosCompra.length > 0
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 4)
+        : null;
+
+    const ultimaGasolinaA = dadosCompra.length > 0
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 5)
+        : null;
+
+    const ultimaCompraDisel = dadosCompra.length > 0
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 6)
+        : null;
+
+    const ultimaCompraDiselS = dadosCompra.length > 0
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 7)
+        : null;
+
 
     return (
         <ChakraProvider theme={theme}>
@@ -43,43 +119,48 @@ function Custos() {
                 </Heading>
                 <Divider marginTop={'1rem'} />
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor total da última compra de combustíveis</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor total da última compra de combustíveis (por litro)</Heading>
 
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Gasolina Comum'} info={`R$ ${ultimaCompraGasolina?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={`R$ ${ultimaGasolinaA?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Etanol'} info={`R$ ${ultimaCompraEtanol?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Disel Comum'} info={`R$ ${ultimaCompraDisel?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Disel S10'} info={`R$ ${ultimaCompraDiselS?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'IPTU'} info={`R$ ${ultimosCustos?.iptu} ` || 'Sem informação'} />
                 </SimpleGrid>
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Gastos com Funcionários</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor dos últimos custos</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'IPTU'} info={`R$ ${ultimosCustos?.iptu} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Custos Operacionais'} info={`R$ ${ultimosCustos?.custos_operacionais} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Honorários'} info={`R$ ${ultimosCustos?.honorarios_contabeis} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Água'} info={`R$ ${ultimosCustos?.agua} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Luz'} info={`R$ ${ultimosCustos?.luz} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Telefone e Internet'} info={`R$ ${ultimosCustos?.telefone_internet} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Softwares'} info={`R$ ${ultimosCustos?.softwares} ` || 'Sem informação'} />
                 </SimpleGrid>
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Impostos</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor das últimas taxas e impostos</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'IBAMA'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'IBRAN'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'AGEFIS'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'AGEFIS'} info={`R$ ${ultimasTaxas?.agefis} ` || 'Sem informação'} />
+                    <CaixaInfo title={'IBRAN'} info={`R$ ${ultimasTaxas?.ibran} ` || 'Sem informação'} />
+                    <CaixaInfo title={'IBAMA'} info={`R$ ${ultimasTaxas?.ibama} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Bandeira'} info={`R$ ${ultimasTaxas?.comissao_bandeira} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Outros Impostos'} info={`R$ ${ultimasTaxas?.impostos_recolhidos} ` || 'Sem informação'} />
                 </SimpleGrid>
 
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Taxas de cartão</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor gasto com funcionários</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Débito'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Crédito'} info={'Informação que virá do back'} />
+                    {dadosFuncionario.map((funcionario) => (
+                        <CaixaInfo
+                            key={funcionario.id} // Certifique-se de ter uma chave única para cada elemento na lista
+                            title={funcionario.nome} // Supondo que "nome" seja o campo que contém o nome do funcionário
+                            info={`R$ ${funcionario.total_folha} ` || 'Sem informação'}
+                        />
+                    ))}
                 </SimpleGrid>
-
-                <Flex marginTop={'10'} justifyContent={'flex-end'}>
-
-                    <AlertaUltimaAtualizacao dataHora={'dia tal hora tal'} />
-                </Flex>
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 <Rodape />

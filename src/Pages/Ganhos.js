@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
     ChakraProvider,
     Grid,
@@ -7,16 +8,54 @@ import {
     Flex,
     Heading,
     Divider,
-    Tooltip,
-    
+    Tooltip
 } from '@chakra-ui/react';
 import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
-import {QuestionOutlineIcon} from '@chakra-ui/icons';
+import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
 
+axios.defaults.baseURL = "http://localhost:8000";
+
 function Ganhos() {
+    const [dadosVenda, setDadosVenda] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const resposta = await axios.get('/venda/');
+                setDadosVenda(resposta.data);
+                console.log(resposta.data); // Adicionando um console.log para verificar os dados recebidos
+            } catch (error) {
+                console.error('Erro ao obter dados de venda:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const ultimaVendaGasolina = dadosVenda.length > 0
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 3)
+        : null;
+
+    const ultimaVendaEtanol = dadosVenda.length > 0
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 4)
+        : null;
+
+    const ultimaGasolinaA = dadosVenda.length > 0
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 5)
+        : null;
+
+    const ultimaVendaDisel = dadosVenda.length > 0
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 6)
+        : null;
+
+    const ultimaVendaDiselS = dadosVenda.length > 0
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 7)
+        : null;
+
+
     return (
         <ChakraProvider theme={theme}>
             <Grid
@@ -39,31 +78,22 @@ function Ganhos() {
                     </Tooltip></Heading>
                 <Divider marginTop={'1rem'} />
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor de venda atual</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor da última venda (Litro)</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Gasolina Comum'} info={`R$ ${ultimaVendaGasolina?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={`R$ ${ultimaGasolinaA?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Etanol'} info={`R$ ${ultimaVendaEtanol?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Disel Comum'} info={`R$ ${ultimaVendaDisel?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Disel S10'} info={`R$ ${ultimaVendaDiselS?.preco_litro} ` || 'Sem informação'} />
                 </SimpleGrid>
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Volume de venda semanal</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Volume da última venda</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
-                </SimpleGrid>
-
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Total de lucros semanal</Heading>
-                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
-                    <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
+                    <CaixaInfo title={'Gasolina Comum'} info={`${ultimaVendaGasolina?.volume_venda} Litros`} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={`${ultimaGasolinaA?.volume_venda} Litros`} />
+                    <CaixaInfo title={'Etanol'} info={`${ultimaVendaEtanol?.volume_venda} Litros`} />
+                    <CaixaInfo title={'Disel Comum'} info={`${ultimaVendaDisel?.volume_venda} Litros`} />
+                    <CaixaInfo title={'Disel S10'} info={`${ultimaVendaDiselS?.volume_venda} Litros`} />
                 </SimpleGrid>
 
                 <Flex marginTop={'10'} justifyContent={'flex-end'}>
