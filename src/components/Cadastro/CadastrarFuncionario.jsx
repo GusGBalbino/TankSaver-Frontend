@@ -22,12 +22,12 @@ import {
 axios.defaults.baseURL = "http://localhost:8000";
 
 export function CadastrarFuncionario() {
+
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
     const [totalFolha, setTotalFolha] = useState(0);
     const [postoId, setPostoId] = useState('');
     const [postoName, setPostoNome] = useState('');
-
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => {
@@ -75,36 +75,33 @@ export function CadastrarFuncionario() {
                 initialFocusRef={null}
                 finalFocusRef={null}
                 isOpen={isOpen}
-                onClose={onClose}
-            >
+                onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Cadastro de funcionário</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
+
                             <FormLabel>Nome</FormLabel>
                             <Input
                                 value={nome}
                                 onChange={(e) => setNome(e.target.value)}
                                 marginBottom={'15px'}
-                                variant='filled'
-                            />
+                                variant='filled'/>
 
                             <FormLabel>Cargo</FormLabel>
                             <Input
                                 value={cargo}
                                 onChange={(e) => setCargo(e.target.value)}
                                 marginBottom={'15px'}
-                                variant='filled'
-                            />
+                                variant='filled' />
 
                             <FormLabel>Salário Bruto</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
-                                    children='R$'
-                                />
+                                    children='R$'/>
                                 <Input 
                                 bg={'gray.100'}  
                                 onChange={(e) => setTotalFolha(e.target.value)} />

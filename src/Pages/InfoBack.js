@@ -13,6 +13,10 @@ import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import Rodape from '../components/Rodape/Rodape';
 import TabelaFuncionarios from '../components/Tabelas/Funcionarios';
 import TabelaResponsavel from '../components/Tabelas/Responsavel';
+import TabelaCompra from '../components/Tabelas/Compra';
+import TabelaVenda from '../components/Tabelas/Venda';
+import TabelaTaxa from '../components/Tabelas/Taxas';
+import TabelaCustos from '../components/Tabelas/Custos';
 
 
 function Dados() {
@@ -32,7 +36,7 @@ function Dados() {
                 <Sidebar />
 
                 <Heading textAlign={'center'}>
-                    Dados
+                    Histórico
                     <Tooltip label="Para visualizar os dados de forma dinâmica vá ao dashboard." fontSize="md" >
                         <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
                     </Tooltip>
@@ -40,7 +44,21 @@ function Dados() {
                 <Divider marginTop={'1rem'} />
 
                 <TabelaFuncionarios />
+                <Divider margin={'0.5rem'} />
+
                 <TabelaResponsavel />
+                <Divider margin={'0.5rem'} />
+
+                <TabelaCompra />
+                <Divider margin={'0.5rem'} />
+
+                <TabelaVenda />
+                <Divider margin={'0.5rem'} />
+
+                <TabelaTaxa />
+                <Divider margin={'0.5rem'} />
+
+                <TabelaCustos />
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 <Rodape />

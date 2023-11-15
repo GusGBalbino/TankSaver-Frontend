@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import {
     Button,
     Modal,
@@ -13,34 +12,16 @@ import {
     useDisclosure,
     ModalOverlay,
     FormLabel,
-    Text,
-    Card,
-    CardHeader,
-    CardBody,
     Select,
     Input,
     NumberInputField,
     NumberInput,
     InputLeftElement,
     InputGroup,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    Divider,
-    VStack,
-    Heading,
 } from '@chakra-ui/react';
-
 import { format } from 'date-fns';
-import { BotaoAlteracao } from '../Botoes/BotaoAlteracao';
 
-const InfoProps = {
-    title: String,
-    info: String,
-    editor: String,
-    infoSelect: String,
-};
-
-export function CardCadastroCompra(props = InfoProps) {
+export function CardCadastroCompra() {
     const [tipo_combustiveis, setCombustiveis] = useState([]);
     const [tipo_combustivel, SetTipo] = useState('');
     const [volume_compra, SetVolume] = useState('');
@@ -54,9 +35,9 @@ export function CardCadastroCompra(props = InfoProps) {
     useEffect(() => {
         const fetchCombustiveis = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/tipoDeCombustivel/'); 
+                const response = await axios.get('http://localhost:8000/tipoDeCombustivel/');
                 console.log("resposta dos tipos de combustiveis", response.data);
-                setCombustiveis(response.data); 
+                setCombustiveis(response.data);
             } catch (error) {
                 console.error('Erro ao obter opções de combustível:', error);
             }
@@ -78,28 +59,28 @@ export function CardCadastroCompra(props = InfoProps) {
 
     const adicionarCompra = async () => {
         const token = localStorage.getItem('token');
-    console.log('Token:', token);
-    console.log('Request Data:', {
-        tipo_combustivel: tipo_combustivel, 
-        volume_compra,
-        preco_litro,
-        data_compra,
-        posto: postoId
-    });
-
-    try {
-        const response = await axios.post('http://localhost:8000/compra/', {
-            tipo_combustivel,
+        console.log('Token:', token);
+        console.log('Request Data:', {
+            tipo_combustivel: tipo_combustivel,
             volume_compra,
             preco_litro,
-            data_compra: format(new Date(data_compra), 'yyyy-MM-dd'),
+            data_compra,
             posto: postoId
         });
-        console.log('Compra adicionada com sucesso:', response.data);
-    } catch (error) {
-        console.error('Erro ao adicionar compra:', error);
-        console.log('Erro na resposta:', error.response);
-    }
+
+        try {
+            const response = await axios.post('http://localhost:8000/compra/', {
+                tipo_combustivel,
+                volume_compra,
+                preco_litro,
+                data_compra: format(new Date(data_compra), 'yyyy-MM-dd'),
+                posto: postoId
+            });
+            console.log('Compra adicionada com sucesso:', response.data);
+        } catch (error) {
+            console.error('Erro ao adicionar compra:', error);
+            console.log('Erro na resposta:', error.response);
+        }
     };
 
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -143,8 +124,8 @@ export function CardCadastroCompra(props = InfoProps) {
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
-                            <FormLabel>Selecione o tipo de combustível</FormLabel>
 
+                            <FormLabel>Selecione o tipo de combustível</FormLabel>
                             <Select
                                 marginBottom={'15px'}
                                 value={tipo_combustivel}
@@ -159,7 +140,7 @@ export function CardCadastroCompra(props = InfoProps) {
                                 ))}
                             </Select>
 
-                            <FormLabel>Volume de compra em litros</FormLabel>
+                            <FormLabel>Volume de compra (Litros)</FormLabel>
                             <NumberInput
                                 marginBottom={'15px'}
                                 variant='filled'
@@ -169,7 +150,7 @@ export function CardCadastroCompra(props = InfoProps) {
                                 />
                             </NumberInput>
 
-                            <FormLabel>Valor de compra por litro</FormLabel>
+                            <FormLabel>Valor do litro</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
 
@@ -181,16 +162,6 @@ export function CardCadastroCompra(props = InfoProps) {
                                     bg={'gray.100'}
                                     onChange={(e) => setValorCompra(e.target.value)} />
                             </InputGroup>
-
-                            {/* <NumberInput
-                                variant='filled'
-                                onChange={setValueCompra}
-                                value={format(valueCompra)}
-                                max={50}
-                                marginBottom={'15px'}
-                            >
-                                <NumberInputField />
-                            </NumberInput> */}
 
                             <FormLabel>Data da compra</FormLabel>
                             <Input
@@ -213,7 +184,5 @@ export function CardCadastroCompra(props = InfoProps) {
                 </ModalContent>
             </Modal>
         </>
-
-
     )
 }

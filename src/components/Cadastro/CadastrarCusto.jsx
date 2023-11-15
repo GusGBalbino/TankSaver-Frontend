@@ -12,20 +12,19 @@ import {
     useDisclosure,
     ModalOverlay,
     FormLabel,
-    Select,
     Input,
-    NumberInputField,
-    NumberInput,
     InputLeftElement,
     InputGroup,
 } from '@chakra-ui/react';
 
-export function CadastrarTaxas() {
-    const [ibran, setValorIBRAN] = useState(0);
-    const [ibama, setValorIBAMA] = useState(0);
-    const [agefis, setValorAGEFIS] = useState(0);
-    const [comissao_bandeira, setValorBandeira] = useState(0);
-    const [impostos_recolhidos, setValorImposto] = useState(0);
+export function CadastrarCusto() {
+    const [iptu, setValorIPTU] = useState(0);
+    const [custos_operacionais, setValorOperacionais] = useState(0);
+    const [honorarios_contabeis, setValorHonorarios] = useState(0);
+    const [telefone_internet, setValorTelefone] = useState(0);
+    const [luz, setValorLuz] = useState(0);
+    const [agua, setValorAgua] = useState(0);
+    const [softwares, setValorSoftwares] = useState(0);
 
 
     const [postoName, setPostoNome] = useState('');
@@ -46,26 +45,30 @@ export function CadastrarTaxas() {
         const token = localStorage.getItem('token');
         console.log('Token:', token);
         console.log('Request Data:', {
-            ibran,
-            ibama,
-            agefis,
-            comissao_bandeira,
-            impostos_recolhidos,
+            iptu,
+            custos_operacionais,
+            honorarios_contabeis,
+            telefone_internet,
+            luz,
+            agua,
+            softwares,
             posto: postoId
         });
 
         try {
-            const response = await axios.post('http://localhost:8000/taxas/', {
-                ibran,
-                ibama,
-                agefis,
-                comissao_bandeira,
-                impostos_recolhidos,
+            const response = await axios.post('http://localhost:8000/custos/', {
+                iptu,
+                custos_operacionais,
+                honorarios_contabeis,
+                telefone_internet,
+                luz,
+                agua,
+                softwares,
                 posto: postoId
             });
             console.log('Venda adicionada com sucesso:', response.data);
         } catch (error) {
-            console.error('Erro ao adicionar taxas:', error);
+            console.error('Erro ao adicionar custos:', error);
             console.log('Erro na resposta:', error.response);
         }
     };
@@ -107,12 +110,12 @@ export function CadastrarTaxas() {
                 onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Cadastro de taxas e impostos</ModalHeader>
+                    <ModalHeader>Cadastro de custos</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
 
-                            <FormLabel>Valor pago para o IBRAN</FormLabel>
+                            <FormLabel>Valor do IPTU</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -121,10 +124,10 @@ export function CadastrarTaxas() {
                                 <Input
                                     marginBottom={'15px'}
                                     bg={'gray.100'}
-                                    onChange={(e) => setValorIBRAN(e.target.value)} />
+                                    onChange={(e) => setValorIPTU(e.target.value)} />
                             </InputGroup>
 
-                            <FormLabel>Valor pago para o IBAMA</FormLabel>
+                            <FormLabel>Valor dos custos operacionais</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -133,10 +136,10 @@ export function CadastrarTaxas() {
                                 <Input
                                     marginBottom={'15px'}
                                     bg={'gray.100'}
-                                    onChange={(e) => setValorIBAMA(e.target.value)} />
+                                    onChange={(e) => setValorOperacionais(e.target.value)} />
                             </InputGroup>
 
-                            <FormLabel>Valor pago para o AGEFIS</FormLabel>
+                            <FormLabel>Valor dos honorários contábeis</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -145,10 +148,10 @@ export function CadastrarTaxas() {
                                 <Input
                                     marginBottom={'15px'}
                                     bg={'gray.100'}
-                                    onChange={(e) => setValorAGEFIS(e.target.value)} />
+                                    onChange={(e) => setValorHonorarios(e.target.value)} />
                             </InputGroup>
 
-                            <FormLabel>Valor pago da comissão da bandeira</FormLabel>
+                            <FormLabel>Valor da internet e telefone</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -157,10 +160,10 @@ export function CadastrarTaxas() {
                                 <Input
                                     marginBottom={'15px'}
                                     bg={'gray.100'}
-                                    onChange={(e) => setValorBandeira(e.target.value)} />
+                                    onChange={(e) => setValorTelefone(e.target.value)} />
                             </InputGroup>
 
-                            <FormLabel>Valor pago de impostos</FormLabel>
+                            <FormLabel>Valor da luz</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -169,8 +172,33 @@ export function CadastrarTaxas() {
                                 <Input
                                     marginBottom={'15px'}
                                     bg={'gray.100'}
-                                    onChange={(e) => setValorImposto(e.target.value)} />
+                                    onChange={(e) => setValorLuz(e.target.value)} />
                             </InputGroup>
+
+                            <FormLabel>Valor da água</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement
+                                    pointerEvents='none'
+                                    children='R$'
+                                />
+                                <Input
+                                    marginBottom={'15px'}
+                                    bg={'gray.100'}
+                                    onChange={(e) => setValorAgua(e.target.value)} />
+                            </InputGroup>
+
+                            <FormLabel>Valor dos softwares utilizados no posto</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement
+                                    pointerEvents='none'
+                                    children='R$'
+                                />
+                                <Input
+                                    marginBottom={'15px'}
+                                    bg={'gray.100'}
+                                    onChange={(e) => setValorSoftwares(e.target.value)} />
+                            </InputGroup>
+
 
                         </FormControl>
                     </ModalBody>

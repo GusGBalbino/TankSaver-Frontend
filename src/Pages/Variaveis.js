@@ -15,6 +15,7 @@ import { CadastrarVenda } from '../components/Cadastro/CadastrarVenda';
 import { AlterarResponsavel } from '../components/Cadastro/AlterarResponsavel';
 import { CadastrarTaxas } from '../components/Cadastro/CadastrarTaxas';
 import { CadastrarFuncionario } from '../components/Cadastro/CadastrarFuncionario';
+import { CadastrarCusto } from '../components/Cadastro/CadastrarCusto';
 
 function Variaveis() {
     return (
@@ -35,13 +36,14 @@ function Variaveis() {
                 <Heading textAlign={'center'}>Atualização de Dados </Heading>
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
 
-                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(250px, 1fr))'>
+                <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(350px, 1fr))'>
 
                 <CaixaInfo title={'Cadastro de Compras'} info={<CardCadastroCompra/>} />
                 <CaixaInfo title={'Cadastro de Venda'} info={<CadastrarVenda/>} />
-                <CaixaInfo title={'Cadastro de Taxas'} info={<CadastrarTaxas/>} />
+                <CaixaInfo title={'Cadastro de Taxas e Impostos'} info={<CadastrarTaxas/>} />
                 <CaixaInfo title={'Cadastro de Responsável'} info={<AlterarResponsavel/>} />
                 <CaixaInfo title={'Cadastro de Funcionário'} info={<CadastrarFuncionario/>} />
+                <CaixaInfo title={'Cadastro de Custos'} info={<CadastrarCusto />} />
                 
                 </SimpleGrid>
 

@@ -19,9 +19,7 @@ function TabelaFuncionarios() {
 
     const handleDelete = async (id) => {
         try {
-            // Faça uma requisição DELETE para o endpoint adequado
             await axios.delete(`/funcionario/${id}`);
-            // Atualize os dados após a exclusão
             const resposta = await axios.get('/funcionario/');
             setDadosFuncionarios(resposta.data);
         } catch (error) {
@@ -32,7 +30,7 @@ function TabelaFuncionarios() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get('/funcionario/'); // Ajuste o URL conforme necessário
+                const resposta = await axios.get('/funcionario/');
                 setDadosFuncionarios(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de funcionários:', error);
@@ -45,7 +43,7 @@ function TabelaFuncionarios() {
 
 
     return (
-        <TableContainer alignItems={'center'} w={'50vw'} marginX="auto">
+        <TableContainer alignItems={'center'} w={'70vw'} marginX="auto">
             <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Funcionários</Heading>
             <Table size='sm' bg={'whiteAlpha.700'} borderRadius={'10px'} >
                 <Thead >

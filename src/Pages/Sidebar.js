@@ -75,7 +75,7 @@ function Sidebar() {
           <Link to="/dados">
             <OpcoesSidebar
               icon={<AiOutlineFileSearch  />}
-              name={'Dados'}
+              name={'Histórico'}
             />
 
             <Link to="/perfil">

@@ -19,21 +19,6 @@ import Rodape from '../components/Rodape/Rodape';
 axios.defaults.baseURL = "http://localhost:8000";
 
 function Custos() {
-    const [dadosCustos, setDadosCustos] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const resposta = await axios.get('/funcionario/'); // Ajuste o URL conforme necessário
-                setDadosCustos(resposta.data);
-            } catch (error) {
-                console.error('Erro ao obter dados de custos:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
 
     return (
         <ChakraProvider theme={theme}>
@@ -58,7 +43,7 @@ function Custos() {
                 </Heading>
                 <Divider marginTop={'1rem'} />
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor da última compra de combustíveis</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor total da última compra de combustíveis</Heading>
 
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
@@ -66,17 +51,9 @@ function Custos() {
                     <CaixaInfo title={'Etanol'} info={'Informação que virá do back'} />
                     <CaixaInfo title={'Disel Comum'} info={'Informação que virá do back'} />
                     <CaixaInfo title={'Disel S10'} info={'Informação que virá do back'} />
-
-                    {dadosCustos.map((custo) => (
-                        <CaixaInfo
-                            key={custo.id} // Certifique-se de ter um identificador único
-                            title={custo.nome} // Substitua com o campo correto do seu banco de dados
-                            info={`R$ ${custo.valor}`} // Substitua com o campo correto do seu banco de dados
-                        />
-                    ))}
                 </SimpleGrid>
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Volume de compra</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Gastos com Funcionários</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     <CaixaInfo title={'Gasolina Comum'} info={'Informação que virá do back'} />
                     <CaixaInfo title={'Gasolina Aditivada'} info={'Informação que virá do back'} />

@@ -30,13 +30,12 @@ function Login() {
         localStorage.setItem('token', access_token);  
         localStorage.setItem('postoId', postoId);   
         localStorage.setItem('postoName', postoName);
-        history('/dashboard'); // Redirecionamento para a Dashboard
+        history('/dashboard'); 
         console.log(postoId);
         console.log(postoName);
       }
     } catch (error) {
       console.error("Erro de login:", error);
-      // Aqui você pode adicionar algum feedback para o usuário em caso de falha no login
     }
   }
 

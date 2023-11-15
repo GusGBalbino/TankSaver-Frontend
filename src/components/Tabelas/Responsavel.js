@@ -18,9 +18,7 @@ function TabelaResponsavel() {
 
     const handleDelete = async (id) => {
         try {
-            // Faça uma requisição DELETE para o endpoint adequado
             await axios.delete(`/responsavel/${id}`);
-            // Atualize os dados após a exclusão
             const resposta = await axios.get('/responsavel/');
             setDadosResponsavel(resposta.data);
         } catch (error) {
@@ -31,7 +29,7 @@ function TabelaResponsavel() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get('/responsavel/'); // Ajuste o URL conforme necessário
+                const resposta = await axios.get('/responsavel/');
                 setDadosResponsavel(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de responsável:', error);
@@ -44,7 +42,7 @@ function TabelaResponsavel() {
 
 
     return (
-        <TableContainer alignItems={'center'} w={'50vw'} marginX="auto">
+        <TableContainer alignItems={'center'} w={'70vw'} marginX="auto">
             <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Responsável</Heading>
             <Table size='sm' bg={'whiteAlpha.700'} borderRadius={'10px'} >
                 <Thead >

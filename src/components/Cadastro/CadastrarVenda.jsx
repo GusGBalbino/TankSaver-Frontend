@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
     Button,
     Modal,
@@ -11,41 +12,93 @@ import {
     useDisclosure,
     ModalOverlay,
     FormLabel,
-    Text,
-    Card,
-    CardHeader,
-    CardBody,
     Select,
     Input,
     NumberInputField,
     NumberInput,
-    NumberDecrementStepper,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    Divider,
-    VStack,
-    Heading,
+    InputLeftElement,
+    InputGroup,
 } from '@chakra-ui/react';
-import { BotaoAlteracao } from '../Botoes/BotaoAlteracao';
 
-const InfoProps = [
-    { title: String },
-    { info: String },
-    { editor: String },
-    { infoSelect: String },
-]
+import { format } from 'date-fns';
+
+export function CadastrarVenda() {
+
+    const [tipo_combustiveis, setCombustiveis] = useState([]);
+    const [tipo_combustivel, SetTipo] = useState('');
+    const [pagamento, setPagamento] = useState([]);
+    const [tipo_pagamento, SetTipoPagamento ] = useState ('');
+    const [volume_venda, SetVolume] = useState('');
+    const [preco_litro, setValorVenda] = useState(0);
+    const [data_venda, SetDataVenda] = useState('');
+    const [postoName, setPostoNome] = useState('');
+    const [postoId, setPostoId] = useState('');
 
 
+    useEffect(() => {
+        const fetchCombustiveis = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/tipoDeCombustivel/');
+                console.log("resposta dos tipos de combustiveis", response.data);
+                setCombustiveis(response.data);
+            } catch (error) {
+                console.error('Erro ao obter opções de combustível:', error);
+            }
+        };
 
-export function CadastrarVenda(props = InfoProps) {
-    //FORMATAÇÃO PARA RECEBER EM REAIS
-    const format = (val) => `$ ` + val.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
-    // const parse = (val) => val.replace(/^\$/, '')
-    // var format = atual.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+        const fetchPagamentos = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/tipoDePagamento/');
+                console.log("resposta dos tipos de pagamentos", response.data);
+                setPagamento(response.data);
+            } catch (error) {
+                console.error('Erro ao obter opções de pagamento:', error);
+            }
+        };
 
-    const [valueVenda, setValueVenda] = React.useState('')
+        fetchCombustiveis();
+        fetchPagamentos();
+    }, []);
 
-    // LÓGICA DE APARIÇÃO DO MODAL
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
+
+    const adicionarVenda = async () => {
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
+        console.log('Request Data:', {
+            tipo_combustivel: tipo_combustivel,
+            tipo_pagamento: tipo_pagamento,
+            volume_venda,
+            preco_litro,
+            data_venda,
+            posto: postoId
+        });
+
+        try {
+            const response = await axios.post('http://localhost:8000/venda/', {
+                tipo_combustivel,
+                tipo_pagamento,
+                volume_venda,
+                preco_litro,
+                data_venda: format(new Date(data_venda), 'yyyy-MM-dd'),
+                posto: postoId
+            });
+            console.log('Venda adicionada com sucesso:', response.data);
+        } catch (error) {
+            console.error('Erro ao adicionar venda:', error);
+            console.log('Erro na resposta:', error.response);
+        }
+    };
+
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const initialRef = React.useRef(null)
@@ -80,53 +133,80 @@ export function CadastrarVenda(props = InfoProps) {
                 initialFocusRef={initialRef}
                 finalFocusRef={finalRef}
                 isOpen={isOpen}
-                onClose={onClose}
-            >
+                onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Cadastro de venda</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
+
                             <FormLabel>Selecione o tipo de pagamento</FormLabel>
-                            <Select marginBottom={'15px'} value={props.infoSelect} variant='filled' placeholder='Selecione' >
-                                <option value='option1'>Option 1</option>
+                            <Select
+                                marginBottom={'15px'}
+                                value={tipo_pagamento}
+                                variant='filled'
+                                placeholder='Selecione'
+                                onChange={(e) => SetTipoPagamento(e.target.value)}
+                            >
+                                {pagamento.map((tipo_pagamento) => (
+                                    <option key={tipo_pagamento.id} value={tipo_pagamento.id}>
+                                        {tipo_pagamento.tipo_pagamento}
+                                    </option>
+                                ))}
                             </Select>
 
                             <FormLabel>Selecione o tipo de combustível</FormLabel>
-                            <Select marginBottom={'15px'} value={props.infoSelect} variant='filled' placeholder='Selecione' >
-                                <option value='option1'>Option 1</option>
+                            <Select
+                                marginBottom={'15px'}
+                                value={tipo_combustivel}
+                                variant='filled'
+                                placeholder='Selecione'
+                                onChange={(e) => SetTipo(e.target.value)}
+                            >
+                                {tipo_combustiveis.map((tipo_combustivel) => (
+                                    <option key={tipo_combustivel.id} value={tipo_combustivel.id}>
+                                        {tipo_combustivel.tipo_combustivel}
+                                    </option>
+                                ))}
                             </Select>
 
-                            <FormLabel>Volume de venda</FormLabel>
-                            <NumberInput marginBottom={'15px'} variant='filled' placeholder='Insira o volume da venda em litros'>
-                                <NumberInputField />
+                            <FormLabel>Volume de venda (Litros)</FormLabel>
+                            <NumberInput
+                                marginBottom={'15px'}
+                                variant='filled'
+                                placeholder='Insira o volume da compra em litros'>
+                                <NumberInputField
+                                    onChange={(e) => SetVolume(e.target.value)}
+                                />
                             </NumberInput>
 
-                            <FormLabel>Valor de venda por litro</FormLabel>
-                            <NumberInput
-                                variant='filled'
-                                onChange={setValueVenda}
-                                value={format(valueVenda)}
-                                max={50}
-                                marginBottom={'15px'}
-                            >
-                                <NumberInputField />
-                            </NumberInput>
+                            <FormLabel>Valor do litro</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement
+                                    pointerEvents='none'
+                                    children='R$'
+                                />
+                                <Input
+                                    marginBottom={'15px'}
+                                    bg={'gray.100'}
+                                    onChange={(e) => setValorVenda(e.target.value)} />
+                            </InputGroup>
 
                             <FormLabel>Data da venda</FormLabel>
                             <Input
+                                onChange={(e) => SetDataVenda(e.target.value)}
                                 marginBottom={'15px'}
                                 variant='filled'
-                                placeholder="Select Date and Time"
+                                placeholder="Select Date"
                                 size="md"
-                                type="datetime-local"
+                                type="date"
                             />
                         </FormControl>
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3}>
+                        <Button onClick={adicionarVenda} colorScheme='blue' mr={3}>
                             Salvar
                         </Button>
                         <Button onClick={onClose}>Cancelar</Button>
@@ -134,7 +214,5 @@ export function CadastrarVenda(props = InfoProps) {
                 </ModalContent>
             </Modal>
         </>
-
-
     )
 }

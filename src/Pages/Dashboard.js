@@ -3,8 +3,6 @@ import {
     ChakraProvider,
     Grid,
     theme,
-    SimpleGrid,
-    Flex,
     Heading,
     Divider,
 } from '@chakra-ui/react';

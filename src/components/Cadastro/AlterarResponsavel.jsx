@@ -107,6 +107,7 @@ export function AlterarResponsavel() {
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
+                            
                             <FormLabel>Nome</FormLabel>
                             <Input onChange={(e) => setNome(e.target.value)} marginBottom={'15px'} variant='filled' />
 
@@ -114,7 +115,7 @@ export function AlterarResponsavel() {
                             <Input
                                 value={cpf}
                                 // onChange={handleChangeCPF}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => setCpf(e.target.value)}
                                 marginBottom={'15px'}
                                 variant='filled'
                             />
