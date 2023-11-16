@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Perfil from '../Pages/Perfil';
 import Login from '../Pages/Login';
 import Variaveis from '../Pages/Variaveis';
@@ -10,21 +10,27 @@ import Dashboard from '../Pages/Dashboard';
 import Dados from '../Pages/InfoBack';
 
 const Private = ({ Item }) => {
-  const Login = true;
-  return Login > 0 ? <Item /> : <Login />;
+  const token = localStorage.getItem('token');
+  return token ? <Item /> : <Navigate to="/" />;
+  // if (!token) {
+  //   alert('Realize no login para continuar.')
+  //   return <Navigate to="/" />;
+  // }
+
+  // return <Item />
 };
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />}></Route>
-        <Route path="/dashboard" element={< Private Item ={Dashboard} />}></Route>
-        <Route path="/custos" element={<Custo />}></Route>
-        <Route path="/ganhos" element={<Ganhos />}></Route>
-        <Route path="/variaveis" element={<Variaveis />}></Route>
-        <Route path="/perfil" element={<Perfil />}></Route>
-        <Route path='/dados' element={<Dados />}></Route>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Private Item={Dashboard} />} />
+        <Route path="/custos" element={<Private Item={Custo} />} />
+        <Route path="/ganhos" element={<Private Item={Ganhos} />} />
+        <Route path="/variaveis" element={<Private Item={Variaveis} />} />
+        <Route path="/perfil" element={<Private Item={Perfil} />} />
+        <Route path="/dados" element={<Private Item={Dados} />} />
       </Routes>
     </BrowserRouter>
   )
