@@ -18,6 +18,7 @@ import {
     NumberInput,
     InputLeftElement,
     InputGroup,
+    useToast
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
 
@@ -29,8 +30,9 @@ export function CardCadastroCompra() {
     const [data_compra, SetDataCompra] = useState('');
 
     const [postoName, setPostoNome] = useState('');
-
     const [postoId, setPostoId] = useState('');
+
+    const toast = useToast();
 
     useEffect(() => {
         const fetchCombustiveis = async () => {
@@ -76,7 +78,16 @@ export function CardCadastroCompra() {
                 data_compra: format(new Date(data_compra), 'yyyy-MM-dd'),
                 posto: postoId
             });
-            console.log('Compra adicionada com sucesso:', response.data);
+
+            toast({
+                position: 'top',
+                title: 'Cadastrado com sucesso',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+
+            onClose();
         } catch (error) {
             console.error('Erro ao adicionar compra:', error);
             console.log('Erro na resposta:', error.response);

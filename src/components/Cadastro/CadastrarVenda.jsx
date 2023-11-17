@@ -18,12 +18,12 @@ import {
     NumberInput,
     InputLeftElement,
     InputGroup,
+    useToast,
 } from '@chakra-ui/react';
 
 import { format } from 'date-fns';
 
 export function CadastrarVenda() {
-
     const [tipo_combustiveis, setCombustiveis] = useState([]);
     const [tipo_combustivel, SetTipo] = useState('');
     const [pagamento, setPagamento] = useState([]);
@@ -31,9 +31,11 @@ export function CadastrarVenda() {
     const [volume_venda, SetVolume] = useState('');
     const [preco_litro, setValorVenda] = useState(0);
     const [data_venda, SetDataVenda] = useState('');
+
     const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
 
+    const toast = useToast();
 
     useEffect(() => {
         const fetchCombustiveis = async () => {
@@ -51,6 +53,8 @@ export function CadastrarVenda() {
                 const response = await axios.get('http://localhost:8000/tipoDePagamento/');
                 console.log("resposta dos tipos de pagamentos", response.data);
                 setPagamento(response.data);
+
+                
             } catch (error) {
                 console.error('Erro ao obter opções de pagamento:', error);
             }
@@ -92,7 +96,16 @@ export function CadastrarVenda() {
                 data_venda: format(new Date(data_venda), 'yyyy-MM-dd'),
                 posto: postoId
             });
-            console.log('Venda adicionada com sucesso:', response.data);
+            
+             toast({
+                position: 'top',
+                title: 'Cadastrado com sucesso',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+
+            onClose();
         } catch (error) {
             console.error('Erro ao adicionar venda:', error);
             console.log('Erro na resposta:', error.response);
@@ -107,8 +120,8 @@ export function CadastrarVenda() {
     //FILTRO DO MODAL
     const OverlayOne = () => (
         <ModalOverlay
-            bg='blackAlpha.300'
-            backdropFilter='blur(10px) hue-rotate(90deg)'
+        bg='blackAlpha.300'
+        // backdropFilter='blur(10px) hue-rotate(90deg)'
         />
     )
     const [overlay, setOverlay] = React.useState(<OverlayOne />)

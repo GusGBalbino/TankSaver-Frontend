@@ -11,7 +11,9 @@ import {
     FormControl,
     useDisclosure,
     FormLabel,
+    ModalOverlay,
     Input,
+    useToast
 } from '@chakra-ui/react';
 
 axios.defaults.baseURL = "http://localhost:8000";
@@ -22,11 +24,12 @@ export function AlterarResponsavel() {
     const [cpf, setCpf] = useState('');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
+
     const [postoId, setPostoId] = useState('');
     const [postoName, setPostoNome] = useState('');
-    
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    
+
+    const toast = useToast();
+
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
@@ -37,7 +40,8 @@ export function AlterarResponsavel() {
             setPostoNome(storedPostoName);
         }
     }, []);
-    
+
+
     const formatarTelefone = (value) => {
         const numericValue = value.replace(/\D/g, '');
 
@@ -81,12 +85,34 @@ export function AlterarResponsavel() {
             const response = await axios.post('/responsavel/', {
                 nome, cpf, email, telefone, posto: postoId
             });
-            console.log('Responsável adicionado com sucesso:', response.data);
+
+            toast({
+                title: 'Cadastrado com sucesso',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+
+            onClose();
         } catch (error) {
             console.error('Erro ao adicionar responsável:', error);
             console.log('Erro na resposta:', error.response);
         }
     };
+
+    const OverlayOne = () => (
+        <ModalOverlay
+            bg='blackAlpha.300'
+            backdropFilter='blur(10px) hue-rotate(90deg)'
+        />
+    );
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const initialRef = React.useRef(null);
+    const finalRef = React.useRef(null);
+
+    const [overlay, setOverlay] = React.useState(null);
 
     return (
         <>
@@ -98,16 +124,28 @@ export function AlterarResponsavel() {
                 textColor={'black'}
                 borderColor={'#131328'}
                 _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
-                onClick={onOpen}>
-                Cadastrar
-            </Button>
-            <Modal isOpen={isOpen} onClose={onClose}>
+
+                onClick={() => {
+                    setOverlay(<OverlayOne />)
+                    onOpen()
+                }}
+            >Cadastrar</Button>
+            <Modal
+                initialFocusRef={initialRef}
+                finalFocusRef={finalRef}
+                isOpen={isOpen}
+                onClose={() => {
+                    setOverlay(null);
+                    onClose();
+                }}
+            >
+                <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Cadastro de responsável</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
-                            
+
                             <FormLabel>Nome</FormLabel>
                             <Input onChange={(e) => setNome(e.target.value)} marginBottom={'15px'} variant='filled' />
 

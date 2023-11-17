@@ -15,20 +15,21 @@ import {
     Input,
     InputGroup,
     InputLeftElement,
-    NumberInput,
-    NumberInputField
+    useToast
 } from '@chakra-ui/react';
 
 axios.defaults.baseURL = "http://localhost:8000";
 
 export function CadastrarFuncionario() {
-
     const [nome, setNome] = useState('');
     const [cargo, setCargo] = useState('');
     const [totalFolha, setTotalFolha] = useState(0);
     const [postoId, setPostoId] = useState('');
+
     const [postoName, setPostoNome] = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const toast = useToast();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
@@ -50,7 +51,16 @@ export function CadastrarFuncionario() {
             const response = await axios.post('/funcionario/', {
                 nome, cargo, total_folha: totalFolha, posto: postoId
             });
-            console.log('Funcionário criado com sucesso:', response.data);
+
+            toast({
+                position: 'top',
+                title: 'Cadastrado com sucesso',
+                status: 'success',
+                duration: 3000, 
+                isClosable: true,
+            });
+
+            onClose();
         } catch (error) {
             console.error('Erro ao adicionar funcionário:', error);
             console.log('Erro na resposta:', error.response);
@@ -88,7 +98,7 @@ export function CadastrarFuncionario() {
                                 value={nome}
                                 onChange={(e) => setNome(e.target.value)}
                                 marginBottom={'15px'}
-                                variant='filled'/>
+                                variant='filled' />
 
                             <FormLabel>Cargo</FormLabel>
                             <Input
@@ -101,10 +111,10 @@ export function CadastrarFuncionario() {
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
-                                    children='R$'/>
-                                <Input 
-                                bg={'gray.100'}  
-                                onChange={(e) => setTotalFolha(e.target.value)} />
+                                    children='R$' />
+                                <Input
+                                    bg={'gray.100'}
+                                    onChange={(e) => setTotalFolha(e.target.value)} />
                             </InputGroup>
                         </FormControl>
                     </ModalBody>

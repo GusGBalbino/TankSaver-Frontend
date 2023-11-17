@@ -12,13 +12,13 @@ import {
     useDisclosure,
     ModalOverlay,
     FormLabel,
-    Select,
+    Tooltip,
     Input,
-    NumberInputField,
-    NumberInput,
     InputLeftElement,
     InputGroup,
+    useToast
 } from '@chakra-ui/react';
+import { QuestionOutlineIcon } from '@chakra-ui/icons';
 
 export function CadastrarTaxas() {
     const [ibran, setValorIBRAN] = useState(0);
@@ -27,9 +27,10 @@ export function CadastrarTaxas() {
     const [comissao_bandeira, setValorBandeira] = useState(0);
     const [impostos_recolhidos, setValorImposto] = useState(0);
 
-
     const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
+
+    const toast = useToast();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
@@ -42,7 +43,7 @@ export function CadastrarTaxas() {
         }
     }, []);
 
-    const adicionarCusto = async () => {
+    const adicionarTaxas = async () => {
         const token = localStorage.getItem('token');
         console.log('Token:', token);
         console.log('Request Data:', {
@@ -63,7 +64,16 @@ export function CadastrarTaxas() {
                 impostos_recolhidos,
                 posto: postoId
             });
-            console.log('Venda adicionada com sucesso:', response.data);
+
+            toast({
+                position: 'top',
+                title: 'Cadastrado com sucesso',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+
+            onClose();
         } catch (error) {
             console.error('Erro ao adicionar taxas:', error);
             console.log('Erro na resposta:', error.response);
@@ -107,7 +117,12 @@ export function CadastrarTaxas() {
                 onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Cadastro de taxas e impostos</ModalHeader>
+                    <ModalHeader>
+                    Cadastro de taxas e impostos
+                        <Tooltip label="Os valores a serem inseridos devem ser o total pago por cada taxa e imposto." fontSize="md" >
+                            <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
+                        </Tooltip>
+                    </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
@@ -176,7 +191,7 @@ export function CadastrarTaxas() {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button onClick={adicionarCusto} colorScheme='blue' mr={3}>
+                        <Button onClick={adicionarTaxas} colorScheme='blue' mr={3}>
                             Salvar
                         </Button>
                         <Button onClick={onClose}>Cancelar</Button>

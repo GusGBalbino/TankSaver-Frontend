@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     ChakraProvider,
     Grid,
@@ -6,6 +6,12 @@ import {
     Heading,
     Divider,
     Tooltip,
+    Tabs,
+    TabList,
+    Tab,
+    TabPanel,
+    TabPanels,
+    TabIndicator,
 } from '@chakra-ui/react';
 
 import Sidebar from './Sidebar';
@@ -18,8 +24,22 @@ import TabelaVenda from '../components/Tabelas/Venda';
 import TabelaTaxa from '../components/Tabelas/Taxas';
 import TabelaCustos from '../components/Tabelas/Custos';
 
-
 function Dados() {
+    const [tabIndex, setTabIndex] = useState(0);
+
+    const handleTabChange = (index) => {
+        setTabIndex(index);
+    };
+
+    const tabelas = [
+        <TabelaFuncionarios />,
+        <TabelaResponsavel />,
+        <TabelaCompra />,
+        <TabelaVenda />,
+        <TabelaTaxa />,
+        <TabelaCustos />,
+    ];
+
     return (
         <ChakraProvider theme={theme}>
             <Grid
@@ -43,22 +63,30 @@ function Dados() {
                 </Heading>
                 <Divider marginTop={'1rem'} />
 
-                <TabelaFuncionarios />
-                <Divider margin={'0.5rem'} />
+                <Tabs size='md' variant='enclosed' index={tabIndex} onChange={handleTabChange}>
+                    <TabList>
+                        <Tab _selected={{ color: '#FFBB0D', bg: '#131328' }}>Funcionários</Tab>
+                        <Tab _selected={{ color: '#FFBB0D', bg: '#131328' }}>Responsável</Tab>
+                        <Tab _selected={{ color: '#FFBB0D', bg: '#131328' }}>Compra</Tab>
+                        <Tab _selected={{ color: '#FFBB0D', bg: '#131328' }}>Venda</Tab>
+                        <Tab _selected={{ color: '#FFBB0D', bg: '#131328' }}>Taxa</Tab>
+                        <Tab _selected={{ color: '#FFBB0D', bg: '#131328' }}>Custos</Tab>
+                    </TabList>
+                    <TabIndicator
+                        mt="-1.5px"
+                        height="2px"
+                        bg="#FFBB0D"
+                        borderRadius="1px"
+                    />
 
-                <TabelaResponsavel />
-                <Divider margin={'0.5rem'} />
-
-                <TabelaCompra />
-                <Divider margin={'0.5rem'} />
-
-                <TabelaVenda />
-                <Divider margin={'0.5rem'} />
-
-                <TabelaTaxa />
-                <Divider margin={'0.5rem'} />
-
-                <TabelaCustos />
+                    <TabPanels>
+                        {tabelas.map((tabela, index) => (
+                            <TabPanel key={index}>
+                                {tabela}
+                            </TabPanel>
+                        ))}
+                    </TabPanels>
+                </Tabs>
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 <Rodape />

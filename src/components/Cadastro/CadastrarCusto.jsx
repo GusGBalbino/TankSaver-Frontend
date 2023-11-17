@@ -15,7 +15,10 @@ import {
     Input,
     InputLeftElement,
     InputGroup,
+    Tooltip,
+    useToast,
 } from '@chakra-ui/react';
+import { QuestionOutlineIcon } from '@chakra-ui/icons';
 
 export function CadastrarCusto() {
     const [iptu, setValorIPTU] = useState(0);
@@ -26,9 +29,10 @@ export function CadastrarCusto() {
     const [agua, setValorAgua] = useState(0);
     const [softwares, setValorSoftwares] = useState(0);
 
-
     const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
+
+    const toast = useToast();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
@@ -41,10 +45,22 @@ export function CadastrarCusto() {
         }
     }, []);
 
-    const adicionarCusto = async () => {
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
-        console.log('Request Data:', {
+   const adicionarCusto = async () => {
+    const token = localStorage.getItem('token');
+    console.log('Token:', token);
+    console.log('Request Data:', {
+        iptu,
+        custos_operacionais,
+        honorarios_contabeis,
+        telefone_internet,
+        luz,
+        agua,
+        softwares,
+        posto: postoId
+    });
+
+    try {
+        const response = await axios.post('http://localhost:8000/custos/', {
             iptu,
             custos_operacionais,
             honorarios_contabeis,
@@ -55,23 +71,20 @@ export function CadastrarCusto() {
             posto: postoId
         });
 
-        try {
-            const response = await axios.post('http://localhost:8000/custos/', {
-                iptu,
-                custos_operacionais,
-                honorarios_contabeis,
-                telefone_internet,
-                luz,
-                agua,
-                softwares,
-                posto: postoId
-            });
-            console.log('Venda adicionada com sucesso:', response.data);
-        } catch (error) {
-            console.error('Erro ao adicionar custos:', error);
-            console.log('Erro na resposta:', error.response);
-        }
-    };
+        toast({
+            position: 'top',
+            title: 'Cadastrado com sucesso',
+            status: 'success',
+            duration: 3000, 
+            isClosable: true,
+        });
+
+        onClose();
+    } catch (error) {
+        console.error('Erro ao adicionar custos:', error);
+        console.log('Erro na resposta:', error.response);
+    }
+};
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -110,7 +123,12 @@ export function CadastrarCusto() {
                 onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Cadastro de custos</ModalHeader>
+                    <ModalHeader>
+                        Cadastro de custos
+                        <Tooltip label="Os valores a serem inseridos devem ser o total pago por cada custo." fontSize="md" >
+                            <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
+                        </Tooltip>
+                    </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <FormControl>
