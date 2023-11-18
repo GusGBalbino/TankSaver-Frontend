@@ -118,9 +118,9 @@ function Ganhos() {
                     <CaixaInfo title={'Disel S10'} info={`${ultimaVendaDiselS?.volume_venda} Litros`} />
                 </SimpleGrid>
 
-                <Flex marginTop={'10'} justifyContent={'flex-end'}>
+                {/* <Flex marginTop={'10'} justifyContent={'flex-end'}>
                     <AlertaUltimaAtualizacao dataHora={'dia tal hora tal'} />
-                </Flex>
+                </Flex> */}
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 <Rodape />

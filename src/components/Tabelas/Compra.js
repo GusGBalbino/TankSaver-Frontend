@@ -16,6 +16,37 @@ import { DeleteIcon } from '@chakra-ui/icons';
 function TabelaCompra() {
     const [dadosCompra, setDadosCompra] = useState([]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [comprasResponse, combustiveisResponse ] = await Promise.all([
+                    axios.get('/compra/'),
+                    axios.get('/tipoDeCombustivel/'),
+                ]);
+
+                const vendas = comprasResponse.data;
+                const combustiveis = combustiveisResponse.data;
+
+                const combustiveisMap = combustiveis.reduce((acc, curr) => {
+                    acc[curr.id] = curr.tipo_combustivel;
+                    return acc;
+                }, {});
+
+                const comprasComNomes = vendas.map(venda => ({
+                    ...venda,
+                    nome_combustivel: combustiveisMap[venda.tipo_combustivel] || 'Desconhecido',
+                }));
+
+                setDadosCompra(comprasComNomes);
+            } catch (error) {
+                console.error('Erro ao obter dados de venda:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+
     const getNomeCombustivelById = async (id) => {
         try {
             const response = await axios.get(`/tipoDeCombustivel/${id}/`);
@@ -26,6 +57,28 @@ function TabelaCompra() {
         }
     };
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const resposta = await axios.get('/compra/');
+                const compras = resposta.data;
+
+                const comprasComNomes = await Promise.all(
+                    compras.map(async (compra) => {
+                        const nomeCombustivel = await getNomeCombustivelById(compra.tipo_combustivel);
+                        return { ...compra, nome_combustivel: nomeCombustivel };
+                    })
+                );
+
+                setDadosCompra(comprasComNomes);
+            } catch (error) {
+                console.error('Erro ao obter dados de compra:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     const handleDelete = async (id) => {
         try {
             await axios.delete(`/compra/${id}`);
@@ -35,29 +88,6 @@ function TabelaCompra() {
             console.error('Erro ao excluir funcionário:', error);
         }
     };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const resposta = await axios.get('/compra/');
-                const compras = resposta.data;
-    
-                const comprasComNomes = await Promise.all(
-                    compras.map(async (compra) => {
-                        const nomeCombustivel = await getNomeCombustivelById(compra.tipo_combustivel);
-                        return { ...compra, nome_combustivel: nomeCombustivel };
-                    })
-                );
-    
-                setDadosCompra(comprasComNomes);
-            } catch (error) {
-                console.error('Erro ao obter dados de compra:', error);
-            }
-        };
-    
-        fetchData();
-    }, []);
-
     return (
         <TableContainer alignItems={'center'} w={'70vw'} marginX="auto">
             <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Compra de Combustível</Heading>
