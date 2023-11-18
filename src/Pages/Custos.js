@@ -8,7 +8,8 @@ import {
     Flex,
     Heading,
     Divider,
-    Tooltip
+    Tooltip,
+    Spinner
 } from '@chakra-ui/react';
 import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
@@ -23,12 +24,16 @@ function Custos() {
     const [dadosCusto, setDadosCusto] = useState([]);
     const [dadosTaxas, setDadosTaxas] = useState([]);
     const [dadosFuncionario, setDadosFuncionario] = useState([]);
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         const fetchDataCompra = async () => {
             try {
                 const resposta = await axios.get('/compra/');
                 setDadosCompra(resposta.data);
+                setLoading(false);
+
             } catch (error) {
                 console.error('Erro ao obter dados de compra:', error);
             }
@@ -66,6 +71,25 @@ function Custos() {
         fetchDataTaxa();
         fetchDataFuncionario();
     }, []);
+
+    if (loading) {
+        return (
+          // Mostrar Spinner enquanto os dados estão sendo carregados
+          <Flex
+        height="100vh"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.70s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+        );
+      }
 
     const ultimosCustos = dadosCusto.length > 0
         ? dadosCusto.slice().reverse().find((custo) => custo.iptu)

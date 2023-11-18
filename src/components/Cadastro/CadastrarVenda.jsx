@@ -41,7 +41,7 @@ export function CadastrarVenda() {
         const fetchCombustiveis = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/tipoDeCombustivel/');
-                console.log("resposta dos tipos de combustiveis", response.data);
+                // console.log("resposta dos tipos de combustiveis", response.data);
                 setCombustiveis(response.data);
             } catch (error) {
                 console.error('Erro ao obter opções de combustível:', error);
@@ -51,7 +51,7 @@ export function CadastrarVenda() {
         const fetchPagamentos = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/tipoDePagamento/');
-                console.log("resposta dos tipos de pagamentos", response.data);
+                // console.log("resposta dos tipos de pagamentos", response.data);
                 setPagamento(response.data);
 
                 
@@ -67,8 +67,8 @@ export function CadastrarVenda() {
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
-        console.log('Stored Posto ID:', storedPostoId);
-        console.log('Stored Posto Name:', storedPostoName);
+        // console.log('Stored Posto ID:', storedPostoId);
+        // console.log('Stored Posto Name:', storedPostoName);
         if (storedPostoId && storedPostoName) {
             setPostoId(storedPostoId);
             setPostoNome(storedPostoName);
@@ -135,7 +135,7 @@ export function CadastrarVenda() {
                 variant='outline'
                 textColor={'black'}
                 borderColor={'#131328'}
-                _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
+                _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#FFBB0D' }}
 
                 onClick={() => {
                     setOverlay(<OverlayOne />)

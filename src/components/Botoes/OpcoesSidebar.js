@@ -10,12 +10,12 @@ export function OpcoesSidebar(props) {
                 leftIcon={React.cloneElement(props.icon, {
                     color: isHovered ? '#131328' : '#FFBB0D',
                 })}
-                minW={['8rem', '8rem']}
-                maxW={['8rem', '8rem']}
+                minW={['9rem', '9rem']}
+                maxW={['9rem', '9rem']}
                 marginBottom={'15px'}
                 variant='outline'
                 color={isHovered ? '#131328' : 'white'}
-                borderColor="#FFBB0D"
+                borderColor="#8D7843"
                 justifyContent="flex-start"
                 _hover={{
                     bg: '#FFBB0D',

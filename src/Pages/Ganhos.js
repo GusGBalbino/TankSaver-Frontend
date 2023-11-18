@@ -8,7 +8,8 @@ import {
     Flex,
     Heading,
     Divider,
-    Tooltip
+    Tooltip,
+    Spinner
 } from '@chakra-ui/react';
 import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
@@ -20,13 +21,15 @@ axios.defaults.baseURL = "http://localhost:8000";
 
 function Ganhos() {
     const [dadosVenda, setDadosVenda] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const resposta = await axios.get('/venda/');
                 setDadosVenda(resposta.data);
-                console.log(resposta.data); // Adicionando um console.log para verificar os dados recebidos
+                setLoading(false);
+                // console.log(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de venda:', error);
             }
@@ -34,6 +37,25 @@ function Ganhos() {
 
         fetchData();
     }, []);
+
+    if (loading) {
+        return (
+          // Mostrar Spinner enquanto os dados estão sendo carregados
+          <Flex
+        height="100vh"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.70s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+        );
+      }
 
     const ultimaVendaGasolina = dadosVenda.length > 0
         ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 3)

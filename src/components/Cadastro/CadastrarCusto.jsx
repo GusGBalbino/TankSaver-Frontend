@@ -37,8 +37,8 @@ export function CadastrarCusto() {
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
-        console.log('Stored Posto ID:', storedPostoId);
-        console.log('Stored Posto Name:', storedPostoName);
+        // console.log('Stored Posto ID:', storedPostoId);
+        // console.log('Stored Posto Name:', storedPostoName);
         if (storedPostoId && storedPostoName) {
             setPostoId(storedPostoId);
             setPostoNome(storedPostoName);
@@ -109,7 +109,7 @@ export function CadastrarCusto() {
                 variant='outline'
                 textColor={'black'}
                 borderColor={'#131328'}
-                _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
+                _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#FFBB0D' }}
 
                 onClick={() => {
                     setOverlay(<OverlayOne />)

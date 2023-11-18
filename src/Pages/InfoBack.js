@@ -26,9 +26,16 @@ import TabelaCustos from '../components/Tabelas/Custos';
 
 function Dados() {
     const [tabIndex, setTabIndex] = useState(0);
+    const [loadedTabs, setLoadedTabs] = useState([0]); // Mantém o controle das guias carregadas
+
 
     const handleTabChange = (index) => {
         setTabIndex(index);
+
+        // Adiciona o índice da guia aos tabs carregados se ainda não foi carregado
+        if (!loadedTabs.includes(index)) {
+            setLoadedTabs([...loadedTabs, index]);
+        }
     };
 
     const tabelas = [
@@ -81,7 +88,7 @@ function Dados() {
 
                     <TabPanels>
                         {tabelas.map((tabela, index) => (
-                            <TabPanel key={index}>
+                            <TabPanel key={index} lazy={!loadedTabs.includes(index)}>
                                 {tabela}
                             </TabPanel>
                         ))}
