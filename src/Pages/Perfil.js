@@ -8,7 +8,8 @@ import {
     Flex,
     Heading,
     Divider,
-    Spacer
+    Spacer,
+    Spinner
 } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
@@ -23,6 +24,10 @@ function Perfil() {
     const [postoNome, setPostoNome] = useState(null);
     const [postoInfo, setPostoInfo] = useState(null);
     const [responsavelInfo, setResponsavelInfo] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+
+
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
@@ -41,6 +46,8 @@ function Perfil() {
                 const response = await axios.get(`http://localhost:8000/posto/${postoId}`);
                 // console.log("Informações do posto", response.data);
                 setPostoInfo(response.data);
+                setLoading(false);
+                
             } catch (error) {
                 console.error('Erro ao obter informações do posto:', error);
             }
@@ -56,13 +63,34 @@ function Perfil() {
             }
         };
 
-        
+
 
         if (postoId) {
             fetchPostoInfo();
             fetchResponsavelInfo();
         }
-    }, [postoId]);
+    }, [postoId]); 
+
+    if (loading) {
+        return (
+            // Mostrar Spinner enquanto os dados estão sendo carregados
+            <Flex
+                height="100vh"
+                justifyContent="center"
+                alignItems="center"
+            >
+                <Spinner
+                    thickness="4px"
+                    speed="0.70s"
+                    emptyColor="gray.200"
+                    color="blue.500"
+                    size="xl"
+                />
+            </Flex>
+        );
+    }
+
+
 
     return (
         <ChakraProvider theme={theme}>
@@ -101,10 +129,10 @@ function Perfil() {
 
                         <Spacer height={4} />
 
-                        <Grid templateColumns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap={4} width="100%" justifyContent="center"  marginX="auto">
-                            <CaixaInfo2 title={'CEP'} info={postoInfo?.cep} minH="80px"/>
-                            <CaixaInfo2 title={'Cidade'} info={postoInfo?.cidade} minH="80px"/>
-                            <CaixaInfo2 title={'UF'} info={postoInfo?.uf} minH="80px"/>
+                        <Grid templateColumns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap={4} width="100%" justifyContent="center" marginX="auto">
+                            <CaixaInfo2 title={'CEP'} info={postoInfo?.cep} minH="80px" />
+                            <CaixaInfo2 title={'Cidade'} info={postoInfo?.cidade} minH="80px" />
+                            <CaixaInfo2 title={'UF'} info={postoInfo?.uf} minH="80px" />
                         </Grid>
 
                         <Spacer height={4} />
