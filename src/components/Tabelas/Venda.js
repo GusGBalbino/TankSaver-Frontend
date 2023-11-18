@@ -12,29 +12,46 @@ import {
 } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
 
-
 function TabelaVenda() {
     const [dadosVenda, setDadosvenda] = useState([]);
 
-    const getNomeCombustivelById = async (id) => {
-        try {
-            const response = await axios.get(`/tipoDeCombustivel/${id}/`);
-            return response.data.tipo_combustivel;
-        } catch (error) {
-            console.error('Erro ao obter nome do combustível:', error);
-            return 'Desconhecido';
-        }
-    };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [vendasResponse, combustiveisResponse, pagamentosResponse] = await Promise.all([
+                    axios.get('/venda/'),
+                    axios.get('/tipoDeCombustivel/'),
+                    axios.get('/tipoDePagamento/')
+                ]);
 
-    const getNomePagamentoById = async (id) => {
-        try {
-            const response = await axios.get(`/tipoDePagamento/${id}/`);
-            return response.data.tipo_pagamento;
-        } catch (error) {
-            console.error('Erro ao obter o tipo do pagamento:', error);
-            return 'Desconhecido';
-        }
-    };
+                const vendas = vendasResponse.data;
+                const combustiveis = combustiveisResponse.data;
+                const pagamentos = pagamentosResponse.data;
+
+                const combustiveisMap = combustiveis.reduce((acc, curr) => {
+                    acc[curr.id] = curr.tipo_combustivel;
+                    return acc;
+                }, {});
+
+                const pagamentosMap = pagamentos.reduce((acc, curr) => {
+                    acc[curr.id] = curr.tipo_pagamento;
+                    return acc;
+                }, {});
+
+                const comprasComNomes = vendas.map(venda => ({
+                    ...venda,
+                    nome_combustivel: combustiveisMap[venda.tipo_combustivel] || 'Desconhecido',
+                    nome_pagamento: pagamentosMap[venda.tipo_pagamento] || 'Desconhecido'
+                }));
+
+                setDadosvenda(comprasComNomes);
+            } catch (error) {
+                console.error('Erro ao obter dados de venda:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleDelete = async (id) => {
         try {
@@ -45,31 +62,6 @@ function TabelaVenda() {
             console.error('Erro ao excluir funcionário:', error);
         }
     };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const resposta = await axios.get('/venda/');
-                const compras = resposta.data;
-    
-                const comprasComNomes = await Promise.all(
-                    compras.map(async (venda) => {
-                        const nomeCombustivel = await getNomeCombustivelById(venda.tipo_combustivel);
-                        const nomePagamento = await getNomePagamentoById(venda.tipo_pagamento);
-                        return { ...venda, nome_combustivel: nomeCombustivel, nome_pagamento: nomePagamento };
-                    })
-                );
-    
-                setDadosvenda(comprasComNomes);
-            } catch (error) {
-                console.error('Erro ao obter dados de venda:', error);
-            }
-        };
-    
-        fetchData();
-    }, []);
-
-
 
     return (
         <TableContainer alignItems={'center'} w={'70vw'} marginX="auto">
@@ -82,17 +74,16 @@ function TabelaVenda() {
                         <Th fontSize={'sm'} color={'#131328'}>Volume (Litro)</Th>
                         <Th fontSize={'sm'} color={'#131328'}>Valor (Litro)</Th>
                         <Th fontSize={'sm'} color={'#131328'}>Data</Th>
-
                     </Tr>
                 </Thead>
 
                 <Tbody>
                     {dadosVenda.map((venda) => (
                         <Tr key={venda.id}>
-                            <Td>{venda.nome_combustivel ? venda.nome_combustivel : 'Nome do Combustível Indisponível'}</Td>
-                            <Td>{venda.nome_pagamento ? venda.nome_pagamento : 'Nome do pagamento Indisponível'}</Td>
+                            <Td>{venda.nome_combustivel}</Td>
+                            <Td>{venda.nome_pagamento}</Td>
                             <Td>{venda.volume_venda}</Td>
-                            <Td >R$ {venda.preco_litro}</Td>
+                            <Td>R$ {venda.preco_litro}</Td>
                             <Td>{venda.data_venda}</Td>
 
                             <Td textAlign={'right'}>
@@ -105,10 +96,8 @@ function TabelaVenda() {
                         </Tr>
                     ))}
                 </Tbody>
-
             </Table>
         </TableContainer>
-
     );
 }
 

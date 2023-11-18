@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     ChakraProvider,
     Grid,
@@ -27,7 +27,12 @@ import TabelaCustos from '../components/Tabelas/Custos';
 function Dados() {
     const [tabIndex, setTabIndex] = useState(0);
     const [loadedTabs, setLoadedTabs] = useState([0]); // Mantém o controle das guias carregadas
-
+    const [funcionariosLoaded, setFuncionariosLoaded] = useState(true);
+    const [responsavelLoaded, setResponsavelLoaded] = useState(false);
+    const [compraLoaded, setCompraLoaded] = useState(false);
+    const [vendaLoaded, setVendaLoaded] = useState(false);
+    const [taxaLoaded, setTaxaLoaded] = useState(false);
+    const [custosLoaded, setCustosLoaded] = useState(false);
 
     const handleTabChange = (index) => {
         setTabIndex(index);
@@ -36,16 +41,27 @@ function Dados() {
         if (!loadedTabs.includes(index)) {
             setLoadedTabs([...loadedTabs, index]);
         }
+
+        // Define a flag de carregamento do componente baseado na guia clicada
+        setFuncionariosLoaded(index === 0);
+        setResponsavelLoaded(index === 1);
+        setCompraLoaded(index === 2);
+        setVendaLoaded(index === 3);
+        setTaxaLoaded(index === 4);
+        setCustosLoaded(index === 5);
     };
 
-    const tabelas = [
-        <TabelaFuncionarios />,
-        <TabelaResponsavel />,
-        <TabelaCompra />,
-        <TabelaVenda />,
-        <TabelaTaxa />,
-        <TabelaCustos />,
-    ];
+    // Atualiza o estado para carregar a tabela de funcionários somente após o componente ser montado
+    useEffect(() => {
+        setFuncionariosLoaded(true);
+    }, []);
+
+    const renderTable = (tableLoaded, tableComponent) => {
+        if (tableLoaded) {
+            return tableComponent;
+        }
+        return null;
+    };
 
     return (
         <ChakraProvider theme={theme}>
@@ -59,12 +75,11 @@ function Dados() {
                 zIndex="1"
                 marginLeft="13rem"
             >
-
                 <Sidebar />
 
                 <Heading textAlign={'center'}>
                     Histórico
-                    <Tooltip label="Para visualizar os dados de forma dinâmica vá ao dashboard." fontSize="md" >
+                    <Tooltip label="Para visualizar os dados de forma dinâmica vá ao dashboard." fontSize="md">
                         <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
                     </Tooltip>
                 </Heading>
@@ -87,17 +102,29 @@ function Dados() {
                     />
 
                     <TabPanels>
-                        {tabelas.map((tabela, index) => (
-                            <TabPanel key={index} lazy={!loadedTabs.includes(index)}>
-                                {tabela}
-                            </TabPanel>
-                        ))}
+                        <TabPanel key={0} lazy={!funcionariosLoaded}>
+                            {renderTable(funcionariosLoaded, <TabelaFuncionarios />)}
+                        </TabPanel>
+                        <TabPanel key={1} lazy={!loadedTabs.includes(1)}>
+                            {renderTable(responsavelLoaded, <TabelaResponsavel />)}
+                        </TabPanel>
+                        <TabPanel key={2} lazy={!loadedTabs.includes(2)}>
+                            {renderTable(compraLoaded, <TabelaCompra />)}
+                        </TabPanel>
+                        <TabPanel key={3} lazy={!loadedTabs.includes(3)}>
+                            {renderTable(vendaLoaded, <TabelaVenda />)}
+                        </TabPanel>
+                        <TabPanel key={4} lazy={!loadedTabs.includes(4)}>
+                            {renderTable(taxaLoaded, <TabelaTaxa />)}
+                        </TabPanel>
+                        <TabPanel key={5} lazy={!loadedTabs.includes(5)}>
+                            {renderTable(custosLoaded, <TabelaCustos />)}
+                        </TabPanel>
                     </TabPanels>
                 </Tabs>
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 <Rodape />
-
             </Grid>
         </ChakraProvider>
     );
