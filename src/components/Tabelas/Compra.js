@@ -15,12 +15,26 @@ import { DeleteIcon } from '@chakra-ui/icons';
 
 function TabelaCompra() {
     const [dadosCompra, setDadosCompra] = useState([]);
+    const [postoId, setPostoId] = useState('');
+    const [postoName, setPostoNome] = useState('');
+
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        // console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const [comprasResponse, combustiveisResponse ] = await Promise.all([
-                    axios.get('/compra/'),
+                    axios.get(`/compra/${postoId}/comprasPorPosto`),
                     axios.get('/tipoDeCombustivel/'),
                 ]);
 
@@ -43,8 +57,10 @@ function TabelaCompra() {
             }
         };
 
-        fetchData();
-    }, []);
+        if (postoId) {
+            fetchData();
+        }
+    }, [postoId]);
 
 
     const getNomeCombustivelById = async (id) => {

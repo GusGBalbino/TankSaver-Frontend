@@ -15,11 +15,25 @@ import { DeleteIcon } from '@chakra-ui/icons';
 
 function TabelaResponsavel() {
     const [dadosResponsavel, setDadosResponsavel] = useState([]);
+    const [postoId, setPostoId] = useState('');
+    const [postoName, setPostoNome] = useState('');
+
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        // console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/responsavel/${id}`);
-            const resposta = await axios.get('/responsavel/');
+            await axios.delete(`/responsavel/${postoId}/dadosPerfil`);
+            const resposta = await axios.get(`/responsavel/${postoId}/dadosPerfil`);
             setDadosResponsavel(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir responsável:', error);
@@ -29,15 +43,17 @@ function TabelaResponsavel() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get('/responsavel/');
+                const resposta = await axios.get(`/responsavel/${postoId}/dadosPerfil`);
                 setDadosResponsavel(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de responsável:', error);
             }
         };
 
-        fetchData();
-    }, []);
+        if (postoId) {
+            fetchData();
+        }
+    }, [postoId]);
 
 
 
@@ -55,21 +71,21 @@ function TabelaResponsavel() {
                 </Thead>
 
                 <Tbody>
-                    {dadosResponsavel.map((responsavel) => (
-                        <Tr key={responsavel.id}>
-                            <Td>{responsavel.nome}</Td>
-                            <Td>{responsavel.cpf}</Td>
-                            <Td >{responsavel.email}</Td>
-                            <Td >{responsavel.telefone}</Td>
+                    {/* {dadosResponsavel.map((responsavel) => ( */}
+                        <Tr key={dadosResponsavel.id}>
+                            <Td>{dadosResponsavel.nome}</Td>
+                            <Td>{dadosResponsavel.cpf}</Td>
+                            <Td >{dadosResponsavel.email}</Td>
+                            <Td >{dadosResponsavel.telefone}</Td>
                             <Td textAlign={'right'}>
                                 <DeleteIcon
                                     color="red.500"
                                     cursor="pointer"
-                                    onClick={() => handleDelete(responsavel.id)}
+                                    onClick={() => handleDelete(dadosResponsavel.id)}
                                 />
                             </Td>
                         </Tr>
-                    ))}
+                    {/* ))} */}
                 </Tbody>
 
             </Table>

@@ -25,12 +25,25 @@ function Custos() {
     const [dadosTaxas, setDadosTaxas] = useState([]);
     const [dadosFuncionario, setDadosFuncionario] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [postoId, setPostoId] = useState('');
+    const [postoName, setPostoNome] = useState('');
 
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        // console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
 
     useEffect(() => {
         const fetchDataCompra = async () => {
             try {
-                const resposta = await axios.get('/compra/');
+                const resposta = await axios.get(`/compra/${postoId}/comprasPorPosto`);
                 setDadosCompra(resposta.data);
                 setLoading(false);
 
@@ -41,36 +54,39 @@ function Custos() {
 
         const fetchDataCusto = async () => {
             try {
-                const resposta = await axios.get('/custos/');
+                const resposta = await axios.get(`/custos/${postoId}/custosPorPosto`);
                 setDadosCusto(resposta.data);
             } catch (error) {
-                console.error('Erro ao obter dados de compra:', error);
+                console.error('Erro ao obter dados de custo:', error);
             }
         };
 
         const fetchDataTaxa = async () => {
             try {
-                const resposta = await axios.get('/taxas/');
+                const resposta = await axios.get(`/taxas/${postoId}/taxasPorPosto`);
                 setDadosTaxas(resposta.data);
             } catch (error) {
-                console.error('Erro ao obter dados de compra:', error);
+                console.error('Erro ao obter dados de taxas:', error);
             }
         };
 
         const fetchDataFuncionario = async () => {
             try {
-                const resposta = await axios.get('/funcionario/');
+                const resposta = await axios.get(`/funcionario/${postoId}/funcionariosPorPosto`);
                 setDadosFuncionario(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de compra:', error);
             }
         };
 
+    if (postoId) {
         fetchDataCompra();
         fetchDataCusto();
         fetchDataTaxa();
         fetchDataFuncionario();
-    }, []);
+    }
+}, [postoId]);
+
 
     if (loading) {
         return (
@@ -151,7 +167,7 @@ function Custos() {
                     <CaixaInfo title={'Etanol'} info={`R$ ${ultimaCompraEtanol?.preco_litro} ` || 'Sem informação'} />
                     <CaixaInfo title={'Disel Comum'} info={`R$ ${ultimaCompraDisel?.preco_litro} ` || 'Sem informação'} />
                     <CaixaInfo title={'Disel S10'} info={`R$ ${ultimaCompraDiselS?.preco_litro} ` || 'Sem informação'} />
-                    <CaixaInfo title={'IPTU'} info={`R$ ${ultimosCustos?.iptu} ` || 'Sem informação'} />
+                    
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor dos últimos custos</Heading>

@@ -23,10 +23,25 @@ function Ganhos() {
     const [dadosVenda, setDadosVenda] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const [postoId, setPostoId] = useState('');
+    const [postoName, setPostoNome] = useState('');
+
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        // console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get('/venda/');
+                const resposta = await axios.get(`/venda/${postoId}/vendasPorPosto`);
                 setDadosVenda(resposta.data);
                 setLoading(false);
                 // console.log(resposta.data);
@@ -35,8 +50,11 @@ function Ganhos() {
             }
         };
 
-        fetchData();
-    }, []);
+        if (postoId) {
+            fetchData();
+        }
+    }, [postoId]);
+
 
     if (loading) {
         return (

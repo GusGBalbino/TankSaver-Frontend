@@ -15,15 +15,31 @@ import { DeleteIcon } from '@chakra-ui/icons';
 function TabelaVenda() {
     const [dadosVenda, setDadosvenda] = useState([]);
 
+    const [postoId, setPostoId] = useState('');
+    const [postoName, setPostoNome] = useState('');
+
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        // console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
+                console.log('postoId antes da chamada da rota:', postoId);
                 const [vendasResponse, combustiveisResponse, pagamentosResponse] = await Promise.all([
-                    axios.get('/venda/'),
+                    axios.get(`/venda/${postoId}/vendasPorPosto`),
                     axios.get('/tipoDeCombustivel/'),
                     axios.get('/tipoDePagamento/')
                 ]);
-
                 const vendas = vendasResponse.data;
                 const combustiveis = combustiveisResponse.data;
                 const pagamentos = pagamentosResponse.data;
@@ -49,9 +65,10 @@ function TabelaVenda() {
                 console.error('Erro ao obter dados de venda:', error);
             }
         };
-
-        fetchData();
-    }, []);
+        if (postoId) {
+            fetchData();
+        }
+    }, [postoId]);
 
     const handleDelete = async (id) => {
         try {

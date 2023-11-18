@@ -15,11 +15,25 @@ import { DeleteIcon } from '@chakra-ui/icons';
 
 function TabelaTaxa() {
     const [dadosTaxa, setDadosTaxa] = useState([]);
+    const [postoId, setPostoId] = useState('');
+    const [postoName, setPostoNome] = useState('');
+
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        // console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
 
     const handleDelete = async (id) => {
         try {
             await axios.delete(`/taxas/${id}`);
-            const resposta = await axios.get('/taxas/');
+            const resposta = await axios.get(`/taxas/`);
             setDadosTaxa(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir funcionário:', error);
@@ -29,15 +43,18 @@ function TabelaTaxa() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get('/taxas/');
+                const resposta = await axios.get(`/taxas/${postoId}/taxasPorPosto`);
                 setDadosTaxa(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de responsável:', error);
             }
         };
 
-        fetchData();
-    }, []);
+        if (postoId) {
+            fetchData();
+        }
+    }, [postoId]);
+
 
     return (
         <TableContainer alignItems={'center'} w={'70vw'} marginX="auto">

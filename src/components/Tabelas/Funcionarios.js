@@ -16,6 +16,21 @@ import { DeleteIcon } from '@chakra-ui/icons';
 function TabelaFuncionarios() {
     const [dadosCustos, setDadosCustos] = useState([]);
     const [dadosFuncionarios, setDadosFuncionarios] = useState([]);
+    
+    const [postoId, setPostoId] = useState('');
+    const [postoName, setPostoNome] = useState('');
+
+    useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        console.log('Stored Posto ID:', storedPostoId);
+        // console.log('Stored Posto Name:', storedPostoName);
+        if (storedPostoId && storedPostoName) {
+            
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
 
     const handleDelete = async (id) => {
         try {
@@ -30,15 +45,18 @@ function TabelaFuncionarios() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get('/funcionario/');
+                const resposta = await axios.get(`/funcionario/${postoId}/funcionariosPorPosto`);
                 setDadosFuncionarios(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de funcionários:', error);
             }
         };
 
-        fetchData();
-    }, []);
+        if (postoId) {
+            fetchData();
+        }
+    }, [postoId]);
+
 
 
 
