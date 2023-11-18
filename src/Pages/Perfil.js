@@ -78,10 +78,11 @@ function Perfil() {
                 flexDirection={'column'}
                 templateColumns={{ base: '1fr', md: '1fr 2fr' }}
                 minHeight="100vh"
-                p={8}
+                p={{ base: 4, md: 8 }}
                 bgColor={'#F5F5F5'}
                 zIndex="1"
                 marginLeft="13rem"
+                overflow="auto"
             >
                 <Heading textAlign={'center'}>Perfil</Heading>
                 <Divider marginTop={'1rem'}></Divider>

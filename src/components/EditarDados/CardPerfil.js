@@ -36,9 +36,10 @@ export function CardPerfil() {
                     justifyContent="flex-start"
                     _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
                     onClick={onOpen}
-                    position="absolute"
-                    right="40"   
-                    top="750"      
+                    position="sticky"
+                    top="0"
+                    zIndex="2"
+                    marginLeft="35rem"
                 >
                     <Flex align="center"> 
                         <EditIcon mr={2} /> 

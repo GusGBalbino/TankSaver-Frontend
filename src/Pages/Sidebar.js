@@ -21,6 +21,7 @@ import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
 import { AlertaAtualizarDados } from '../components/Alerta/AlertaAtualizarDados';
 
 function Sidebar() {
+  
   return (
     <ChakraProvider theme={theme}>
       <AlertaAtualizarDados title={'ATUALIZAÇÃO DE DADOS'} description={'Lembre-se de atualizar os dados diáriamente, semanalmente e mensalmente.'} />
@@ -94,3 +95,5 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
+
