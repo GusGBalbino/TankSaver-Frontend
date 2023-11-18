@@ -25,16 +25,17 @@ import { EditIcon } from '@chakra-ui/icons';
 export function CardPerfil() {
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const [nome_fantasia, setNomeFantasia] = useState(0);
-    const [cnpj, setCnpj] = useState(0);
-    const [cidade, setCidade] = useState(0);
-    const [telefone, setTelefone] = useState(0);
-    const [endereco, setEndereco] = useState(0);
-    const [cep, setCep] = useState(0);
-    const [email, setEemail] = useState(0);
-    const [uf, setUf] = useState(0);
-    const [bandeira, setBandeira] = useState(0);
-    const [telefonempresarial, setTelefonempresarial] = useState(0);
+    const [nome_fantasia, setNomeFantasia] = useState('');
+    const [cnpj, setCnpj] = useState('');
+    const [cidade, setCidade] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [endereco, setEndereco] = useState('');
+    const [cep, setCep] = useState('');
+    const [email, setEmail] = useState('');
+    const [uf, setUf] = useState('');
+    const [bandeira, setBandeira] = useState('');
+    const [telefonempresarial, setTelefoneEmpresarial] = useState('');
+    const [senha, setSenha] = useState('');
 
     const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
@@ -44,13 +45,36 @@ export function CardPerfil() {
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
-        // console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
+        console.log('Stored Posto ID:', storedPostoId);
+        //console.log('Stored Posto Name:', storedPostoName);
         if (storedPostoId && storedPostoName) {
             setPostoId(storedPostoId);
             setPostoNome(storedPostoName);
         }
     }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get(`http://localhost:8000/posto/${postoId}`);
+            const data = response.data;
+
+            setNomeFantasia(data.nome_fantasia);
+            setCnpj(data.cnpj);
+            setCidade(data.cidade);
+            setTelefone(data.telefone);
+            setEndereco(data.endereco);
+            setCep(data.cep);
+            setEmail(data.email);
+            setUf(data.uf);
+            setBandeira(data.bandeira);
+            setTelefoneEmpresarial(data.telefone_empresarial);
+        };
+
+        if (isOpen) {
+            fetchData();
+        }
+    }, [isOpen, postoId]);
+
 
     const adicionarPosto = async () => {
         const token = localStorage.getItem('token');
@@ -65,7 +89,7 @@ export function CardPerfil() {
             email,
             uf,
             telefone,
-            telefone,
+            senha,
             posto: postoId
         });
 
@@ -81,6 +105,7 @@ export function CardPerfil() {
                 uf,
                 telefone,
                 telefone,
+                senha, 
                 posto: postoId
             });
 
@@ -162,7 +187,7 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         Nome Fantasia
                                     </FormLabel>
-                                    <Input placeholder='Nome Fantasia...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setNomeFantasia(e.target.value)} />
+                                    <Input value={nome_fantasia} color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setNomeFantasia(e.target.value)} />
                                 </FormControl>
                             </Box>
 
@@ -171,7 +196,7 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         CNPJ
                                     </FormLabel>
-                                    <Input placeholder='CNPJ...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setCnpj(formatarCnpj(e.target.value))}/>
+                                    <Input value={cnpj} color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setCnpj(formatarCnpj(e.target.value))}/>
                                 </FormControl>
                             </Box>
 
@@ -180,7 +205,7 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         Bandeira
                                     </FormLabel>
-                                    <Input placeholder='Bandeira...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setBandeira(e.target.value)}/>
+                                    <Input value={bandeira} color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setBandeira(e.target.value)}/>
                                 </FormControl>
                             </Box>
 
@@ -189,7 +214,7 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         Telefone Empresarial
                                     </FormLabel>
-                                    <Input placeholder='Telefone Empresarial...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
+                                    <Input value={telefone} color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                                 </FormControl>
                             </Box> 
 
@@ -198,7 +223,7 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         CEP
                                     </FormLabel>
-                                    <Input placeholder='CEP...' color="black" _placeholder={{ color: 'black.500' }} bg="white"  onChange={(e) => setCep(formatarCep(e.target.value))} pattern="[0-9]{5}-[0-9]{3}" title="Digite um CEP válido no formato XXXXX-XXX"/>
+                                    <Input value={cep} color="black" _placeholder={{ color: 'black.500' }} bg="white"  onChange={(e) => setCep(formatarCep(e.target.value))} pattern="[0-9]{5}-[0-9]{3}" title="Digite um CEP válido no formato XXXXX-XXX"/>
                                 </FormControl>
                             </Box>
 
@@ -207,7 +232,7 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         Endereço
                                     </FormLabel>
-                                    <Input placeholder='Endereço...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setEndereco(e.target.value)}/>
+                                    <Input value={endereco} color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setEndereco(e.target.value)}/>
                                 </FormControl>
                             </Box>
 
@@ -216,7 +241,7 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         Cidade
                                     </FormLabel>
-                                    <Input placeholder='Município...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setCidade(e.target.value)}/>
+                                    <Input value={cidade} color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setCidade(e.target.value)}/>
                                 </FormControl>
                             </Box>
 
@@ -225,7 +250,7 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         UF
                                     </FormLabel>
-                                    <Input placeholder='UF...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setUf(e.target.value)} />
+                                    <Input value={uf} color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setUf(e.target.value)} />
                                 </FormControl>
                             </Box>
 
@@ -234,7 +259,16 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         E-mail
                                     </FormLabel>
-                                    <Input placeholder='E-mail...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setEemail(e.target.value)}/>
+                                    <Input value={email} color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setEmail(e.target.value)}/>
+                                </FormControl>
+                            </Box>
+
+                            <Box mb={4}>
+                                <FormControl isRequired>
+                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
+                                        Senha
+                                    </FormLabel>
+                                    <Input value={senha} color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setSenha(e.target.value)}/>
                                 </FormControl>
                             </Box>
 
@@ -256,5 +290,3 @@ export function CardPerfil() {
         </>
     );
 }
-
-
