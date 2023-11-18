@@ -34,6 +34,7 @@ export function CardPerfil() {
     const [email, setEemail] = useState(0);
     const [uf, setUf] = useState(0);
     const [bandeira, setBandeira] = useState(0);
+    const [telefonempresarial, setTelefonempresarial] = useState(0);
 
     const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
@@ -63,6 +64,8 @@ export function CardPerfil() {
             cep,
             email,
             uf,
+            telefone,
+            telefone,
             posto: postoId
         });
 
@@ -76,6 +79,8 @@ export function CardPerfil() {
                 cep,
                 email,
                 uf,
+                telefone,
+                telefone,
                 posto: postoId
             });
 
@@ -93,6 +98,32 @@ export function CardPerfil() {
             console.log('Erro na resposta:', error.response);
         }
     };
+
+    const formatarCep = (cep) => {
+        // Remove caracteres não numéricos do CEP
+        const cepNumerico = cep.replace(/\D/g, '');
+    
+        // Limita o CEP a 8 dígitos
+        const cepLimitado = cepNumerico.slice(0, 8);
+    
+        // Adiciona a formatação: XXXXX-XXX
+        const cepFormatado = cepLimitado.replace(/(\d{5})(\d{3})/, '$1-$2');
+    
+        return cepFormatado;
+    };
+    
+    const formatarCnpj = (cnpj) => {
+        // Remove caracteres não numéricos do CNPJ
+        const cnpjNumerico = cnpj.replace(/\D/g, '');
+    
+        // Limita o CNPJ a 14 dígitos
+        const cnpjLimitado = cnpjNumerico.slice(0, 14);
+    
+        // Adiciona a formatação: XX.XXX.XXX/0001-XX
+        const cnpjFormatado = cnpjLimitado.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    
+        return cnpjFormatado;
+    };    
 
     return (
         <>
@@ -140,7 +171,7 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         CNPJ
                                     </FormLabel>
-                                    <Input placeholder='CNPJ...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setCnpj(e.target.value)}/>
+                                    <Input placeholder='CNPJ...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setCnpj(formatarCnpj(e.target.value))}/>
                                 </FormControl>
                             </Box>
 
@@ -149,25 +180,25 @@ export function CardPerfil() {
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         Bandeira
                                     </FormLabel>
-                                    <Input placeholder='CNPJ...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setBandeira(e.target.value)}/>
+                                    <Input placeholder='Bandeira...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setBandeira(e.target.value)}/>
                                 </FormControl>
                             </Box>
 
-                            {/* <Box mb={4}>
+                            <Box mb={4}>
                                 <FormControl isRequired>
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         Telefone Empresarial
                                     </FormLabel>
                                     <Input placeholder='Telefone Empresarial...' color="black" _placeholder={{ color: 'black.500' }} bg="white" />
                                 </FormControl>
-                            </Box> */}
+                            </Box> 
 
                             <Box mb={4}>
                                 <FormControl isRequired>
                                     <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
                                         CEP
                                     </FormLabel>
-                                    <Input placeholder='CEP...' color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setCep(e.target.value)} />
+                                    <Input placeholder='CEP...' color="black" _placeholder={{ color: 'black.500' }} bg="white"  onChange={(e) => setCep(formatarCep(e.target.value))} pattern="[0-9]{5}-[0-9]{3}" title="Digite um CEP válido no formato XXXXX-XXX"/>
                                 </FormControl>
                             </Box>
 
@@ -225,3 +256,5 @@ export function CardPerfil() {
         </>
     );
 }
+
+

@@ -18,6 +18,7 @@ import { CaixaInfo2 } from '../components/Informacoes/CaixaInfo2';
 import axios from 'axios';
 
 function Perfil() {
+    const [perfilData, setPerfilData] = useState(null);
     const [postoId, setPostoId] = useState(null);
     const [postoNome, setPostoNome] = useState(null);
     const [postoInfo, setPostoInfo] = useState(null);
@@ -55,6 +56,8 @@ function Perfil() {
             }
         };
 
+        
+
         if (postoId) {
             fetchPostoInfo();
             fetchResponsavelInfo();
@@ -82,27 +85,29 @@ function Perfil() {
                 <Flex justifyContent="center" alignItems="center" as="form" marginBottom={8} >
                     <Box p={4} width={{ base: '100%', md: 'auto' }} maxW={{ base: '100%', md: '600px' }}>
 
-
                         <Spacer height={4} />
                         <CaixaInfo2 title={'Nome Fantasia'} info={postoInfo?.nome_fantasia} margin={4} />
 
                         <Spacer height={4} />
+                        <Grid templateColumns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap={4} width="100%" justifyContent="center" marginX="auto">
+                            <CaixaInfo2 title={'Bandeira'} info={postoInfo?.bandeira} minH="80px" textAlign="center" customMaxW="250px" />
+                            <CaixaInfo2 title={'CNPJ'} info={postoInfo?.cnpj} minH="80px" textAlign="center" customMaxW="250px" />
+                            <CaixaInfo2 title={'Telefone Empresarial'} info={postoInfo?.telefone} />
+                        </Grid>
 
-                        <HStack spacing={4} justifyContent="center" mb={4} width="100%">
-                            <CaixaInfo2 title={'Bandeira'} info={postoInfo?.bandeira} />
-                            <CaixaInfo2 title={'CNPJ'} info={postoInfo?.cnpj} />
-                            {/* <CaixaInfo2 title={'Telefone Empresarial'} info={'Informação que virá do back'} /> */}
-                        </HStack>
+                        <Spacer height={4} />
 
                         <CaixaInfo2 title={'Endereço'} info={postoInfo?.endereco} margin={4} />
 
                         <Spacer height={4} />
 
-                        <HStack spacing={4} justifyContent="center" mb={4}>
-                            <CaixaInfo2 title={'CEP'} info={postoInfo?.cep} />
-                            <CaixaInfo2 title={'Cidade'} info={postoInfo?.cidade} />
-                            <CaixaInfo2 title={'UF'} info={postoInfo?.uf} />
-                        </HStack>
+                        <Grid templateColumns={{ base: '1fr', md: '1fr 1fr 1fr' }} gap={4} width="100%" justifyContent="center"  marginX="auto">
+                            <CaixaInfo2 title={'CEP'} info={postoInfo?.cep} minH="80px"/>
+                            <CaixaInfo2 title={'Cidade'} info={postoInfo?.cidade} minH="80px"/>
+                            <CaixaInfo2 title={'UF'} info={postoInfo?.uf} minH="80px"/>
+                        </Grid>
+
+                        <Spacer height={4} />
 
                         <CaixaInfo2 title={'E-mail'} info={postoInfo?.email} mb={4} />
 
