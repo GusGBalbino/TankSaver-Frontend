@@ -46,8 +46,9 @@ function Sidebar() {
         <VStack spacing={2} alignItems="center" justifyContent="center">
           <Link to="/dashboard">
             <OpcoesSidebar
-              icon={<AiOutlineFundProjectionScreen />}
+              icon={<AiOutlineFundProjectionScreen  />}
               name={'Dashboard'}
+              
             />
           </Link>
 
@@ -74,7 +75,7 @@ function Sidebar() {
 
           <Link to="/dados">
             <OpcoesSidebar
-              icon={<AiOutlineFileSearch  />}
+              icon={<AiOutlineFileSearch />}
               name={'Histórico'}
             />
 

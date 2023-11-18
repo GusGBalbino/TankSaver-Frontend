@@ -13,7 +13,7 @@ import {
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
 import { CardPerfil } from '../components/EditarDados/CardPerfil';
-import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
+import { CaixaInfo2} from '../components/Informacoes/CaixaInfo2';
 
 function Perfil() {
     function cadastrarUsuario(e) {
@@ -40,35 +40,39 @@ function Perfil() {
 
                 <Flex justifyContent="center" alignItems="center" as="form" marginBottom={8} >
                     <Box p={4} width={{ base: '100%', md: 'auto' }} maxW={{ base: '100%', md: '600px' }}>
-                        <CaixaInfo title={'Nome Fantasia'} info={'Informação que virá do back'} mb={4} />
+
+
+                        <Spacer height={4} />
+
+                        <CaixaInfo2 title={'Nome Fantasia'} info={'Informação que virá do back'} margin={4} />
+
+                        <Spacer height={4} />
+
+                        <HStack spacing={4} justifyContent="center" mb={4}  width="100%">
+                            <CaixaInfo2 title={'Usuário'} info={'Informação que virá do back'}/>
+                            <CaixaInfo2 title={'CNPJ'} info={'Informação que virá do back'} />
+                            <CaixaInfo2 title={'Telefone Empresarial'} info={'Informação que virá do back'}  />
+                        </HStack>
+
+                        <CaixaInfo2 title={'Endereço'} info={'Informação que virá do back'}  margin={4}/>
 
                         <Spacer height={4} />
 
                         <HStack spacing={4} justifyContent="center" mb={4}>
-                            <CaixaInfo title={'Usuário'} info={'Informação que virá do back'} />
-                            <CaixaInfo title={'CNPJ'} info={'Informação que virá do back'}  />
-                            <CaixaInfo title={'Telefone Empresarial'} info={'Informação que virá do back'} />
+                            <CaixaInfo2 title={'CEP'} info={'Informação que virá do back'}/>
+                            <CaixaInfo2 title={'Município'} info={'Informação que virá do back'} />
+                            <CaixaInfo2 title={'UF'} info={'Informação que virá do back'} />
                         </HStack>
 
-                        <CaixaInfo title={'Endereço'} info={'Informação que virá do back'} mb={4}/>
+                        <CaixaInfo2 title={'E-mail'} info={'Informação que virá do back'} mb={4}/>
 
                         <Spacer height={4} />
 
                         <HStack spacing={4} justifyContent="center" mb={4}>
-                            <CaixaInfo title={'CEP'} info={'Informação que virá do back'}/>
-                            <CaixaInfo title={'Município'} info={'Informação que virá do back'} />
-                            <CaixaInfo title={'UF'} info={'Informação que virá do back'} />
+                            <CaixaInfo2 title={'Responsável pela Empresa'} info={'Informação que virá do back'} />
+                            <CaixaInfo2 title={'Telefone'} info={'Informação que virá do back'}  />
                         </HStack>
-
-                        <CaixaInfo title={'E-mail'} info={'Informação que virá do back'} mb={4}/>
-
-                        <Spacer height={4} />
-
-                        <HStack spacing={4} justifyContent="center" mb={4}>
-                            <CaixaInfo title={'Responsável pela Empresa'} info={'Informação que virá do back'} width="50%"/>
-                            <CaixaInfo title={'Telefone'} info={'Informação que virá do back'} width="50%" />
-                        </HStack>
-
+                        <Spacer />
                         <Box marginBox='left'>
                             <CardPerfil />
                         </Box>

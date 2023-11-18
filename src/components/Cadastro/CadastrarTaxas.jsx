@@ -191,11 +191,12 @@ export function CadastrarTaxas() {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button onClick={adicionarTaxas} colorScheme='blue' mr={3}>
+                        <Button onClick={adicionarTaxas} mr={3} bg="#131328" color="white" _hover={{ bg: '#131328', color: 'white' }}>
                             Salvar
                         </Button>
-                        <Button onClick={onClose}>Cancelar</Button>
+                        <Button borderColor={isOpen ? '#FFBB0D' : '#131328'}  onClick={onClose} _hover={{ color: '#131328', borderColor: '#FFBB0D' }}borderWidth="2px">Cancelar</Button>
                     </ModalFooter>
+
                 </ModalContent>
             </Modal>
         </>

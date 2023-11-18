@@ -25,7 +25,7 @@ export function CardPerfil() {
 
     return (
         <>
-            <HStack spacing={4} justifyContent="flex-end">
+
                 <Spacer />
                 <Button
                     minW={['10rem', '10rem']}
@@ -36,13 +36,16 @@ export function CardPerfil() {
                     justifyContent="flex-start"
                     _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
                     onClick={onOpen}
+                    position="absolute"
+                    right="40"   
+                    top="750"      
                 >
                     <Flex align="center"> 
                         <EditIcon mr={2} /> 
                     Editar Dados
                     </Flex>
                 </Button>
-            </HStack>
+
 
             <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
                 <ModalOverlay />
