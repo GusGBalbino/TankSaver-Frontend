@@ -47,7 +47,7 @@ function Perfil() {
                 // console.log("Informações do posto", response.data);
                 setPostoInfo(response.data);
                 setLoading(false);
-                
+
             } catch (error) {
                 console.error('Erro ao obter informações do posto:', error);
             }
@@ -69,7 +69,7 @@ function Perfil() {
             fetchPostoInfo();
             fetchResponsavelInfo();
         }
-    }, [postoId]); 
+    }, [postoId]);
 
     if (loading) {
         return (
@@ -140,14 +140,17 @@ function Perfil() {
 
                         <Spacer height={4} />
 
-                        <HStack spacing={4} justifyContent="center" mb={4} w={'100%'}>
+                        <Grid templateColumns={{ base: '1fr', md: '2fr 2fr' }} gap={4} width="100%" justifyContent="center" marginX="auto">
                             <CaixaInfo2 title={'Responsável pela Empresa'} info={responsavelInfo?.nome} />
                             <CaixaInfo2 title={'Telefone do Responsável'} info={responsavelInfo?.telefone} />
-                        </HStack>
-                        <Spacer />
+                        </Grid>
+
+                        <Spacer height={7} />
                         <Box marginBox='left'>
                             <CardPerfil />
                         </Box>
+
+
                     </Box>
                 </Flex>
             </Grid>

@@ -131,7 +131,7 @@ export function CadastrarTaxas() {
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
-                                    children='R$'
+                                    children='%'
                                 />
                                 <Input
                                     marginBottom={'15px'}
@@ -143,7 +143,7 @@ export function CadastrarTaxas() {
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
-                                    children='R$'
+                                    children='%'
                                 />
                                 <Input
                                     marginBottom={'15px'}
@@ -155,7 +155,7 @@ export function CadastrarTaxas() {
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
-                                    children='R$'
+                                    children='%'
                                 />
                                 <Input
                                     marginBottom={'15px'}
@@ -167,7 +167,7 @@ export function CadastrarTaxas() {
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
-                                    children='R$'
+                                    children='%'
                                 />
                                 <Input
                                     marginBottom={'15px'}
@@ -179,7 +179,7 @@ export function CadastrarTaxas() {
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
-                                    children='R$'
+                                    children='%'
                                 />
                                 <Input
                                     marginBottom={'15px'}

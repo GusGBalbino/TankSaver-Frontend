@@ -13,11 +13,23 @@ export function CaixaInfo2(props = InfoProps) {
             <Box align={'center'} bg={'#131328'} textColor={'white'} borderRadius='md' boxShadow={'4px 4px 5px #E4E4E4'} height={'1.7rem'}>
                 <Text size='sm'>{props.title}</Text>
             </Box>
-            <Box borderWidth='1px' boxShadow={'2px 2px 5px #E4E4E4'} borderColor={'#FFBB0D'} align={'center'} bg='white' height={'1.7rem'} borderRadius='md' > 
-                <Text fontSize="xs" lineHeight="shorter" margin="0">
+            <Box
+                borderWidth='1px'
+                boxShadow={'2px 2px 5px #E4E4E4'}
+                borderColor={'#FFBB0D'}
+                align={'center'}
+                bg='white'
+                height={'1.7rem'}
+                borderRadius='md'
+                display='flex'
+                alignItems='center'
+                justifyContent='center'
+            >
+                <Text fontSize="xs" lineHeight="shorter" margin="0" >
                     {props.info}
                 </Text>
             </Box>
+
         </Box>
 
         // <Card size={'sm'} borderWidth={1} borderColor="#FFBB0D" borderRadius="lg" > 
