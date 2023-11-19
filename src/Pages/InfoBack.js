@@ -77,7 +77,7 @@ function Dados() {
             >
                 <Sidebar />
 
-                <Heading textAlign={'center'}>
+                <Heading textAlign={'center'} fontWeight={'15px'}>
                     Histórico
                     <Tooltip label="Para visualizar os dados de forma dinâmica vá ao dashboard." fontSize="md">
                         <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />

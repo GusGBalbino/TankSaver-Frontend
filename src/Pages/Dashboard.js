@@ -92,7 +92,7 @@ function Dashboard() {
                 marginLeft="13rem"
             >
                 <Sidebar />
-                <Heading textAlign={'center'}>Dashboard</Heading>
+                <Heading textAlign={'center'}  fontWeight={'15px'}>Dashboard</Heading>
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
 
                 <Chart

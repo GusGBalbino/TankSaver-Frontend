@@ -151,7 +151,7 @@ function Custos() {
 
                 <Sidebar />
 
-                <Heading textAlign={'center'}>
+                <Heading textAlign={'center'} fontWeight={'15px'}>
                     Custos
                     <Tooltip label="Direcione-se à opção de Cadastro." fontSize="md" >
                         <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
@@ -159,7 +159,7 @@ function Custos() {
                 </Heading>
                 <Divider marginTop={'1rem'} />
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor total da última compra de combustíveis (por litro)</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor total da última compra de combustíveis (por litro)</Heading>
 
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     <CaixaInfo title={'Gasolina Comum'} info={`R$ ${ultimaCompraGasolina?.preco_litro} ` || 'Sem informação'} />
@@ -170,7 +170,7 @@ function Custos() {
                     
                 </SimpleGrid>
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor dos últimos custos</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor dos últimos custos</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     <CaixaInfo title={'IPTU'} info={`R$ ${ultimosCustos?.iptu} ` || 'Sem informação'} />
                     <CaixaInfo title={'Custos Operacionais'} info={`R$ ${ultimosCustos?.custos_operacionais} ` || 'Sem informação'} />
@@ -181,7 +181,7 @@ function Custos() {
                     <CaixaInfo title={'Softwares'} info={`R$ ${ultimosCustos?.softwares} ` || 'Sem informação'} />
                 </SimpleGrid>
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor das últimas taxas e impostos</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor das últimas taxas e impostos</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     <CaixaInfo title={'AGEFIS'} info={`R$ ${ultimasTaxas?.agefis} ` || 'Sem informação'} />
                     <CaixaInfo title={'IBRAN'} info={`R$ ${ultimasTaxas?.ibran} ` || 'Sem informação'} />
@@ -191,7 +191,7 @@ function Custos() {
                 </SimpleGrid>
 
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor gasto com funcionários</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor gasto com funcionários</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     {dadosFuncionario.map((funcionario) => (
                         <CaixaInfo

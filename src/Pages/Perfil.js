@@ -107,12 +107,11 @@ function Perfil() {
                 marginLeft="13rem"
                 overflow="auto"
             >
-                <Heading textAlign={'center'}>Perfil</Heading>
+                <Heading textAlign={'center'} fontWeight={'15px'}>Perfil</Heading>
                 <Divider marginTop={'1rem'}></Divider>
 
                 <Flex justifyContent="center" alignItems="center" as="form" marginBottom={8} >
                     <Box p={4} width={{ base: '100%', md: 'auto' }} maxW={{ base: '100%', md: '600px' }}>
-
                         <Spacer height={4} />
                         <CaixaInfo2 title={'Nome Fantasia'} info={postoInfo?.nome_fantasia} margin={4} />
 
@@ -141,8 +140,7 @@ function Perfil() {
 
                         <Spacer height={4} />
 
-                        <HStack spacing={4} justifyContent="center" mb={4}>
-
+                        <HStack spacing={4} justifyContent="center" mb={4} w={'100%'}>
                             <CaixaInfo2 title={'Responsável pela Empresa'} info={responsavelInfo?.nome} />
                             <CaixaInfo2 title={'Telefone do Responsável'} info={responsavelInfo?.telefone} />
                         </HStack>

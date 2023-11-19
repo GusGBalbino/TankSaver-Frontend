@@ -21,10 +21,10 @@ import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
 import { AlertaAtualizarDados } from '../components/Alerta/AlertaAtualizarDados';
 
 function Sidebar() {
-  
+
   return (
     <ChakraProvider theme={theme}>
-      <AlertaAtualizarDados title={'ATUALIZAÇÃO DE DADOS'} description={'Lembre-se de atualizar os dados diáriamente, semanalmente e mensalmente.'} />
+      <AlertaAtualizarDados title={'ATUALIZAÇÃO DE DADOS'} description={'Lembre-se de atualizar os dados diariamente, semanalmente e mensalmente.'} />
       <Box
         position="fixed"
         top={0}
@@ -47,9 +47,9 @@ function Sidebar() {
         <VStack spacing={2} alignItems="center" justifyContent="center">
           <Link to="/dashboard">
             <OpcoesSidebar
-              icon={<AiOutlineFundProjectionScreen  />}
+              icon={<AiOutlineFundProjectionScreen />}
               name={'Dashboard'}
-              
+
             />
           </Link>
 
@@ -69,7 +69,7 @@ function Sidebar() {
 
           <Link to="/variaveis">
             <OpcoesSidebar
-              icon={<AiOutlineForm  />}
+              icon={<AiOutlineForm />}
               name={'Cadastro'}
             />
           </Link>
@@ -78,16 +78,16 @@ function Sidebar() {
             <OpcoesSidebar
               icon={<AiOutlineFileSearch />}
               name={'Histórico'}
+            /></Link>
+
+          <Link to="/perfil">
+            <OpcoesSidebar
+              icon={<AiOutlineUser />}
+              name={'Perfil'}
             />
-
-            <Link to="/perfil">
-              <OpcoesSidebar
-                icon={<AiOutlineUser />}
-                name={'Perfil'}
-              />
-            </Link>
-
           </Link>
+
+
         </VStack>
       </Box>
     </ChakraProvider>

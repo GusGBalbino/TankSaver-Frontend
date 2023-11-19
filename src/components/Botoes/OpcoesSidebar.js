@@ -14,6 +14,7 @@ export function OpcoesSidebar(props) {
                 maxW={['9rem', '9rem']}
                 marginBottom={'15px'}
                 variant='outline'
+                borderRadius={'8px'}
                 color={isHovered ? '#131328' : 'white'}
                 borderColor="#8D7843"
                 justifyContent="flex-start"

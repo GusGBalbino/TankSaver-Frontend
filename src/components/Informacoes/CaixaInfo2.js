@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Card, CardHeader, CardBody } from '@chakra-ui/react';
+import { Text, Card, CardHeader, CardBody, Box, Flex } from '@chakra-ui/react';
 
 const InfoProps = [
     { title: String },
@@ -9,16 +9,30 @@ const InfoProps = [
 
 export function CaixaInfo2(props = InfoProps) {
     return (
-        <Card size={'sm'} borderWidth={1} borderColor="#FFBB0D" borderRadius="lg" > 
-            <CardHeader align={'center'} bg={'#131328'} textColor={'white'} borderRadius='md'>
+        <Box display={'flex'} flexDirection={'column'} gap={'6px'}>
+            <Box align={'center'} bg={'#131328'} textColor={'white'} borderRadius='md' boxShadow={'4px 4px 5px #E4E4E4'} height={'1.7rem'}>
                 <Text size='sm'>{props.title}</Text>
-            </CardHeader>
-
-            <CardBody align={'center'} border='#FFBB0D'>
-                <Text fontSize="xs" lineHeight="shorter" margin="0"> 
+            </Box>
+            <Box borderWidth='1px' boxShadow={'2px 2px 5px #E4E4E4'} borderColor={'#FFBB0D'} align={'center'} bg='white' height={'1.7rem'} borderRadius='md' > 
+                <Text fontSize="xs" lineHeight="shorter" margin="0">
                     {props.info}
                 </Text>
-            </CardBody>
-        </Card>
+            </Box>
+        </Box>
+
+        // <Card size={'sm'} borderWidth={1} borderColor="#FFBB0D" borderRadius="lg" > 
+        //     <CardHeader align={'center'} bg={'#131328'} textColor={'white'} borderRadius='md'>
+        //         <Text size='sm'>{props.title}</Text>
+        //     </CardHeader>
+
+        //     <CardBody align={'center'} border='#FFBB0D'>
+        //         <Text fontSize="xs" lineHeight="shorter" margin="0"> 
+        //             {props.info}
+        //         </Text>
+        //     </CardBody>
+        // </Card>
+
+
+
     );
 }

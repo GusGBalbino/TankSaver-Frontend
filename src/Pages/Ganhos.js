@@ -111,14 +111,14 @@ function Ganhos() {
 
                 <Sidebar />
 
-                <Heading textAlign={'center'}>
+                <Heading textAlign={'center'} fontWeight={'15px'} >
                     Ganhos
                     <Tooltip label="Direcione-se à opção de Cadastro." fontSize="md" >
                         <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
                     </Tooltip></Heading>
                 <Divider marginTop={'1rem'} />
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Valor da última venda (Litro)</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor da última venda (Litro)</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     <CaixaInfo title={'Gasolina Comum'} info={`R$ ${ultimaVendaGasolina?.preco_litro} ` || 'Sem informação'} />
                     <CaixaInfo title={'Gasolina Aditivada'} info={`R$ ${ultimaGasolinaA?.preco_litro} ` || 'Sem informação'} />
@@ -127,7 +127,7 @@ function Ganhos() {
                     <CaixaInfo title={'Disel S10'} info={`R$ ${ultimaVendaDiselS?.preco_litro} ` || 'Sem informação'} />
                 </SimpleGrid>
 
-                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'}>Volume da última venda</Heading>
+                <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Volume da última venda</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     <CaixaInfo title={'Gasolina Comum'} info={`${ultimaVendaGasolina?.volume_venda} Litros`} />
                     <CaixaInfo title={'Gasolina Aditivada'} info={`${ultimaGasolinaA?.volume_venda} Litros`} />
