@@ -142,7 +142,18 @@ function Dashboard() {
                 <Heading textAlign={'center'} fontWeight={'15px'}>Dashboard</Heading>
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 
-                <Button colorScheme="blue" onClick={enviarFechamentoMes}>
+                <Button 
+                variant='outline'
+                textColor={'black'}
+                borderColor={'#131328'}
+                // justifyContent="space-between"
+                _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
+                // textAlign={'center'}
+                // position="sticky"
+                // top="0"
+                // zIndex="2"
+                // marginLeft="35rem"
+                onClick={enviarFechamentoMes}>
                     Fechar Mês
                 </Button>
 

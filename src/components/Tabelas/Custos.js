@@ -64,6 +64,7 @@ function TabelaCustos() {
                     <Tr>
                         <Th fontSize={'sm'} color={'#131328'}>IPTU</Th>
                         <Th fontSize={'sm'} color={'#131328'}>Custos operacionais</Th>
+                        <Th fontSize={'sm'} color={'#131328'}>Honorários</Th>
                         <Th fontSize={'sm'} color={'#131328'}>Telefone e internet</Th>
                         <Th fontSize={'sm'} color={'#131328'}>Luz</Th>
                         <Th fontSize={'sm'} color={'#131328'}>Água</Th>
