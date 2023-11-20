@@ -43,7 +43,7 @@ function Custos() {
     useEffect(() => {
         const fetchDataCompra = async () => {
             try {
-                const resposta = await axios.get(`/compra/${postoId}/comprasPorPosto`);
+                const resposta = await axios.get(`/compra/${postoId}/comprasPorPosto/`);
                 setDadosCompra(resposta.data);
                 setLoading(false);
 
@@ -54,7 +54,7 @@ function Custos() {
 
         const fetchDataCusto = async () => {
             try {
-                const resposta = await axios.get(`/custos/${postoId}/custosPorPosto`);
+                const resposta = await axios.get(`/custos/${postoId}/custosPorPosto/`);
                 setDadosCusto(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de custo:', error);
@@ -63,7 +63,7 @@ function Custos() {
 
         const fetchDataTaxa = async () => {
             try {
-                const resposta = await axios.get(`/taxas/${postoId}/taxasPorPosto`);
+                const resposta = await axios.get(`/taxas/${postoId}/taxasPorPosto/`);
                 setDadosTaxas(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de taxas:', error);
@@ -72,7 +72,7 @@ function Custos() {
 
         const fetchDataFuncionario = async () => {
             try {
-                const resposta = await axios.get(`/funcionario/${postoId}/funcionariosPorPosto`);
+                const resposta = await axios.get(`/funcionario/${postoId}/funcionariosPorPosto/`);
                 setDadosFuncionario(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de compra:', error);

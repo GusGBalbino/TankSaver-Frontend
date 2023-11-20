@@ -45,7 +45,7 @@ function TabelaFuncionarios() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get(`/funcionario/${postoId}/funcionariosPorPosto`);
+                const resposta = await axios.get(`/funcionario/${postoId}/funcionariosPorPosto/`);
                 setDadosFuncionarios(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de funcionários:', error);

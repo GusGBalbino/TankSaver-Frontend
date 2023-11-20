@@ -41,7 +41,7 @@ function Ganhos() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get(`/venda/${postoId}/vendasPorPosto`);
+                const resposta = await axios.get(`/venda/${postoId}/vendasPorPosto/`);
                 setDadosVenda(resposta.data);
                 setLoading(false);
                 // console.log(resposta.data);

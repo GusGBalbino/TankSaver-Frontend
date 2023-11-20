@@ -36,7 +36,7 @@ function TabelaVenda() {
             try {
                 console.log('postoId antes da chamada da rota:', postoId);
                 const [vendasResponse, combustiveisResponse, pagamentosResponse] = await Promise.all([
-                    axios.get(`/venda/${postoId}/vendasPorPosto`),
+                    axios.get(`/venda/${postoId}/vendasPorPosto/`),
                     axios.get('/tipoDeCombustivel/'),
                     axios.get('/tipoDePagamento/')
                 ]);

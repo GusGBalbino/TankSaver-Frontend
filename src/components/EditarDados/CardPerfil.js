@@ -34,22 +34,15 @@ export function CardPerfil() {
     const [email, setEmail] = useState('');
     const [uf, setUf] = useState('');
     const [bandeira, setBandeira] = useState('');
-    const [telefonempresarial, setTelefoneEmpresarial] = useState('');
-    const [senha, setSenha] = useState('');
 
-    const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
 
     const toast = useToast();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        console.log('Stored Posto ID:', storedPostoId);
-        //console.log('Stored Posto Name:', storedPostoName);
-        if (storedPostoId && storedPostoName) {
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 
@@ -67,7 +60,7 @@ export function CardPerfil() {
             setEmail(data.email);
             setUf(data.uf);
             setBandeira(data.bandeira);
-            setTelefoneEmpresarial(data.telefone_empresarial);
+            setTelefone(data.telefone);
         };
 
         if (isOpen) {
@@ -75,26 +68,9 @@ export function CardPerfil() {
         }
     }, [isOpen, postoId]);
 
-
-    const adicionarPosto = async () => {
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
-        console.log('Request Data:', {
-            nome_fantasia,
-            cnpj,
-            bandeira,
-            cidade,
-            endereco,
-            cep,
-            email,
-            uf,
-            telefone,
-            senha,
-            posto: postoId
-        });
-
+    const salvarEdicoes = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/posto/', {
+            await axios.patch(`http://localhost:8000/posto/${postoId}/`, {
                 nome_fantasia,
                 cnpj,
                 bandeira,
@@ -104,14 +80,11 @@ export function CardPerfil() {
                 email,
                 uf,
                 telefone,
-                telefone,
-                senha, 
-                posto: postoId
             });
 
             toast({
                 position: 'top',
-                title: 'Cadastrado com sucesso',
+                title: 'Dados atualizados com sucesso',
                 status: 'success',
                 duration: 3000,
                 isClosable: true,
@@ -119,40 +92,34 @@ export function CardPerfil() {
 
             onClose();
         } catch (error) {
-            console.error('Erro ao adicionar posto:', error);
-            console.log('Erro na resposta:', error.response);
+            console.error('Erro ao atualizar dados do posto:', error);
+            toast({
+                position: 'top',
+                title: 'Erro ao atualizar dados',
+                description: 'Não foi possível atualizar os dados. Tente novamente mais tarde.',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            });
         }
     };
 
     const formatarCep = (cep) => {
-        // Remove caracteres não numéricos do CEP
         const cepNumerico = cep.replace(/\D/g, '');
-    
-        // Limita o CEP a 8 dígitos
         const cepLimitado = cepNumerico.slice(0, 8);
-    
-        // Adiciona a formatação: XXXXX-XXX
         const cepFormatado = cepLimitado.replace(/(\d{5})(\d{3})/, '$1-$2');
-    
         return cepFormatado;
     };
     
     const formatarCnpj = (cnpj) => {
-        // Remove caracteres não numéricos do CNPJ
         const cnpjNumerico = cnpj.replace(/\D/g, '');
-    
-        // Limita o CNPJ a 14 dígitos
         const cnpjLimitado = cnpjNumerico.slice(0, 14);
-    
-        // Adiciona a formatação: XX.XXX.XXX/0001-XX
         const cnpjFormatado = cnpjLimitado.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
-    
         return cnpjFormatado;
-    };    
+    };
 
     return (
         <>
-
             <Spacer />
             <Button
                 minW={['10rem', '10rem']}
@@ -173,7 +140,6 @@ export function CardPerfil() {
                     Editar Dados
                 </Flex>
             </Button>
-
 
             <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
                 <ModalOverlay />
@@ -263,22 +229,11 @@ export function CardPerfil() {
                                 </FormControl>
                             </Box>
 
-                            <Box mb={4}>
-                                <FormControl isRequired>
-                                    <FormLabel bg="#131328" color="white" borderRadius="3" mb={1} mr={1} paddingLeft={4}>
-                                        Senha
-                                    </FormLabel>
-                                    <Input value={senha} color="black" _placeholder={{ color: 'black.500' }} bg="white" onChange={(e) => setSenha(e.target.value)}/>
-                                </FormControl>
-                            </Box>
-
-
-
                         </FormControl>
-                    </ModalBody>
+                        </ModalBody>
                     <Divider marginTop={'1rem'} />
                     <ModalFooter>
-                        <Button bg="#131328" color="white" mr={2} _hover={{ bg: '#131328', color: 'white' }} onClick={adicionarPosto}>
+                        <Button bg="#131328" color="white" mr={2} _hover={{ bg: '#131328', color: 'white' }} onClick={salvarEdicoes}>
                             Salvar
                         </Button>
                         <Button borderColor={isOpen ? '#FFBB0D' : '#131328'} onClick={onClose} _hover={{ color: '#131328', borderColor: '#FFBB0D' }} borderWidth="2px">

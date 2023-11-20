@@ -43,7 +43,7 @@ function TabelaTaxa() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get(`/taxas/${postoId}/taxasPorPosto`);
+                const resposta = await axios.get(`/taxas/${postoId}/taxasPorPosto/`);
                 setDadosTaxa(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de responsável:', error);
@@ -73,11 +73,11 @@ function TabelaTaxa() {
                 <Tbody>
                     {dadosTaxa.map((taxas) => (
                         <Tr key={taxas.id}>
-                            <Td>R$ {taxas.ibran}</Td>
-                            <Td>R$ {taxas.ibama}</Td>
-                            <Td >R$ {taxas.agefis}</Td>
-                            <Td>R$ {taxas.comissao_bandeira}</Td>
-                            <Td>R$ {taxas.impostos_recolhidos}</Td>
+                            <Td>{taxas.ibran}%</Td>
+                            <Td>{taxas.ibama}%</Td>
+                            <Td >{taxas.agefis}%</Td>
+                            <Td>{taxas.comissao_bandeira}%</Td>
+                            <Td>{taxas.impostos_recolhidos}%</Td>
 
                             <Td textAlign={'right'}>
                                 <DeleteIcon

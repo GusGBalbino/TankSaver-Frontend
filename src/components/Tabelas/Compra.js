@@ -34,7 +34,7 @@ function TabelaCompra() {
         const fetchData = async () => {
             try {
                 const [comprasResponse, combustiveisResponse ] = await Promise.all([
-                    axios.get(`/compra/${postoId}/comprasPorPosto`),
+                    axios.get(`/compra/${postoId}/comprasPorPosto/`),
                     axios.get('/tipoDeCombustivel/'),
                 ]);
 

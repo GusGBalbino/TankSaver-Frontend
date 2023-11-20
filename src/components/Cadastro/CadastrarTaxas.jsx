@@ -127,7 +127,7 @@ export function CadastrarTaxas() {
                     <ModalBody pb={6}>
                         <FormControl>
 
-                            <FormLabel>Valor pago para o IBRAN</FormLabel>
+                            <FormLabel>% IBRAN</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -139,7 +139,7 @@ export function CadastrarTaxas() {
                                     onChange={(e) => setValorIBRAN(e.target.value)} />
                             </InputGroup>
 
-                            <FormLabel>Valor pago para o IBAMA</FormLabel>
+                            <FormLabel>% IBAMA</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -151,7 +151,7 @@ export function CadastrarTaxas() {
                                     onChange={(e) => setValorIBAMA(e.target.value)} />
                             </InputGroup>
 
-                            <FormLabel>Valor pago para o AGEFIS</FormLabel>
+                            <FormLabel>% AGEFIS</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -163,7 +163,7 @@ export function CadastrarTaxas() {
                                     onChange={(e) => setValorAGEFIS(e.target.value)} />
                             </InputGroup>
 
-                            <FormLabel>Valor pago da comissão da bandeira</FormLabel>
+                            <FormLabel>% Comissão da Bandeira</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
@@ -175,7 +175,7 @@ export function CadastrarTaxas() {
                                     onChange={(e) => setValorBandeira(e.target.value)} />
                             </InputGroup>
 
-                            <FormLabel>Valor pago de impostos</FormLabel>
+                            <FormLabel>% Impostos</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'

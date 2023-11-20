@@ -43,7 +43,7 @@ function TabelaCustos() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get(`/custos/${postoId}/custosPorPosto`);
+                const resposta = await axios.get(`/custos/${postoId}/custosPorPosto/`);
                 setDadosCusto(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de responsável:', error);
