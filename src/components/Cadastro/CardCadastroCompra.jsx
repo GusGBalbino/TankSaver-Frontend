@@ -38,7 +38,6 @@ export function CardCadastroCompra() {
         const fetchCombustiveis = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/tipoDeCombustivel/');
-                // console.log("resposta dos tipos de combustiveis", response.data);
                 setCombustiveis(response.data);
             } catch (error) {
                 console.error('Erro ao obter opções de combustível:', error);
@@ -51,8 +50,6 @@ export function CardCadastroCompra() {
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
-        // console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
         if (storedPostoId && storedPostoName) {
             setPostoId(storedPostoId);
             setPostoNome(storedPostoName);
@@ -60,10 +57,11 @@ export function CardCadastroCompra() {
     }, []);
 
     const adicionarCompra = async () => {
+        console.log('Tipo de Combustível:', tipo_combustivel);
         const token = localStorage.getItem('token');
         console.log('Token:', token);
         console.log('Request Data:', {
-            tipo_combustivel: tipo_combustivel,
+            tipo_combustivel_id: tipo_combustivel,
             volume_compra,
             preco_litro,
             data_compra,

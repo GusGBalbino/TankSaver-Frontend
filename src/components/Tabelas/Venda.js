@@ -34,33 +34,8 @@ function TabelaVenda() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log('postoId antes da chamada da rota:', postoId);
-                const [vendasResponse, combustiveisResponse, pagamentosResponse] = await Promise.all([
-                    axios.get(`/venda/${postoId}/vendasPorPosto/`),
-                    axios.get('/tipoDeCombustivel/'),
-                    axios.get('/tipoDePagamento/')
-                ]);
-                const vendas = vendasResponse.data;
-                const combustiveis = combustiveisResponse.data;
-                const pagamentos = pagamentosResponse.data;
-
-                const combustiveisMap = combustiveis.reduce((acc, curr) => {
-                    acc[curr.id] = curr.tipo_combustivel;
-                    return acc;
-                }, {});
-
-                const pagamentosMap = pagamentos.reduce((acc, curr) => {
-                    acc[curr.id] = curr.tipo_pagamento;
-                    return acc;
-                }, {});
-
-                const comprasComNomes = vendas.map(venda => ({
-                    ...venda,
-                    nome_combustivel: combustiveisMap[venda.tipo_combustivel] || 'Desconhecido',
-                    nome_pagamento: pagamentosMap[venda.tipo_pagamento] || 'Desconhecido'
-                }));
-
-                setDadosvenda(comprasComNomes);
+                const response = await axios.get(`/venda/${postoId}/vendasPorPosto/`);
+                setDadosvenda(response.data);
             } catch (error) {
                 console.error('Erro ao obter dados de venda:', error);
             }
@@ -76,7 +51,7 @@ function TabelaVenda() {
             const resposta = await axios.get('/venda/');
             setDadosvenda(resposta.data);
         } catch (error) {
-            console.error('Erro ao excluir funcionário:', error);
+            console.error('Erro ao excluir.', error);
         }
     };
 
@@ -97,8 +72,8 @@ function TabelaVenda() {
                 <Tbody>
                     {dadosVenda.map((venda) => (
                         <Tr key={venda.id}>
-                            <Td>{venda.nome_combustivel}</Td>
-                            <Td>{venda.nome_pagamento}</Td>
+                            <Td>{venda.tipo_combustivel.tipo_combustivel}</Td>
+                            <Td>{venda.tipo_pagamento.tipo_pagamento}</Td>
                             <Td>{venda.volume_venda}</Td>
                             <Td>R$ {venda.preco_litro}</Td>
                             <Td>{venda.data_venda}</Td>
