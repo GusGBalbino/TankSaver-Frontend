@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Sidebar from './Sidebar';
+import Rodape from '../components/Rodape/Rodape';
+import Chart from 'react-apexcharts';
 import {
     ChakraProvider,
     Grid,
     theme,
     Heading,
     Divider,
-    useToast
+    Button
 } from '@chakra-ui/react';
-import Sidebar from './Sidebar';
-import Rodape from '../components/Rodape/Rodape';
-import Chart from 'react-apexcharts';
 
 function Dashboard() {
     const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
 
-    
-
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
         console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
         if (storedPostoId && storedPostoName) {
             setPostoId(storedPostoId);
             setPostoNome(storedPostoName);
@@ -33,51 +30,101 @@ function Dashboard() {
         options: {
             chart: {
                 id: 'basic-bar',
+                type: 'bar',
+                toolbar: {
+                    show: true
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '30%', // Largura das colunas ajustada
+                    endingShape: 'rounded'
+                }
             },
             xaxis: {
                 categories: [],
+                labels: {
+                    rotate: -45,
+                    rotateAlways: true
+                }
             },
+            yaxis: {
+                labels: {
+                    formatter: function (val) {
+                        return val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                    }
+                }
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                    }
+                }
+            },
+            colors: ['#008FFB', '#00E396', '#FEB019']
         },
         series: [
             {
-                name: 'Fechamento Mensal',
+                name: 'Despesa Mensal',
+                data: [],
+            },
+            {
+                name: 'Faturamento Mensal',
+                data: [],
+            },
+            {
+                name: 'Total de Rendimento',
                 data: [],
             },
         ],
     });
 
     useEffect(() => {
-        // Chamada à API usando axios
-        axios.get(`http://localhost:8000/historico/fecharMes/${postoId}`)
-            .then(response => {
-                const dataFromApi = response.data;
-                console.log(response.data);
+        const postoId = localStorage.getItem("postoId");
+        axios.get(`http://localhost:8000/historico/${postoId}/historicoPorPosto/`)
+        .then(response => {
+            const dataFromApi = response.data;
+            console.log(response.data);
 
-                const categories = dataFromApi.map(item => item.data_historico);
-                const fechamentoMensal = dataFromApi.map(item => parseFloat(item.despesa_mensal));
-        
+            const categories = dataFromApi.map(item => item.data_historico);
+            const despesaMensal = dataFromApi.map(item => parseFloat(item.despesa_mensal));
+            const faturamentoMensal = dataFromApi.map(item => parseFloat(item.faturamento_mensal));
+            const totalRendimento = dataFromApi.map(item => parseFloat(item.total_rendimento));
 
-                setChartData({
-                    options: {
-                        chart: {
-                            id: 'basic-bar',
-                        },
-                        xaxis: {
-                            categories,
-                        },
-                    },
-                    series: [
-                        {
-                            name: 'Fechamento Mensal',
-                            data: fechamentoMensal,
-                        },
-                    ],
-                });
-            })
-            .catch(error => {
-                console.error('Erro ao buscar dados da API:', error);
-            });
-    }, []); 
+            setChartData(prevState => ({
+                ...prevState,
+                options: {
+                    ...prevState.options,
+                    xaxis: {
+                        ...prevState.options.xaxis,
+                        categories,
+                    }
+                },
+                series: [
+                    { name: 'Despesa Mensal', data: despesaMensal },
+                    { name: 'Faturamento Mensal', data: faturamentoMensal },
+                    { name: 'Total de Rendimento', data: totalRendimento }
+                ]
+            }));
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados da API:', error);
+        });
+    }, [postoId]); 
+
+    const enviarFechamentoMes = () => {
+        axios.post(`http://localhost:8000/historico/fecharMes/`, {
+            posto_id: localStorage.getItem("postoId") 
+        })
+        .then(response => {
+            console.log('Dados enviados com sucesso:', response);
+        })
+        .catch(error => {
+            console.error('Erro ao enviar dados:', error);
+        });
+    };
     
     return (
         <ChakraProvider theme={theme}>
@@ -92,8 +139,12 @@ function Dashboard() {
                 marginLeft="13rem"
             >
                 <Sidebar />
-                <Heading textAlign={'center'}  fontWeight={'15px'}>Dashboard</Heading>
+                <Heading textAlign={'center'} fontWeight={'15px'}>Dashboard</Heading>
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
+                
+                <Button colorScheme="blue" onClick={enviarFechamentoMes}>
+                    Fechar Mês
+                </Button>
 
                 <Chart
                     options={chartData.options}
