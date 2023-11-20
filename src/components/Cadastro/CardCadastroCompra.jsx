@@ -61,7 +61,7 @@ export function CardCadastroCompra() {
         const token = localStorage.getItem('token');
         console.log('Token:', token);
         console.log('Request Data:', {
-            tipo_combustivel_id: tipo_combustivel,
+            tipo_combustivel: tipo_combustivel,
             volume_compra,
             preco_litro,
             data_compra,
