@@ -57,7 +57,6 @@ export function CardCadastroCompra() {
     }, []);
 
     const adicionarCompra = async () => {
-        console.log('Tipo de Combustível:', tipo_combustivel);
         const token = localStorage.getItem('token');
         console.log('Token:', token);
         console.log('Request Data:', {
