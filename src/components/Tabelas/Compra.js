@@ -21,8 +21,6 @@ function TabelaCompra() {
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
-        console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
         if (storedPostoId && storedPostoName) {
             
             setPostoId(storedPostoId);
@@ -47,7 +45,7 @@ function TabelaCompra() {
     const handleDelete = async (id) => {
         try {
             await axios.delete(`/compra/${id}`);
-            const resposta = await axios.get('/compra/');
+            const resposta = await axios.get(`/compra/${postoId}/comprasPorPosto/`);
             setDadosCompra(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir.', error);
