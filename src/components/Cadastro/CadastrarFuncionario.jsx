@@ -34,8 +34,7 @@ export function CadastrarFuncionario() {
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
-        // console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
+
         if (storedPostoId && storedPostoName) {
             setPostoId(storedPostoId);
             setPostoNome(storedPostoName);
@@ -44,8 +43,6 @@ export function CadastrarFuncionario() {
 
     const adicionarFuncionario = async () => {
         const token = localStorage.getItem('token');
-        console.log('Token:', token);
-        console.log('Request Data:', { nome, cargo, totalFolha, posto: postoId });
 
         try {
             const response = await axios.post('https://tanksaver-backend.onrender.com/funcionario/', {

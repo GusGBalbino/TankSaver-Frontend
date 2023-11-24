@@ -11,7 +11,6 @@ import {
     Tooltip,
     Spinner
 } from '@chakra-ui/react';
-import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
 import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
@@ -29,8 +28,7 @@ function Ganhos() {
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
-        console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
+        
         if (storedPostoId && storedPostoName) {
             
             setPostoId(storedPostoId);
@@ -44,7 +42,7 @@ function Ganhos() {
                 const resposta = await axios.get(`https://tanksaver-backend.onrender.com/venda/${postoId}/vendasPorPosto/`);
                 setDadosVenda(resposta.data);
                 setLoading(false);
-                // console.log(resposta.data);
+                
             } catch (error) {
                 console.error('Erro ao obter dados de venda:', error);
             }
@@ -120,25 +118,22 @@ function Ganhos() {
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor da última venda (Litro)</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={`R$ ${ultimaVendaGasolina?.preco_litro} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Gasolina Aditivada'} info={`R$ ${ultimaGasolinaA?.preco_litro} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Etanol'} info={`R$ ${ultimaVendaEtanol?.preco_litro} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Disel Comum'} info={`R$ ${ultimaVendaDisel?.preco_litro} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Disel S10'} info={`R$ ${ultimaVendaDiselS?.preco_litro} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Gasolina Comum'} info={ultimaVendaGasolina?.preco_litro ? `R$ ${ultimaVendaGasolina.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={ultimaGasolinaA?.preco_litro ? `R$ ${ultimaGasolinaA.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Etanol'} info={ultimaVendaEtanol?.preco_litro ? `R$ ${ultimaVendaEtanol.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Disel Comum'} info={ultimaVendaDisel?.preco_litro ? `R$ ${ultimaVendaDisel.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Disel S10'} info={ultimaVendaDiselS?.preco_litro ? `R$ ${ultimaVendaDiselS.preco_litro}` : 'Sem registro'} />
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Volume da última venda</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={`${ultimaVendaGasolina?.volume_venda} Litros`} />
-                    <CaixaInfo title={'Gasolina Aditivada'} info={`${ultimaGasolinaA?.volume_venda} Litros`} />
-                    <CaixaInfo title={'Etanol'} info={`${ultimaVendaEtanol?.volume_venda} Litros`} />
-                    <CaixaInfo title={'Disel Comum'} info={`${ultimaVendaDisel?.volume_venda} Litros`} />
-                    <CaixaInfo title={'Disel S10'} info={`${ultimaVendaDiselS?.volume_venda} Litros`} />
+                    <CaixaInfo title={'Gasolina Comum'} info={ultimaVendaGasolina?.volume_venda != null ? `${ultimaVendaGasolina.volume_venda} Litros` : 'Sem registro'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={ultimaGasolinaA?.volume_venda != null ? `${ultimaGasolinaA.volume_venda} Litros` : 'Sem registro'} />
+                    <CaixaInfo title={'Etanol'} info={ultimaVendaEtanol?.volume_venda != null ? `${ultimaVendaEtanol.volume_venda} Litros` : 'Sem registro'} />
+                    <CaixaInfo title={'Disel Comum'} info={ultimaVendaDisel?.volume_venda != null ? `${ultimaVendaDisel.volume_venda} Litros` : 'Sem registro'} />
+                    <CaixaInfo title={'Disel S10'} info={ultimaVendaDiselS?.volume_venda != null ? `${ultimaVendaDiselS.volume_venda} Litros` : 'Sem registro'} />
                 </SimpleGrid>
 
-                {/* <Flex marginTop={'10'} justifyContent={'flex-end'}>
-                    <AlertaUltimaAtualizacao dataHora={'dia tal hora tal'} />
-                </Flex> */}
 
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 <Rodape />

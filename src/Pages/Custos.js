@@ -11,7 +11,6 @@ import {
     Tooltip,
     Spinner
 } from '@chakra-ui/react';
-import { AlertaUltimaAtualizacao } from '../components/Alerta/AlertaUltimaAtualizacao';
 import Sidebar from './Sidebar';
 import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
@@ -31,8 +30,7 @@ function Custos() {
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
         const storedPostoName = localStorage.getItem('postoName');
-        console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
+        
         if (storedPostoId && storedPostoName) {
             
             setPostoId(storedPostoId);
@@ -162,42 +160,40 @@ function Custos() {
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor total da última compra de combustíveis (por litro)</Heading>
 
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'Gasolina Comum'} info={`R$ ${ultimaCompraGasolina?.preco_litro} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Gasolina Aditivada'} info={`R$ ${ultimaGasolinaA?.preco_litro} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Etanol'} info={`R$ ${ultimaCompraEtanol?.preco_litro} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Disel Comum'} info={`R$ ${ultimaCompraDisel?.preco_litro} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Disel S10'} info={`R$ ${ultimaCompraDiselS?.preco_litro} ` || 'Sem informação'} />
-                    
+                    <CaixaInfo title={'Gasolina Comum'} info={ultimaCompraGasolina?.preco_litro ? `R$ ${ultimaCompraGasolina.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Gasolina Aditivada'} info={ultimaGasolinaA?.preco_litro ? `R$ ${ultimaGasolinaA.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Etanol'} info={ultimaCompraEtanol?.preco_litro ? `R$ ${ultimaCompraEtanol.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Disel Comum'} info={ultimaCompraDisel?.preco_litro ? `R$ ${ultimaCompraDisel.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Disel S10'} info={ultimaCompraDiselS?.preco_litro ? `R$ ${ultimaCompraDiselS.preco_litro}` : 'Sem registro'} />
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor dos últimos custos</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'IPTU'} info={`R$ ${ultimosCustos?.iptu} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Custos Operacionais'} info={`R$ ${ultimosCustos?.custos_operacionais} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Honorários'} info={`R$ ${ultimosCustos?.honorarios_contabeis} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Água'} info={`R$ ${ultimosCustos?.agua} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Luz'} info={`R$ ${ultimosCustos?.luz} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Telefone e Internet'} info={`R$ ${ultimosCustos?.telefone_internet} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Softwares'} info={`R$ ${ultimosCustos?.softwares} ` || 'Sem informação'} />
+                    <CaixaInfo title={'IPTU'} info={ultimosCustos?.iptu ? `R$ ${ultimosCustos.iptu}` : 'Sem registro'} />
+                    <CaixaInfo title={'Custos Operacionais'} info={ultimosCustos?.custos_operacionais ? `R$ ${ultimosCustos.custos_operacionais}` : 'Sem registro'} />
+                    <CaixaInfo title={'Honorários'} info={ultimosCustos?.honorarios_contabeis ? `R$ ${ultimosCustos.honorarios_contabeis}` : 'Sem registro'} />
+                    <CaixaInfo title={'Água'} info={ultimosCustos?.agua ? `R$ ${ultimosCustos.agua}` : 'Sem registro'} />
+                    <CaixaInfo title={'Luz'} info={ultimosCustos?.luz ? `R$ ${ultimosCustos.luz}` : 'Sem registro'} />
+                    <CaixaInfo title={'Telefone e Internet'} info={ultimosCustos?.telefone_internet ? `R$ ${ultimosCustos.telefone_internet}` : 'Sem registro'} />
+                    <CaixaInfo title={'Softwares'} info={ultimosCustos?.softwares ? `R$ ${ultimosCustos.softwares}` : 'Sem registro'} />
                 </SimpleGrid>
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor das últimas taxas e impostos</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'AGEFIS'} info={`% ${ultimasTaxas?.agefis} ` || 'Sem informação'} />
-                    <CaixaInfo title={'IBRAN'} info={`% ${ultimasTaxas?.ibran} ` || 'Sem informação'} />
-                    <CaixaInfo title={'IBAMA'} info={`% ${ultimasTaxas?.ibama} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Bandeira'} info={`% ${ultimasTaxas?.comissao_bandeira} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Impostos Recolhidos'} info={`% ${ultimasTaxas?.impostos_recolhidos} ` || 'Sem informação'} />
+                    <CaixaInfo title={'AGEFIS'} info={ultimasTaxas?.agefis ? `% ${ultimasTaxas.agefis}` : 'Sem registro'} />
+                    <CaixaInfo title={'IBRAN'} info={ultimasTaxas?.ibran ? `% ${ultimasTaxas.ibran}` : 'Sem registro'} />
+                    <CaixaInfo title={'IBAMA'} info={ultimasTaxas?.ibama ? `% ${ultimasTaxas.ibama}` : 'Sem registro'} />
+                    <CaixaInfo title={'Bandeira'} info={ultimasTaxas?.comissao_bandeira ? `% ${ultimasTaxas.comissao_bandeira}` : 'Sem registro'} />
+                    <CaixaInfo title={'Impostos Recolhidos'} info={ultimasTaxas?.impostos_recolhidos ? `% ${ultimasTaxas.impostos_recolhidos}` : 'Sem registro'} />
                 </SimpleGrid>
-
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor gasto com funcionários</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
                     {dadosFuncionario.map((funcionario) => (
                         <CaixaInfo
-                            key={funcionario.id} // Certifique-se de ter uma chave única para cada elemento na lista
-                            title={funcionario.nome} // Supondo que "nome" seja o campo que contém o nome do funcionário
-                            info={`R$ ${funcionario.total_folha} ` || 'Sem informação'}
+                            key={funcionario.id}
+                            title={funcionario.nome}
+                            info={funcionario.total_folha ? `R$ ${funcionario.total_folha}` : 'Sem registro'}
                         />
                     ))}
                 </SimpleGrid>
