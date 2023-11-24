@@ -32,8 +32,8 @@ function TabelaResponsavel() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://tanksaver-backend.onrender.com/responsavel/${postoId}/dadosPerfil`);
-            const resposta = await axios.get(`https://tanksaver-backend.onrender.com/responsavel/${postoId}/dadosPerfil`);
+            await axios.delete(`localhost:8000/responsavel/${postoId}/dadosPerfil`);
+            const resposta = await axios.get(`localhost:8000/responsavel/${postoId}/dadosPerfil`);
             setDadosResponsavel(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir responsável:', error);
@@ -43,7 +43,7 @@ function TabelaResponsavel() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get(`https://tanksaver-backend.onrender.com/responsavel/${postoId}/dadosPerfil`);
+                const resposta = await axios.get(`localhost:8000/responsavel/${postoId}/dadosPerfil`);
                 setDadosResponsavel(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de responsável:', error);

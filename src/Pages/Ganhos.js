@@ -16,7 +16,7 @@ import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
 
-axios.defaults.baseURL = "https://tanksaver-backend.onrender.com";
+axios.defaults.baseURL = "localhost:8000";
 
 function Ganhos() {
     const [dadosVenda, setDadosVenda] = useState([]);
@@ -39,7 +39,7 @@ function Ganhos() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get(`https://tanksaver-backend.onrender.com/venda/${postoId}/vendasPorPosto/`);
+                const resposta = await axios.get(`localhost:8000/venda/${postoId}/vendasPorPosto/`);
                 setDadosVenda(resposta.data);
                 setLoading(false);
                 

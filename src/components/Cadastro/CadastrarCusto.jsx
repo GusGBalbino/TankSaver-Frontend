@@ -58,7 +58,7 @@ export function CadastrarCusto() {
     });
 
     try {
-        const response = await axios.post('https://tanksaver-backend.onrender.com/custos/', {
+        const response = await axios.post('localhost:8000/custos/', {
             iptu,
             custos_operacionais,
             honorarios_contabeis,

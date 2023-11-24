@@ -37,7 +37,7 @@ export function CardCadastroCompra() {
     useEffect(() => {
         const fetchCombustiveis = async () => {
             try {
-                const response = await axios.get('https://tanksaver-backend.onrender.com/tipoDeCombustivel/');
+                const response = await axios.get('localhost:8000/tipoDeCombustivel/');
                 setCombustiveis(response.data);
             } catch (error) {
                 console.error('Erro ao obter opções de combustível:', error);
@@ -68,7 +68,7 @@ export function CardCadastroCompra() {
         });
 
         try {
-            const response = await axios.post('https://tanksaver-backend.onrender.com/compra/', {
+            const response = await axios.post('localhost:8000/compra/', {
                 tipo_combustivel,
                 volume_compra,
                 preco_litro,
