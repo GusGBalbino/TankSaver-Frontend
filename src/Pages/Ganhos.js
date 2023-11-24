@@ -74,23 +74,23 @@ function Ganhos() {
       }
 
     const ultimaVendaGasolina = dadosVenda.length > 0
-        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 3)
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel.id === 3)
         : null;
 
     const ultimaVendaEtanol = dadosVenda.length > 0
-        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 4)
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel.id === 4)
         : null;
 
     const ultimaGasolinaA = dadosVenda.length > 0
-        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 5)
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel.id === 5)
         : null;
 
     const ultimaVendaDisel = dadosVenda.length > 0
-        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 6)
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel.id === 6)
         : null;
 
     const ultimaVendaDiselS = dadosVenda.length > 0
-        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel === 7)
+        ? dadosVenda.slice().reverse().find((venda) => venda.tipo_combustivel.id === 7)
         : null;
 
 

@@ -114,23 +114,23 @@ function Custos() {
         : null;
 
     const ultimaCompraGasolina = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 3)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 3)
         : null;
 
     const ultimaCompraEtanol = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 4)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 4)
         : null;
 
     const ultimaGasolinaA = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 5)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 5)
         : null;
 
     const ultimaCompraDisel = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 6)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 6)
         : null;
 
     const ultimaCompraDiselS = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 7)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 7)
         : null;
 
 
