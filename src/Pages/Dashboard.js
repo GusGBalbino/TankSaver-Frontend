@@ -92,7 +92,7 @@ function Dashboard() {
 
     useEffect(() => {
         const postoId = localStorage.getItem("postoId");
-        axios.get(`localhost:8000/historico/${postoId}/historicoPorPosto/`)
+        axios.get(`http://localhost:8000/historico/${postoId}/historicoPorPosto/`)
         .then(response => {
             const dataFromApi = response.data;
             console.log(response.data);
@@ -128,7 +128,7 @@ function Dashboard() {
     }
 
     const confirmarFechamentoMes = () => {
-        axios.post(`localhost:8000/historico/fecharMes/`, {
+        axios.post(`http://localhost:8000/historico/fecharMes/`, {
             posto_id: localStorage.getItem("postoId") 
         })
         .then(response => {

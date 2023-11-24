@@ -32,8 +32,8 @@ function TabelaTaxa() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`localhost:8000/taxas/${id}`);
-            const resposta = await axios.get(`localhost:8000/taxas/`);
+            await axios.delete(`http://localhost:8000/taxas/${id}`);
+            const resposta = await axios.get(`http://localhost:8000/taxas/`);
             setDadosTaxa(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir funcionário:', error);
@@ -43,7 +43,7 @@ function TabelaTaxa() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get(`localhost:8000/taxas/${postoId}/taxasPorPosto/`);
+                const resposta = await axios.get(`http://localhost:8000/taxas/${postoId}/taxasPorPosto/`);
                 setDadosTaxa(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de responsável:', error);

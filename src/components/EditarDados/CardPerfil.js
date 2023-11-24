@@ -48,7 +48,7 @@ export function CardPerfil() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`localhost:8000/posto/${postoId}`);
+            const response = await axios.get(`http://localhost:8000/posto/${postoId}`);
             const data = response.data;
 
             setNomeFantasia(data.nome_fantasia);
@@ -70,7 +70,7 @@ export function CardPerfil() {
 
     const salvarEdicoes = async () => {
         try {
-            await axios.patch(`localhost:8000/posto/${postoId}/`, {
+            await axios.patch(`http://localhost:8000/posto/${postoId}/`, {
                 nome_fantasia,
                 cnpj,
                 bandeira,

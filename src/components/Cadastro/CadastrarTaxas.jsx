@@ -56,7 +56,7 @@ export function CadastrarTaxas() {
         });
 
         try {
-            const response = await axios.post('localhost:8000/taxas/', {
+            const response = await axios.post('http://localhost:8000/taxas/', {
                 ibran,
                 ibama,
                 agefis,
