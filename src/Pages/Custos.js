@@ -43,8 +43,6 @@ function Custos() {
             try {
                 const resposta = await axios.get(`http://localhost:8000/compra/${postoId}/comprasPorPosto/`);
                 setDadosCompra(resposta.data);
-                setLoading(false);
-
             } catch (error) {
                 console.error('Erro ao obter dados de compra:', error);
             }
@@ -82,6 +80,7 @@ function Custos() {
         fetchDataCusto();
         fetchDataTaxa();
         fetchDataFuncionario();
+        setLoading(false);
     }
 }, [postoId]);
 
@@ -114,25 +113,25 @@ function Custos() {
         : null;
 
     const ultimaCompraGasolina = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 3)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 3)
         : null;
-
+    
     const ultimaCompraEtanol = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 4)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 4)
         : null;
-
+    
     const ultimaGasolinaA = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 5)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 5)
         : null;
-
+    
     const ultimaCompraDisel = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 6)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 6)
         : null;
-
+    
     const ultimaCompraDiselS = dadosCompra.length > 0
-        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel === 7)
+        ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 7)
         : null;
-
+    
 
     return (
         <ChakraProvider theme={theme}>
@@ -163,7 +162,7 @@ function Custos() {
                     <CaixaInfo title={'Gasolina Comum'} info={ultimaCompraGasolina?.preco_litro ? `R$ ${ultimaCompraGasolina.preco_litro}` : 'Sem registro'} />
                     <CaixaInfo title={'Gasolina Aditivada'} info={ultimaGasolinaA?.preco_litro ? `R$ ${ultimaGasolinaA.preco_litro}` : 'Sem registro'} />
                     <CaixaInfo title={'Etanol'} info={ultimaCompraEtanol?.preco_litro ? `R$ ${ultimaCompraEtanol.preco_litro}` : 'Sem registro'} />
-                    <CaixaInfo title={'Disel Comum'} info={ultimaCompraDisel?.preco_litro ? `R$ ${ultimaCompraDisel.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Diesel Comum'} info={ultimaCompraDisel?.preco_litro ? `R$ ${ultimaCompraDisel.preco_litro}` : 'Sem registro'} />
                     <CaixaInfo title={'Disel S10'} info={ultimaCompraDiselS?.preco_litro ? `R$ ${ultimaCompraDiselS.preco_litro}` : 'Sem registro'} />
                 </SimpleGrid>
 
