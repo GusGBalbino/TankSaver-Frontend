@@ -83,7 +83,7 @@ function Dashboard() {
 
     useEffect(() => {
         const postoId = localStorage.getItem("postoId");
-        axios.get(`http://localhost:8000/historico/${postoId}/historicoPorPosto/`)
+        axios.get(`https://tanksaver-backend.onrender.com/historico/${postoId}/historicoPorPosto/`)
         .then(response => {
             const dataFromApi = response.data;
             console.log(response.data);
@@ -115,7 +115,7 @@ function Dashboard() {
     }, [postoId]); 
 
     const enviarFechamentoMes = () => {
-        axios.post(`http://localhost:8000/historico/fecharMes/`, {
+        axios.post(`https://tanksaver-backend.onrender.com/historico/fecharMes/`, {
             posto_id: localStorage.getItem("postoId") 
         })
         .then(response => {

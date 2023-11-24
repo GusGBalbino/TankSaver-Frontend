@@ -40,7 +40,7 @@ export function CadastrarVenda() {
     useEffect(() => {
         const fetchCombustiveis = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/tipoDeCombustivel/');
+                const response = await axios.get('https://tanksaver-backend.onrender.com/tipoDeCombustivel/');
                 setCombustiveis(response.data);
             } catch (error) {
                 console.error('Erro ao obter opções de combustível:', error);
@@ -49,7 +49,7 @@ export function CadastrarVenda() {
 
         const fetchPagamentos = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/tipoDePagamento/',{});
+                const response = await axios.get('https://tanksaver-backend.onrender.com/tipoDePagamento/',{});
                 setPagamento(response.data);
 
                 
@@ -84,7 +84,7 @@ export function CadastrarVenda() {
         });
 
         try {
-            const response = await axios.post('http://localhost:8000/venda/', {
+            const response = await axios.post('https://tanksaver-backend.onrender.com/venda/', {
                 tipo_combustivel,
                 tipo_pagamento,
                 volume_venda,

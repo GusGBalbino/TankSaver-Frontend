@@ -16,7 +16,7 @@ import {
     useToast
 } from '@chakra-ui/react';
 
-axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "https://tanksaver-backend.onrender.com";
 
 
 export function AlterarResponsavel() {
@@ -82,7 +82,7 @@ export function AlterarResponsavel() {
         console.log('Request Data:', { nome, cpf, email, telefone, posto: postoId });
 
         try {
-            const response = await axios.post('/responsavel/', {
+            const response = await axios.post('https://tanksaver-backend.onrender.com/responsavel/', {
                 nome, cpf, email, telefone, posto: postoId
             });
 

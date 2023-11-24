@@ -31,7 +31,7 @@ function TabelaCompra() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/compra/${postoId}/comprasPorPosto/`);
+                const response = await axios.get(`https://tanksaver-backend.onrender.com/compra/${postoId}/comprasPorPosto/`);
                 setDadosCompra(response.data);
             } catch (error) {
                 console.error('Erro ao obter dados de compra:', error);
@@ -44,8 +44,8 @@ function TabelaCompra() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/compra/${id}`);
-            const resposta = await axios.get(`/compra/${postoId}/comprasPorPosto/`);
+            await axios.delete(`https://tanksaver-backend.onrender.com/compra/${id}`);
+            const resposta = await axios.get(`https://tanksaver-backend.onrender.com/compra/${postoId}/comprasPorPosto/`);
             setDadosCompra(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir.', error);

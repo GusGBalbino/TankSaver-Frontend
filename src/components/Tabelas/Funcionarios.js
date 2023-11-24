@@ -34,8 +34,8 @@ function TabelaFuncionarios() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/funcionario/${id}`);
-            const resposta = await axios.get('/funcionario/');
+            await axios.delete(`https://tanksaver-backend.onrender.com/funcionario/${id}`);
+            const resposta = await axios.get('https://tanksaver-backend.onrender.com/funcionario/');
             setDadosFuncionarios(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir funcionário:', error);
@@ -45,7 +45,7 @@ function TabelaFuncionarios() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get(`/funcionario/${postoId}/funcionariosPorPosto/`);
+                const resposta = await axios.get(`https://tanksaver-backend.onrender.com/funcionario/${postoId}/funcionariosPorPosto/`);
                 setDadosFuncionarios(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de funcionários:', error);

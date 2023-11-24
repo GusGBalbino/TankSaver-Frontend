@@ -43,7 +43,7 @@ function Perfil() {
     useEffect(() => {
         const fetchPostoInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/posto/${postoId}`);
+                const response = await axios.get(`https://tanksaver-backend.onrender.com/posto/${postoId}`);
                 // console.log("Informações do posto", response.data);
                 setPostoInfo(response.data);
                 setLoading(false);
@@ -55,7 +55,7 @@ function Perfil() {
 
         const fetchResponsavelInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/responsavel/${postoId}/dadosPerfil/`);
+                const response = await axios.get(`https://tanksaver-backend.onrender.com/responsavel/${postoId}/dadosPerfil/`);
                 console.log("Informações do responsavel", response.data);
                 setResponsavelInfo(response.data);
             } catch (error) {

@@ -23,7 +23,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/login/', { email, senha }); // Atualize a URL conforme necessário
+      const response = await axios.post('https://tanksaver-backend.onrender.com/login/', { email, senha }); // Atualize a URL conforme necessário
       const { access_token, postoId, postoName } = response.data;
 
       if (access_token) {
