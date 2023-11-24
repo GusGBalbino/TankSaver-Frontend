@@ -9,12 +9,21 @@ import {
     theme,
     Heading,
     Divider,
-    Button
+    Button,
+    Flex,
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+    useDisclosure
 } from '@chakra-ui/react';
 
 function Dashboard() {
     const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
@@ -115,11 +124,16 @@ function Dashboard() {
     }, [postoId]); 
 
     const enviarFechamentoMes = () => {
+        onOpen();
+    }
+
+    const confirmarFechamentoMes = () => {
         axios.post(`https://tanksaver-backend.onrender.com/historico/fecharMes/`, {
             posto_id: localStorage.getItem("postoId") 
         })
         .then(response => {
             console.log('Dados enviados com sucesso:', response);
+            onClose();
         })
         .catch(error => {
             console.error('Erro ao enviar dados:', error);
@@ -142,20 +156,7 @@ function Dashboard() {
                 <Heading textAlign={'center'} fontWeight={'15px'}>Dashboard</Heading>
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
                 
-                <Button 
-                variant='outline'
-                textColor={'black'}
-                borderColor={'#131328'}
-                // justifyContent="space-between"
-                _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
-                // textAlign={'center'}
-                // position="sticky"
-                // top="0"
-                // zIndex="2"
-                // marginLeft="35rem"
-                onClick={enviarFechamentoMes}>
-                    Fechar Mês
-                </Button>
+                
 
                 <Chart
                     options={chartData.options}
@@ -164,8 +165,58 @@ function Dashboard() {
                     height={350}
                 />
 
+                <Flex justifyContent="flex-end">
+                    <Button 
+                        size="sm"
+                        variant='outline'
+                        textColor={'black'}
+                        borderColor={'#131328'}
+                        _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
+                        onClick={enviarFechamentoMes}>
+                            Fechar Mês
+                    </Button>
+                </Flex>
+
                 <Rodape />
             </Grid>
+            <AlertDialog
+                isOpen={isOpen}
+                onClose={onClose}
+                isCentered
+            >
+                <AlertDialogOverlay>
+                    <AlertDialogContent
+                        bg="#131328"
+                        color="white"
+                        borderColor="#8D7843"
+                        borderWidth="1px"
+                        borderRadius="8px"
+                        
+                    >
+                        <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                            Fechar Mês
+                        </AlertDialogHeader>
+
+                        <AlertDialogBody>
+                            Tem certeza que deseja fechar o mês?
+                        </AlertDialogBody>
+
+                        <AlertDialogFooter>
+                            <Button 
+                                color="white"
+                                bg="#ff6347"
+                                _hover={{ bg: "#e05a4f" }}
+                                onClick={onClose}
+                            >
+                                Cancelar
+                            </Button>
+                            <Button colorScheme="green" onClick={confirmarFechamentoMes} ml={3}>
+                                Confirmar
+                            </Button>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialogOverlay>
+            </AlertDialog>
         </ChakraProvider>
     );
 }

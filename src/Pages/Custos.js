@@ -183,11 +183,11 @@ function Custos() {
 
                 <Heading size={'md'} marginTop={'3rem'} marginBottom={'0.5rem'} fontWeight={'15px'}>Valor das últimas taxas e impostos</Heading>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-                    <CaixaInfo title={'AGEFIS'} info={`R$ ${ultimasTaxas?.agefis} ` || 'Sem informação'} />
-                    <CaixaInfo title={'IBRAN'} info={`R$ ${ultimasTaxas?.ibran} ` || 'Sem informação'} />
-                    <CaixaInfo title={'IBAMA'} info={`R$ ${ultimasTaxas?.ibama} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Bandeira'} info={`R$ ${ultimasTaxas?.comissao_bandeira} ` || 'Sem informação'} />
-                    <CaixaInfo title={'Outros Impostos'} info={`R$ ${ultimasTaxas?.impostos_recolhidos} ` || 'Sem informação'} />
+                    <CaixaInfo title={'AGEFIS'} info={`% ${ultimasTaxas?.agefis} ` || 'Sem informação'} />
+                    <CaixaInfo title={'IBRAN'} info={`% ${ultimasTaxas?.ibran} ` || 'Sem informação'} />
+                    <CaixaInfo title={'IBAMA'} info={`% ${ultimasTaxas?.ibama} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Bandeira'} info={`% ${ultimasTaxas?.comissao_bandeira} ` || 'Sem informação'} />
+                    <CaixaInfo title={'Impostos Recolhidos'} info={`% ${ultimasTaxas?.impostos_recolhidos} ` || 'Sem informação'} />
                 </SimpleGrid>
 
 
