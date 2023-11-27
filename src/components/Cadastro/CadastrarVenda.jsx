@@ -38,6 +38,15 @@ export function CadastrarVenda() {
     const toast = useToast();
 
     useEffect(() => {
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        if (storedPostoId && storedPostoName) {
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
+
+    useEffect(() => {
         const fetchCombustiveis = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/tipoDeCombustivel/');
@@ -49,10 +58,9 @@ export function CadastrarVenda() {
 
         const fetchPagamentos = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/tipoDePagamento/',{});
+                const response = await axios.get(`http://localhost:8000/tipoDePagamento/${postoId}/pagamentoPorPosto/`);
                 setPagamento(response.data);
 
-                
             } catch (error) {
                 console.error('Erro ao obter opções de pagamento:', error);
             }
@@ -60,16 +68,9 @@ export function CadastrarVenda() {
 
         fetchCombustiveis();
         fetchPagamentos();
-    }, []);
+    }, [postoId]);
 
-    useEffect(() => {
-        const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        if (storedPostoId && storedPostoName) {
-            setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
-        }
-    }, []);
+    
 
     const adicionarVenda = async () => {
         const token = localStorage.getItem('token');
