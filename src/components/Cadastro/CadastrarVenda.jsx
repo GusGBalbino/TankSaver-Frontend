@@ -49,7 +49,7 @@ export function CadastrarVenda() {
 
         const fetchPagamentos = async () => {
             try {
-                const response = await axios.get('https://tanksaver-backend.onrender.com/tipoDePagamento/',{});
+                const response = await axios.get('https://tanksaver-backend.onrender.com/tipoDePagamento/${postoId}/pagamentoPorPosto/');
                 setPagamento(response.data);
 
                 
@@ -60,7 +60,7 @@ export function CadastrarVenda() {
 
         fetchCombustiveis();
         fetchPagamentos();
-    }, []);
+    }, [postoId]);
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
