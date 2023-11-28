@@ -45,18 +45,24 @@ function Sidebar() {
         <Image src={Logo2} boxSize={['2.5rem', '4rem']} alt="Logo TankSaver" />
 
         <VStack spacing={2} alignItems="center" justifyContent="center">
-          <Link to="/dashboard">
+          <Link to="/perfil">
             <OpcoesSidebar
-              icon={<AiOutlineFundProjectionScreen />}
-              name={'Dashboard'}
+              icon={<AiOutlineUser />}
+              name={'Perfil'}
+            />
+          </Link>
 
+          <Link to="/variaveis">
+            <OpcoesSidebar
+              icon={<AiOutlineForm />}
+              name={'Registros'}
             />
           </Link>
 
           <Link to="/ganhos">
             <OpcoesSidebar
               icon={<AiOutlineDollarCircle />}
-              name={'Ganhos'}
+              name={'Vendas'}
             />
           </Link>
 
@@ -67,26 +73,18 @@ function Sidebar() {
             />
           </Link>
 
-          <Link to="/variaveis">
-            <OpcoesSidebar
-              icon={<AiOutlineForm />}
-              name={'Cadastro'}
-            />
-          </Link>
-
           <Link to="/dados">
             <OpcoesSidebar
               icon={<AiOutlineFileSearch />}
               name={'Histórico'}
             /></Link>
 
-          <Link to="/perfil">
+          <Link to="/dashboard">
             <OpcoesSidebar
-              icon={<AiOutlineUser />}
-              name={'Perfil'}
+              icon={<AiOutlineFundProjectionScreen />}
+              name={'Dashboard'}
             />
           </Link>
-
 
         </VStack>
       </Box>

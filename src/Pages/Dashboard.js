@@ -25,35 +25,50 @@ function Dashboard() {
     const [postoId, setPostoId] = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    useEffect(() => {
-        const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        console.log('Stored Posto ID:', storedPostoId);
-        if (storedPostoId && storedPostoName) {
-            setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
-        }
-    }, []);
 
     const [chartData, setChartData] = useState({
         options: {
             chart: {
-                id: 'basic-bar',
-                type: 'bar',
+                id: 'basic-line',
+                type: 'line',
                 toolbar: {
-                    show: true
-                }
+                    show: true,
+                    tools: {
+                        download: true,
+                        reset: true,
+                        selection: false,
+                        zoom: false,
+                        zoomin: false,
+                        zoomout: false,
+                        pan: false
+                    },
+                    export: {
+                        csv: {
+                            filename: "RendimentosCSV",
+                            columnDelimiter: ',',
+                            headerCategory: 'Data',
+                            dateFormatter(timestamp) {
+                                return new Date(timestamp).toDateString();
+                            }
+                        },
+                    },
+                },
             },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '30%', // Largura das colunas ajustada
-                    endingShape: 'rounded'
-                }
+            stroke: {
+                width: 2,
+                dashArray: [5, 5]
             },
             xaxis: {
                 categories: [],
+               
                 labels: {
+                    
+                    formatter: function (val) {
+                        let date = new Date(val);
+                        return ('0' + date.getDate()).slice(-2) + '/'
+                             + ('0' + (date.getMonth() + 1)).slice(-2) + '/'
+                             + date.getFullYear();
+                    },
                     rotate: -45,
                     rotateAlways: true
                 }
@@ -72,7 +87,7 @@ function Dashboard() {
                     }
                 }
             },
-            colors: ['#008FFB', '#00E396', '#FEB019']
+            colors: ['#e83b3b', '#00E396', '#FEB019']
         },
         series: [
             {
@@ -91,12 +106,19 @@ function Dashboard() {
     });
 
     useEffect(() => {
-        const postoId = localStorage.getItem("postoId");
+        const storedPostoId = localStorage.getItem('postoId');
+        const storedPostoName = localStorage.getItem('postoName');
+        if (storedPostoId && storedPostoName) {
+            setPostoId(storedPostoId);
+            setPostoNome(storedPostoName);
+        }
+    }, []);
+
+    const buscarDadosDoGrafico = () => {
         axios.get(`http://localhost:8000/historico/${postoId}/historicoPorPosto/`)
         .then(response => {
             const dataFromApi = response.data;
-            console.log(response.data);
-
+            
             const categories = dataFromApi.map(item => item.data_historico);
             const despesaMensal = dataFromApi.map(item => parseFloat(item.despesa_mensal));
             const faturamentoMensal = dataFromApi.map(item => parseFloat(item.faturamento_mensal));
@@ -121,7 +143,14 @@ function Dashboard() {
         .catch(error => {
             console.error('Erro ao buscar dados da API:', error);
         });
-    }, [postoId]); 
+    };
+
+    useEffect(() => {
+        if (postoId) {
+            buscarDadosDoGrafico();
+        }
+    }, [postoId]);
+    
 
     const enviarFechamentoMes = () => {
         onOpen();
@@ -133,6 +162,7 @@ function Dashboard() {
         })
         .then(response => {
             console.log('Dados enviados com sucesso:', response);
+            buscarDadosDoGrafico();
             onClose();
         })
         .catch(error => {
@@ -161,10 +191,9 @@ function Dashboard() {
                 <Chart
                     options={chartData.options}
                     series={chartData.series}
-                    type="bar"
+                    type="line"
                     height={350}
                 />
-
                 <Flex justifyContent="flex-end">
                     <Button 
                         size="sm"
