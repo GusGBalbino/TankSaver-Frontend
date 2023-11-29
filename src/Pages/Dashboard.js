@@ -162,7 +162,7 @@ function Dashboard() {
     }
 
     const confirmarFechamentoMes = () => {
-        axios.post(`https://tanksaver-backend.onrender.com//historico/fecharMes/`, {
+        axios.post(`https://tanksaver-backend.onrender.com/historico/fecharMes/`, {
             posto_id: localStorage.getItem("postoId") 
         })
         .then(response => {
