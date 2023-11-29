@@ -64,10 +64,8 @@ function Dashboard() {
                 labels: {
                     
                     formatter: function (val) {
-                        let date = new Date(val);
-                        return ('0' + date.getDate()).slice(-2) + '/'
-                             + ('0' + (date.getMonth() + 1)).slice(-2) + '/'
-                             + date.getFullYear();
+                        let date = moment.tz(val, "YYYY-MM-DD", "America/Sao_Paulo");
+                        return date.format('DD/MM/YYYY');
                     },
                     rotate: -45,
                     rotateAlways: true
