@@ -3,6 +3,7 @@ import axios from 'axios';
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
 import Chart from 'react-apexcharts';
+import moment from 'moment-timezone';
 import {
     ChakraProvider,
     Grid,
@@ -74,6 +75,9 @@ function Dashboard() {
             yaxis: {
                 labels: {
                     formatter: function (val) {
+                        if (val === undefined) {
+                            return '';
+                        }
                         return val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
                     }
                 }
@@ -81,6 +85,9 @@ function Dashboard() {
             tooltip: {
                 y: {
                     formatter: function (val) {
+                        if (val === undefined) {
+                            return '';
+                        }
                         return val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
                     }
                 }
@@ -155,7 +162,7 @@ function Dashboard() {
     }
 
     const confirmarFechamentoMes = () => {
-        axios.post(`https://tanksaver-backend.onrender.com/historico/fecharMes/`, {
+        axios.post(`http://localhost:8000/historico/fecharMes/`, {
             posto_id: localStorage.getItem("postoId") 
         })
         .then(response => {
@@ -200,7 +207,7 @@ function Dashboard() {
                         borderColor={'#131328'}
                         _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
                         onClick={enviarFechamentoMes}>
-                            Fechar Mês
+                            Registrar dados
                     </Button>
                 </Flex>
 
@@ -221,11 +228,11 @@ function Dashboard() {
                         
                     >
                         <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                            Fechar Mês
+                            Registrar dados
                         </AlertDialogHeader>
 
                         <AlertDialogBody>
-                            Tem certeza que deseja fechar o mês?
+                            Tem certeza que deseja registrar os dados do mês no gráfico?
                         </AlertDialogBody>
 
                         <AlertDialogFooter>
