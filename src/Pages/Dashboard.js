@@ -3,6 +3,7 @@ import axios from 'axios';
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
 import Chart from 'react-apexcharts';
+import moment from 'moment-timezone';
 import {
     ChakraProvider,
     Grid,
@@ -64,10 +65,8 @@ function Dashboard() {
                 labels: {
                     
                     formatter: function (val) {
-                        let date = new Date(val);
-                        return ('0' + date.getDate()).slice(-2) + '/'
-                             + ('0' + (date.getMonth() + 1)).slice(-2) + '/'
-                             + date.getFullYear();
+                        let date = moment.tz(val, "YYYY-MM-DD", "America/Sao_Paulo");
+                        return date.format('DD/MM/YYYY');
                     },
                     rotate: -45,
                     rotateAlways: true
@@ -76,6 +75,9 @@ function Dashboard() {
             yaxis: {
                 labels: {
                     formatter: function (val) {
+                        if (val === undefined) {
+                            return '';
+                        }
                         return val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
                     }
                 }
@@ -83,6 +85,9 @@ function Dashboard() {
             tooltip: {
                 y: {
                     formatter: function (val) {
+                        if (val === undefined) {
+                            return '';
+                        }
                         return val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
                     }
                 }
@@ -202,7 +207,7 @@ function Dashboard() {
                         borderColor={'#131328'}
                         _hover={{ bg: '#FFBB0D', textColor: '#131328', borderColor: '#131328' }}
                         onClick={enviarFechamentoMes}>
-                            Fechar Mês
+                            Registrar dados
                     </Button>
                 </Flex>
 
@@ -223,11 +228,11 @@ function Dashboard() {
                         
                     >
                         <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                            Fechar Mês
+                            Registrar dados
                         </AlertDialogHeader>
 
                         <AlertDialogBody>
-                            Tem certeza que deseja fechar o mês?
+                            Tem certeza que deseja registrar os dados do mês no gráfico?
                         </AlertDialogBody>
 
                         <AlertDialogFooter>
