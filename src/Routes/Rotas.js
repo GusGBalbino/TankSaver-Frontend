@@ -12,12 +12,6 @@ import Dados from '../Pages/InfoBack';
 const Private = ({ Item }) => {
   const token = localStorage.getItem('token');
   return token ? <Item /> : <Navigate to="/" />;
-  // if (!token) {
-  //   alert('Realize no login para continuar.')
-  //   return <Navigate to="/" />;
-  // }
-
-  // return <Item />
 };
 
 const AppRoutes = () => {

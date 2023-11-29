@@ -118,9 +118,9 @@ function Dashboard() {
             setPostoNome(storedPostoName);
         }
     }, []);
-
+    
     const buscarDadosDoGrafico = () => {
-        axios.get(`http://localhost:8000/historico/${postoId}/historicoPorPosto/`)
+        axios.get(`https://tanksaver-backend.onrender.com/historico/${postoId}/historicoPorPosto/`)
         .then(response => {
             const dataFromApi = response.data;
             
@@ -174,7 +174,7 @@ function Dashboard() {
             console.error('Erro ao enviar dados:', error);
         });
     };
-    
+
     return (
         <ChakraProvider theme={theme}>
             <Grid

@@ -58,7 +58,11 @@ export function CadastrarVenda() {
 
         const fetchPagamentos = async () => {
             try {
+<<<<<<< HEAD
                 const response = await axios.get(`http://localhost:8000/tipoDePagamento/${postoId}/pagamentoPorPosto/`);
+=======
+                const response = await axios.get(`https://tanksaver-backend.onrender.com/tipoDePagamento/${postoId}/pagamentoPorPosto/`);
+>>>>>>> main
                 setPagamento(response.data);
 
             } catch (error) {
