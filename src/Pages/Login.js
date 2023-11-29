@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import {
   Box,
   FormControl,
@@ -12,33 +11,35 @@ import {
   Link,
   ChakraProvider,
   theme,
+  useToast,
+  FormErrorMessage
 } from '@chakra-ui/react';
 import logo from '../image/logo.svg';
 
-
 function Login() {
-  const history = useNavigate();
+  const navigate = useNavigate();
+  const toast = useToast();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [error, setError] = useState('');
 
-  const handleLogin = async () => {
+  const handleLogin = async (event) => {
+    event.preventDefault();
     try {
-      const response = await axios.post('https://tanksaver-backend.onrender.com/login/', { email, senha }); // Atualize a URL conforme necessário
+      const response = await axios.post('http://localhost:8000/login/', { email, senha });
       const { access_token, postoId, postoName } = response.data;
 
       if (access_token) {
-        localStorage.setItem('token', access_token);  
-        localStorage.setItem('postoId', postoId);   
+        localStorage.setItem('token', access_token);
+        localStorage.setItem('postoId', postoId);
         localStorage.setItem('postoName', postoName);
-        history('/dashboard'); 
-        console.log(postoId);
-        console.log(postoName);
+        navigate('/dashboard');
       }
-    } catch (error) {
-      console.error("Erro de login:", error);
+    } catch (err) {
+      setError("Erro de login, verifique suas credenciais.");
+      console.error("Erro de login:", err);
     }
-  }
-
+  };
 
   return (
     <ChakraProvider theme={theme}>
@@ -50,9 +51,10 @@ function Login() {
         minHeight="100vh"
         bgColor="#131328"
         p="4"
-        position="relative"
       >
         <Box
+          as="form"
+          onSubmit={handleLogin}
           display="flex"
           flexDirection="column"
           alignItems="center"
@@ -73,39 +75,39 @@ function Login() {
             Login
           </Text>
 
-          <FormControl id="username" mt="4" color="black" focusBorderColor="green.500">
+          <FormControl id="username" mt="4" isInvalid={error}>
             <FormLabel color="black">Usuário</FormLabel>
             <Input
               type="text"
               placeholder="Digite seu usuário..."
-              color="black"
-              _placeholder={{ color: 'gray.500' }}
               bg="white"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
 
-          <FormControl id="password" mt="4" isRequired color="black">
+          <FormControl id="password" mt="4" isInvalid={error}>
             <FormLabel color="black">Senha</FormLabel>
             <Input
               type="password"
               placeholder="Digite sua senha..."
-              color="black"
-              _placeholder={{ color: 'gray.500' }}
               bg="white"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
             />
+            {error && <FormErrorMessage>{error}</FormErrorMessage>}
           </FormControl>
 
           <Box mt="4" display="flex" flexDirection="column" alignItems="center">
-            <Link alignSelf="flex-end" marginRight="1px" marginLeft="220px" color="blue.600" to='/dashboard'>Esqueci a senha.</Link>
-            <Button onClick={handleLogin} bg="blue.900" color="white" mt="8" _hover={{ bg: 'gray.700' }}>
+            <Link alignSelf="flex-end" marginRight="1px" marginLeft="220px" color="blue.600" >
+              Esqueci a senha.
+            </Link>
+            <Button type="submit" bg="blue.900" color="white" mt="8" _hover={{ bg: 'gray.700' }}>
               Entrar
             </Button>
           </Box>
         </Box>
+
         <Box
           position="fixed"
           bottom="0"
@@ -117,10 +119,7 @@ function Login() {
           <img
             src={logo}
             alt="Logo TankSaver"
-            style={{
-              width: '200px',
-              height: 'auto',
-            }}
+            style={{ width: '200px', height: 'auto' }}
           />
         </Box>
       </Box>

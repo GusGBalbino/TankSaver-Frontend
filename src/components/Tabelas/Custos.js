@@ -32,8 +32,8 @@ function TabelaCustos() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://tanksaver-backend.onrender.com/custos/${id}`);
-            const resposta = await axios.get('https://tanksaver-backend.onrender.com/custos/');
+            await axios.delete(`http://localhost:8000/custos/${id}`);
+            const resposta = await axios.get('http://localhost:8000/custos/');
             setDadosCusto(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir funcionário:', error);
@@ -43,7 +43,7 @@ function TabelaCustos() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resposta = await axios.get(`https://tanksaver-backend.onrender.com/custos/${postoId}/custosPorPosto/`);
+                const resposta = await axios.get(`http://localhost:8000/custos/${postoId}/custosPorPosto/`);
                 setDadosCusto(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de responsável:', error);

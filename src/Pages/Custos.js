@@ -16,7 +16,7 @@ import { QuestionOutlineIcon } from '@chakra-ui/icons';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import Rodape from '../components/Rodape/Rodape';
 
-axios.defaults.baseURL = "https://tanksaver-backend.onrender.com";
+axios.defaults.baseURL = "http://localhost:8000/";
 
 function Custos() {
     const [dadosCompra, setDadosCompra] = useState([]);
@@ -41,10 +41,8 @@ function Custos() {
     useEffect(() => {
         const fetchDataCompra = async () => {
             try {
-                const resposta = await axios.get(`https://tanksaver-backend.onrender.com/compra/${postoId}/comprasPorPosto/`);
+                const resposta = await axios.get(`http://localhost:8000/compra/${postoId}/comprasPorPosto/`);
                 setDadosCompra(resposta.data);
-                setLoading(false);
-
             } catch (error) {
                 console.error('Erro ao obter dados de compra:', error);
             }
@@ -52,7 +50,7 @@ function Custos() {
 
         const fetchDataCusto = async () => {
             try {
-                const resposta = await axios.get(`https://tanksaver-backend.onrender.com/custos/${postoId}/custosPorPosto/`);
+                const resposta = await axios.get(`http://localhost:8000/custos/${postoId}/custosPorPosto/`);
                 setDadosCusto(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de custo:', error);
@@ -61,7 +59,7 @@ function Custos() {
 
         const fetchDataTaxa = async () => {
             try {
-                const resposta = await axios.get(`https://tanksaver-backend.onrender.com/taxas/${postoId}/taxasPorPosto/`);
+                const resposta = await axios.get(`http://localhost:8000/taxas/${postoId}/taxasPorPosto/`);
                 setDadosTaxas(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de taxas:', error);
@@ -70,7 +68,7 @@ function Custos() {
 
         const fetchDataFuncionario = async () => {
             try {
-                const resposta = await axios.get(`https://tanksaver-backend.onrender.com/funcionario/${postoId}/funcionariosPorPosto/`);
+                const resposta = await axios.get(`http://localhost:8000/funcionario/${postoId}/funcionariosPorPosto/`);
                 setDadosFuncionario(resposta.data);
             } catch (error) {
                 console.error('Erro ao obter dados de compra:', error);
@@ -82,6 +80,7 @@ function Custos() {
         fetchDataCusto();
         fetchDataTaxa();
         fetchDataFuncionario();
+        setLoading(false);
     }
 }, [postoId]);
 
@@ -116,23 +115,23 @@ function Custos() {
     const ultimaCompraGasolina = dadosCompra.length > 0
         ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 3)
         : null;
-
+    
     const ultimaCompraEtanol = dadosCompra.length > 0
         ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 4)
         : null;
-
+    
     const ultimaGasolinaA = dadosCompra.length > 0
         ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 5)
         : null;
-
+    
     const ultimaCompraDisel = dadosCompra.length > 0
         ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 6)
         : null;
-
+    
     const ultimaCompraDiselS = dadosCompra.length > 0
         ? dadosCompra.slice().reverse().find((compra) => compra.tipo_combustivel.id === 7)
         : null;
-
+    
 
     return (
         <ChakraProvider theme={theme}>
@@ -163,7 +162,7 @@ function Custos() {
                     <CaixaInfo title={'Gasolina Comum'} info={ultimaCompraGasolina?.preco_litro ? `R$ ${ultimaCompraGasolina.preco_litro}` : 'Sem registro'} />
                     <CaixaInfo title={'Gasolina Aditivada'} info={ultimaGasolinaA?.preco_litro ? `R$ ${ultimaGasolinaA.preco_litro}` : 'Sem registro'} />
                     <CaixaInfo title={'Etanol'} info={ultimaCompraEtanol?.preco_litro ? `R$ ${ultimaCompraEtanol.preco_litro}` : 'Sem registro'} />
-                    <CaixaInfo title={'Disel Comum'} info={ultimaCompraDisel?.preco_litro ? `R$ ${ultimaCompraDisel.preco_litro}` : 'Sem registro'} />
+                    <CaixaInfo title={'Diesel Comum'} info={ultimaCompraDisel?.preco_litro ? `R$ ${ultimaCompraDisel.preco_litro}` : 'Sem registro'} />
                     <CaixaInfo title={'Disel S10'} info={ultimaCompraDiselS?.preco_litro ? `R$ ${ultimaCompraDiselS.preco_litro}` : 'Sem registro'} />
                 </SimpleGrid>
 

@@ -34,7 +34,7 @@ function TabelaVenda() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`https://tanksaver-backend.onrender.com/venda/${postoId}/vendasPorPosto/`);
+                const response = await axios.get(`http://localhost:8000/venda/${postoId}/vendasPorPosto/`);
                 setDadosvenda(response.data);
             } catch (error) {
                 console.error('Erro ao obter dados de venda:', error);
@@ -47,8 +47,8 @@ function TabelaVenda() {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://tanksaver-backend.onrender.com/venda/${id}`);
-            const resposta = await axios.get('https://tanksaver-backend.onrender.com/venda/');
+            await axios.delete(`http://localhost:8000/venda/${id}`);
+            const resposta = await axios.get('http://localhost:8000/venda/');
             setDadosvenda(resposta.data);
         } catch (error) {
             console.error('Erro ao excluir.', error);

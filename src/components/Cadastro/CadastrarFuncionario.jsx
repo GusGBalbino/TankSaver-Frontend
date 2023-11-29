@@ -18,7 +18,7 @@ import {
     useToast
 } from '@chakra-ui/react';
 
-axios.defaults.baseURL = "https://tanksaver-backend.onrender.com";
+axios.defaults.baseURL = "http://localhost:8000/";
 
 export function CadastrarFuncionario() {
     const [nome, setNome] = useState('');
@@ -45,7 +45,7 @@ export function CadastrarFuncionario() {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.post('https://tanksaver-backend.onrender.com/funcionario/', {
+            const response = await axios.post('http://localhost:8000/funcionario/', {
                 nome, cargo, total_folha: totalFolha, posto: postoId
             });
 
