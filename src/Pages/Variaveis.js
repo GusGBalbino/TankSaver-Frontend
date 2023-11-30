@@ -16,6 +16,7 @@ import { AlterarResponsavel } from '../components/Cadastro/AlterarResponsavel';
 import { CadastrarTaxas } from '../components/Cadastro/CadastrarTaxas';
 import { CadastrarFuncionario } from '../components/Cadastro/CadastrarFuncionario';
 import { CadastrarCusto } from '../components/Cadastro/CadastrarCusto';
+import { CadastrarTipoPagamento } from '../components/Cadastro/CadastrarTipoPagamento';
 
 function Variaveis() {
     return (
@@ -44,6 +45,7 @@ function Variaveis() {
                 <CaixaInfo title={'Cadastro de Responsável'} info={<AlterarResponsavel/>} />
                 <CaixaInfo title={'Cadastro de Funcionário'} info={<CadastrarFuncionario/>} />
                 <CaixaInfo title={'Cadastro de Custos'} info={<CadastrarCusto />} />
+                <CaixaInfo title={'Cadastro de Tipo de Pagamento'} info={<CadastrarTipoPagamento />} />
                 
                 </SimpleGrid>
 
