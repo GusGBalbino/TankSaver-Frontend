@@ -17,8 +17,9 @@ import {
   AiOutlineFileSearch
 } from 'react-icons/ai';
 import Logo2 from '../image/Logo2.svg';
-import { OpcoesSidebar, LogoutSidebar } from '../components/Botoes/OpcoesSidebar';
+import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
 import { AlertaAtualizarDados } from '../components/Alerta/AlertaAtualizarDados';
+import { LogoutSidebar } from '../components/Botoes/LogoutSidebar';
 
 function Sidebar() {
   const handleLogout = () => {
@@ -90,7 +91,7 @@ function Sidebar() {
           </Link>
 
         </VStack>
-
+        
         <VStack spacing={2} alignItems="center" justifyContent="center">
           <Link to="/">
             <LogoutSidebar
