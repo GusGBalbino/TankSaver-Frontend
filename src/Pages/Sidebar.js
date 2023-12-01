@@ -17,7 +17,7 @@ import {
   AiOutlineFileSearch
 } from 'react-icons/ai';
 import Logo2 from '../image/Logo2.svg';
-import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
+import { OpcoesSidebar, LogoutSidebar } from '../components/Botoes/OpcoesSidebar';
 import { AlertaAtualizarDados } from '../components/Alerta/AlertaAtualizarDados';
 
 function Sidebar() {
