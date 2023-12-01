@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ChakraProvider,
   Box,
   VStack,
   theme,
   Image,
+  Button,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter as Router } from 'react-router-dom';
 
 import {
   AiOutlineFundProjectionScreen,
@@ -49,51 +50,50 @@ function Sidebar() {
       >
         <Image src={Logo2} boxSize={['2.5rem', '4rem']} alt="Logo TankSaver" />
 
-        <VStack spacing={2} alignItems="center" justifyContent="center">
-          <Link to="/perfil">
-            <OpcoesSidebar
-              icon={<AiOutlineUser />}
-              name={'Perfil'}
-            />
-          </Link>
+        <VStack spacing={2} alignItems="center" justifyContent="space-between" height="100%" w="100%">
+          <VStack spacing={2} alignItems="center">
+            <Link to="/perfil">
+              <OpcoesSidebar
+                icon={<AiOutlineUser />}
+                name={'Perfil'}
+              />
+            </Link>
 
-          <Link to="/variaveis">
-            <OpcoesSidebar
-              icon={<AiOutlineForm />}
-              name={'Registros'}
-            />
-          </Link>
+            <Link to="/variaveis">
+              <OpcoesSidebar
+                icon={<AiOutlineForm />}
+                name={'Registros'}
+              />
+            </Link>
 
-          <Link to="/ganhos">
-            <OpcoesSidebar
-              icon={<AiOutlineDollarCircle />}
-              name={'Vendas'}
-            />
-          </Link>
+            <Link to="/ganhos">
+              <OpcoesSidebar
+                icon={<AiOutlineDollarCircle />}
+                name={'Vendas'}
+              />
+            </Link>
 
-          <Link to="/custos">
-            <OpcoesSidebar
-              icon={<AiFillCalculator />}
-              name={'Custos'}
-            />
-          </Link>
+            <Link to="/custos">
+              <OpcoesSidebar
+                icon={<AiFillCalculator />}
+                name={'Custos'}
+              />
+            </Link>
 
-          <Link to="/dados">
-            <OpcoesSidebar
-              icon={<AiOutlineFileSearch />}
-              name={'Histórico'}
-            /></Link>
+            <Link to="/dados">
+              <OpcoesSidebar
+                icon={<AiOutlineFileSearch />}
+                name={'Histórico'}
+              /></Link>
 
-          <Link to="/dashboard">
-            <OpcoesSidebar
-              icon={<AiOutlineFundProjectionScreen />}
-              name={'Dashboard'}
-            />
-          </Link>
-
-        </VStack>
-
-        <VStack spacing={2} alignItems="center" justifyContent="center">
+            <Link to="/dashboard">
+              <OpcoesSidebar
+                icon={<AiOutlineFundProjectionScreen />}
+                name={'Dashboard'}
+              />
+            </Link>
+          </VStack>
+        
           <Link to="/">
             <LogoutSidebar
               icon={<AiOutlineLogout/>}
