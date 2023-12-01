@@ -14,7 +14,8 @@ import {
   AiFillCalculator,
   AiOutlineForm,
   AiOutlineUser,
-  AiOutlineFileSearch
+  AiOutlineFileSearch,
+  AiOutlineLogout
 } from 'react-icons/ai';
 import Logo2 from '../image/Logo2.svg';
 import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
@@ -91,7 +92,7 @@ function Sidebar() {
           </Link>
 
         </VStack>
-        
+
         <VStack spacing={2} alignItems="center" justifyContent="center">
           <Link to="/">
             <LogoutSidebar
