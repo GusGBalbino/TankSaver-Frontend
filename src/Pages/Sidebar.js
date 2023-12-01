@@ -5,6 +5,7 @@ import {
   VStack,
   theme,
   Image,
+  Button,
 } from '@chakra-ui/react';
 import { Link, BrowserRouter as Router } from 'react-router-dom';
 
@@ -14,13 +15,19 @@ import {
   AiFillCalculator,
   AiOutlineForm,
   AiOutlineUser,
-  AiOutlineFileSearch
+  AiOutlineFileSearch,
+  AiOutlineLogout
 } from 'react-icons/ai';
 import Logo2 from '../image/Logo2.svg';
 import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
 import { AlertaAtualizarDados } from '../components/Alerta/AlertaAtualizarDados';
+import { LogoutSidebar } from '../components/Botoes/LogoutSidebar';
 
 function Sidebar() {
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+  };
+
 
   return (
     <ChakraProvider theme={theme}>
@@ -87,6 +94,17 @@ function Sidebar() {
           </Link>
 
         </VStack>
+        
+        <VStack spacing={2} alignItems="center" justifyContent="center">
+          <Link to="/">
+            <LogoutSidebar
+              icon={<AiOutlineLogout/>}
+              name={'Logout'}
+              onClick={handleLogout}
+            />
+          </Link>
+        </VStack>
+        
       </Box>
     </ChakraProvider>
   );
