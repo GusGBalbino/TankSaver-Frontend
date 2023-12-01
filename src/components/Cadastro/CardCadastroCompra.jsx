@@ -29,7 +29,6 @@ export function CardCadastroCompra() {
     const [preco_litro, setValorCompra] = useState(0);
     const [data_compra, SetDataCompra] = useState('');
 
-    const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
 
     const toast = useToast();
@@ -49,23 +48,12 @@ export function CardCadastroCompra() {
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        if (storedPostoId && storedPostoName) {
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 
     const adicionarCompra = async () => {
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
-        console.log('Request Data:', {
-            tipo_combustivel: tipo_combustivel,
-            volume_compra,
-            preco_litro,
-            data_compra,
-            posto: postoId
-        });
 
         try {
             const response = await axios.post('https://tanksaver-backend.onrender.com/compra/', {
@@ -87,7 +75,6 @@ export function CardCadastroCompra() {
             onClose();
         } catch (error) {
             console.error('Erro ao adicionar compra:', error);
-            console.log('Erro na resposta:', error.response);
         }
     };
 

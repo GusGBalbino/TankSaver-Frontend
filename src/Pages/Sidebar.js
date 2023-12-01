@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ChakraProvider,
   Box,
@@ -6,7 +6,7 @@ import {
   theme,
   Image,
 } from '@chakra-ui/react';
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
   AiOutlineFundProjectionScreen,

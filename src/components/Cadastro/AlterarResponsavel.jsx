@@ -26,18 +26,13 @@ export function AlterarResponsavel() {
     const [telefone, setTelefone] = useState('');
 
     const [postoId, setPostoId] = useState('');
-    const [postoName, setPostoNome] = useState('');
 
     const toast = useToast();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        // console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
-        if (storedPostoId && storedPostoName) {
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 
@@ -77,9 +72,6 @@ export function AlterarResponsavel() {
     };
 
     const adicionarResponsavel = async () => {
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
-        console.log('Request Data:', { nome, cpf, email, telefone, posto: postoId });
 
         try {
             const response = await axios.post('https://tanksaver-backend.onrender.com/responsavel/', {
@@ -96,7 +88,6 @@ export function AlterarResponsavel() {
             onClose();
         } catch (error) {
             console.error('Erro ao adicionar responsável:', error);
-            console.log('Erro na resposta:', error.response);
         }
     };
 

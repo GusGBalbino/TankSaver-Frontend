@@ -19,7 +19,6 @@ import { CaixaInfo2 } from '../components/Informacoes/CaixaInfo2';
 import axios from 'axios';
 
 function Perfil() {
-    const [perfilData, setPerfilData] = useState(null);
     const [postoId, setPostoId] = useState(null);
     const [postoNome, setPostoNome] = useState(null);
     const [postoInfo, setPostoInfo] = useState(null);
@@ -31,12 +30,8 @@ function Perfil() {
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        // console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
-        if (storedPostoId && storedPostoName) {
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 
@@ -44,7 +39,6 @@ function Perfil() {
         const fetchPostoInfo = async () => {
             try {
                 const response = await axios.get(`https://tanksaver-backend.onrender.com/posto/${postoId}`);
-                // console.log("Informações do posto", response.data);
                 setPostoInfo(response.data);
                 setLoading(false);
 
@@ -56,7 +50,6 @@ function Perfil() {
         const fetchResponsavelInfo = async () => {
             try {
                 const response = await axios.get(`https://tanksaver-backend.onrender.com/responsavel/${postoId}/dadosPerfil/`);
-                console.log("Informações do responsavel", response.data);
                 setResponsavelInfo(response.data);
             } catch (error) {
                 console.error('Erro ao obter informações do responsavel:', error);

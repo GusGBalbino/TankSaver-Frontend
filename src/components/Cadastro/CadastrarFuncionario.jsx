@@ -26,23 +26,19 @@ export function CadastrarFuncionario() {
     const [totalFolha, setTotalFolha] = useState(0);
     const [postoId, setPostoId] = useState('');
 
-    const [postoName, setPostoNome] = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const toast = useToast();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
 
-        if (storedPostoId && storedPostoName) {
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 
     const adicionarFuncionario = async () => {
-        const token = localStorage.getItem('token');
 
         try {
             const response = await axios.post('https://tanksaver-backend.onrender.com/funcionario/', {
@@ -60,7 +56,6 @@ export function CadastrarFuncionario() {
             onClose();
         } catch (error) {
             console.error('Erro ao adicionar funcionário:', error);
-            console.log('Erro na resposta:', error.response);
         }
     };
 

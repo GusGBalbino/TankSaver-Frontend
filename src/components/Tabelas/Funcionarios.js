@@ -14,21 +14,14 @@ import { DeleteIcon } from '@chakra-ui/icons';
 
 
 function TabelaFuncionarios() {
-    const [dadosCustos, setDadosCustos] = useState([]);
     const [dadosFuncionarios, setDadosFuncionarios] = useState([]);
     
     const [postoId, setPostoId] = useState('');
-    const [postoName, setPostoNome] = useState('');
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
-        if (storedPostoId && storedPostoName) {
-            
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 

@@ -16,15 +16,11 @@ import { DeleteIcon } from '@chakra-ui/icons';
 function TabelaCompra() {
     const [dadosCompra, setDadosCompra] = useState([]);
     const [postoId, setPostoId] = useState('');
-    const [postoName, setPostoNome] = useState('');
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        if (storedPostoId && storedPostoName) {
-            
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 

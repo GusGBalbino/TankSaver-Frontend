@@ -22,7 +22,6 @@ import {
 } from '@chakra-ui/react';
 
 function Dashboard() {
-    const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -112,10 +111,8 @@ function Dashboard() {
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        if (storedPostoId && storedPostoName) {
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
     

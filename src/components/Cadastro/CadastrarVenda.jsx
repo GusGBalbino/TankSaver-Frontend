@@ -32,17 +32,14 @@ export function CadastrarVenda() {
     const [preco_litro, setValorVenda] = useState(0);
     const [data_venda, SetDataVenda] = useState('');
 
-    const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
 
     const toast = useToast();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        if (storedPostoId && storedPostoName) {
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 
@@ -74,16 +71,6 @@ export function CadastrarVenda() {
     
 
     const adicionarVenda = async () => {
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
-        console.log('Request Data:', {
-            tipo_combustivel: tipo_combustivel,
-            tipo_pagamento: tipo_pagamento,
-            volume_venda,
-            preco_litro,
-            data_venda,
-            posto: postoId
-        });
 
         try {
             const response = await axios.post('https://tanksaver-backend.onrender.com/venda/', {
@@ -106,7 +93,6 @@ export function CadastrarVenda() {
             onClose();
         } catch (error) {
             console.error('Erro ao adicionar venda:', error);
-            console.log('Erro na resposta:', error.response);
         }
     };
 
@@ -119,7 +105,7 @@ export function CadastrarVenda() {
     const OverlayOne = () => (
         <ModalOverlay
         bg='blackAlpha.300'
-        // backdropFilter='blur(10px) hue-rotate(90deg)'
+        
         />
     )
     const [overlay, setOverlay] = React.useState(<OverlayOne />)

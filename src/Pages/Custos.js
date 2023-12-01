@@ -25,16 +25,12 @@ function Custos() {
     const [dadosFuncionario, setDadosFuncionario] = useState([]);
     const [loading, setLoading] = useState(true);
     const [postoId, setPostoId] = useState('');
-    const [postoName, setPostoNome] = useState('');
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
         
-        if (storedPostoId && storedPostoName) {
-            
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 
@@ -88,7 +84,6 @@ function Custos() {
 
     if (loading) {
         return (
-          // Mostrar Spinner enquanto os dados estão sendo carregados
           <Flex
         height="100vh"
         justifyContent="center"

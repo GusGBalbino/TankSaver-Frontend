@@ -27,33 +27,18 @@ export function CadastrarTaxas() {
     const [comissao_bandeira, setValorBandeira] = useState(0);
     const [impostos_recolhidos, setValorImposto] = useState(0);
 
-    const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
 
     const toast = useToast();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        // console.log('Stored Posto ID:', storedPostoId);
-        // console.log('Stored Posto Name:', storedPostoName);
-        if (storedPostoId && storedPostoName) {
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 
     const adicionarTaxas = async () => {
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
-        console.log('Request Data:', {
-            ibran,
-            ibama,
-            agefis,
-            comissao_bandeira,
-            impostos_recolhidos,
-            posto: postoId
-        });
 
         try {
             const response = await axios.post('https://tanksaver-backend.onrender.com/taxas/', {
@@ -76,7 +61,6 @@ export function CadastrarTaxas() {
             onClose();
         } catch (error) {
             console.error('Erro ao adicionar taxas:', error);
-            console.log('Erro na resposta:', error.response);
         }
     };
 

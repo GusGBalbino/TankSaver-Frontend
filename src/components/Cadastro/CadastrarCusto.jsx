@@ -29,33 +29,18 @@ export function CadastrarCusto() {
     const [agua, setValorAgua] = useState(0);
     const [softwares, setValorSoftwares] = useState(0);
 
-    const [postoName, setPostoNome] = useState('');
     const [postoId, setPostoId] = useState('');
 
     const toast = useToast();
 
     useEffect(() => {
         const storedPostoId = localStorage.getItem('postoId');
-        const storedPostoName = localStorage.getItem('postoName');
-        if (storedPostoId && storedPostoName) {
+        if (storedPostoId) {
             setPostoId(storedPostoId);
-            setPostoNome(storedPostoName);
         }
     }, []);
 
    const adicionarCusto = async () => {
-    const token = localStorage.getItem('token');
-    console.log('Token:', token);
-    console.log('Request Data:', {
-        iptu,
-        custos_operacionais,
-        honorarios_contabeis,
-        telefone_internet,
-        luz,
-        agua,
-        softwares,
-        posto: postoId
-    });
 
     try {
         const response = await axios.post('https://tanksaver-backend.onrender.com/custos/', {
@@ -80,7 +65,6 @@ export function CadastrarCusto() {
         onClose();
     } catch (error) {
         console.error('Erro ao adicionar custos:', error);
-        console.log('Erro na resposta:', error.response);
     }
 };
 

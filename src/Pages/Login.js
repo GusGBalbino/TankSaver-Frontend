@@ -20,10 +20,12 @@ function Login() {
   const history = useNavigate();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
+    setIsLoading(true);
     try {
-      const response = await axios.post('https://tanksaver-backend.onrender.com/login/', { email, senha }); // Atualize a URL conforme necessário
+      const response = await axios.post('https://tanksaver-backend.onrender.com/login/', { email, senha });
       const { access_token, postoId, postoName } = response.data;
 
       if (access_token) {
@@ -31,11 +33,11 @@ function Login() {
         localStorage.setItem('postoId', postoId);   
         localStorage.setItem('postoName', postoName);
         history('/dashboard'); 
-        console.log(postoId);
-        console.log(postoName);
       }
     } catch (error) {
       console.error("Erro de login:", error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -101,7 +103,14 @@ function Login() {
 
           <Box mt="4" display="flex" flexDirection="column" alignItems="center">
             <Link alignSelf="flex-end" marginRight="1px" marginLeft="220px" color="blue.600" to='/dashboard'>Esqueci a senha.</Link>
-            <Button onClick={handleLogin} bg="blue.900" color="white" mt="8" _hover={{ bg: 'gray.700' }}>
+            <Button 
+              onClick={handleLogin} 
+              bg="blue.900" 
+              color="white" 
+              mt="8" 
+              _hover={{ bg: 'gray.700' }}
+              isLoading={isLoading}
+            >
               Entrar
             </Button>
           </Box>

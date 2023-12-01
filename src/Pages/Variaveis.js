@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import Sidebar from './Sidebar';
 import Rodape from '../components/Rodape/Rodape';
-import { CardCadastro, CardCadastroCompra } from '../components/Cadastro/CardCadastroCompra';
+import { CardCadastroCompra } from '../components/Cadastro/CardCadastroCompra';
 import { CaixaInfo } from '../components/Informacoes/CaixaInfo';
 import { CadastrarVenda } from '../components/Cadastro/CadastrarVenda';
 import { AlterarResponsavel } from '../components/Cadastro/AlterarResponsavel';
