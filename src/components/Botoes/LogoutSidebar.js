@@ -8,7 +8,7 @@ export function LogoutSidebar({ icon, name, onClick }) {
         <VStack alignItems="start" spacing={2} w="100%">
             <Button
                 leftIcon={React.cloneElement(icon, {
-                    color: isHovered ? '#131328' : '#FFBB0D',
+                    color: isHovered ? 'white' : '#FFBB0D',
                 })}
                 minW={['9rem', '9rem']}
                 maxW={['9rem', '9rem']}
@@ -19,8 +19,8 @@ export function LogoutSidebar({ icon, name, onClick }) {
                 borderColor="#8D7843"
                 justifyContent="flex-start"
                 _hover={{
-                    bg: '#FFBB0D',
-                    color: '#131328',
+                    bg: '#e83b3b',
+                    color: 'white',
                     borderColor: '#131328',
                 }}
                 onMouseEnter={() => setIsHovered(true)}
