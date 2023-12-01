@@ -21,6 +21,9 @@ import { OpcoesSidebar } from '../components/Botoes/OpcoesSidebar';
 import { AlertaAtualizarDados } from '../components/Alerta/AlertaAtualizarDados';
 
 function Sidebar() {
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+  };
 
   return (
     <ChakraProvider theme={theme}>
@@ -86,6 +89,16 @@ function Sidebar() {
             />
           </Link>
 
+        </VStack>
+
+        <VStack spacing={2} alignItems="center" justifyContent="center">
+          <Link to="/">
+            <LogoutSidebar
+              icon={<AiOutlineLogout/>}
+              name={'Logout'}
+              onClick={handleLogout}
+            />
+          </Link>
         </VStack>
       </Box>
     </ChakraProvider>
