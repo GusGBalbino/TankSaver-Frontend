@@ -105,8 +105,8 @@ function Ganhos() {
                 <Sidebar />
 
                 <Heading textAlign={'center'} fontWeight={'15px'} >
-                    Ganhos
-                    <Tooltip label="Direcione-se à opção de Cadastro." fontSize="md" >
+                    Vendas
+                    <Tooltip label="Direcione-se à opção de Registros." fontSize="md" >
                         <QuestionOutlineIcon className="small-icon" style={{ transform: 'scale(0.5)' }} />
                     </Tooltip></Heading>
                 <Divider marginTop={'1rem'} />

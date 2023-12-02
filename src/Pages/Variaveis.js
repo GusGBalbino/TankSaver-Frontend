@@ -34,7 +34,7 @@ function Variaveis() {
                 >
 
                 <Sidebar />
-                <Heading textAlign={'center'} fontWeight={'15px'}>Atualização de Dados </Heading>
+                <Heading textAlign={'center'} fontWeight={'15px'}>Registro de Dados </Heading>
                 <Divider marginTop={'1rem'} marginBottom={'3rem'} />
 
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(350px, 1fr))'>
