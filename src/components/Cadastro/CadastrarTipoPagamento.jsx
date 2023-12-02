@@ -18,7 +18,7 @@ import {
     useToast,
 } from '@chakra-ui/react';
 
-export function CadastrarTipoPagamento() {
+export function CadastrarTipoPagamento({ onTipoPagamentoAdded }) {
     const [tipoPagamento, setTipoPagamento] = useState('');
     const [taxa, setTaxa] = useState('');
     const [postoId, setPostoId] = useState(localStorage.getItem('postoId'));
@@ -41,7 +41,7 @@ export function CadastrarTipoPagamento() {
                 duration: 3000,
                 isClosable: true,
             });
-
+            onTipoPagamentoAdded();
             onClose();
         } catch (error) {
             console.error('Erro ao adicionar tipo de pagamento:', error);

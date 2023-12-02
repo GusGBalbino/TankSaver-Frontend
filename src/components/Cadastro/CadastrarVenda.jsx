@@ -23,7 +23,7 @@ import {
 
 import { format } from 'date-fns';
 
-export function CadastrarVenda() {
+export function CadastrarVenda({ reloadPagamentos }) {
     const [tipo_combustiveis, setCombustiveis] = useState([]);
     const [tipo_combustivel, SetTipo] = useState('');
     const [pagamento, setPagamento] = useState([]);
@@ -66,7 +66,7 @@ export function CadastrarVenda() {
 
         fetchCombustiveis();
         fetchPagamentos();
-    }, [postoId]);
+    }, [postoId, reloadPagamentos]);
 
     
 
