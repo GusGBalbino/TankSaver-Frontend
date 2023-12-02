@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     ChakraProvider,
     Grid,
@@ -19,6 +19,12 @@ import { CadastrarCusto } from '../components/Cadastro/CadastrarCusto';
 import { CadastrarTipoPagamento } from '../components/Cadastro/CadastrarTipoPagamento';
 
 function Variaveis() {
+    const [reloadPagamentos, setReloadPagamentos] = useState(false);
+
+    const handleTipoPagamentoAdded = () => {
+        setReloadPagamentos(true);
+    };
+
     return (
         <ChakraProvider theme={theme}>
 
@@ -40,12 +46,12 @@ function Variaveis() {
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(350px, 1fr))'>
 
                 <CaixaInfo title={'Cadastro de Compras'} info={<CardCadastroCompra/>} />
-                <CaixaInfo title={'Cadastro de Venda'} info={<CadastrarVenda/>} />
+                <CaixaInfo title={'Cadastro de Venda'} info={<CadastrarVenda reloadPagamentos={reloadPagamentos} />} />
                 <CaixaInfo title={'Cadastro de Taxas e Impostos'} info={<CadastrarTaxas/>} />
                 <CaixaInfo title={'Cadastro de Responsável'} info={<AlterarResponsavel/>} />
                 <CaixaInfo title={'Cadastro de Funcionário'} info={<CadastrarFuncionario/>} />
                 <CaixaInfo title={'Cadastro de Custos'} info={<CadastrarCusto />} />
-                <CaixaInfo title={'Cadastro de Tipo de Pagamento'} info={<CadastrarTipoPagamento />} />
+                <CaixaInfo title={'Cadastro de Tipo de Pagamento'} info={<CadastrarTipoPagamento onTipoPagamentoAdded={handleTipoPagamentoAdded} />} />
                 
                 </SimpleGrid>
 
