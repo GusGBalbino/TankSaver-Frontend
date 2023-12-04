@@ -61,7 +61,7 @@ function TabelaFuncionarios() {
                     <Tr>
                         <Th fontSize={'sm'} color={'#131328'}>Nome</Th>
                         <Th fontSize={'sm'} color={'#131328'}>Cargo</Th>
-                        <Th fontSize={'sm'} color={'#131328'}>Salário</Th>
+                        <Th fontSize={'sm'} color={'#131328'}>Folha de pagamento</Th>
                     </Tr>
                 </Thead>
 

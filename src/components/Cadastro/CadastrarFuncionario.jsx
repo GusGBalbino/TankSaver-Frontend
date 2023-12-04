@@ -99,7 +99,7 @@ export function CadastrarFuncionario() {
                                 marginBottom={'15px'}
                                 variant='filled' />
 
-                            <FormLabel>Salário Bruto</FormLabel>
+                            <FormLabel>Folha de pagamento</FormLabel>
                             <InputGroup>
                                 <InputLeftElement
                                     pointerEvents='none'
