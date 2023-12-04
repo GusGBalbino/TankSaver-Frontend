@@ -45,13 +45,13 @@ function Variaveis() {
 
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(350px, 1fr))'>
 
-                <CaixaInfo title={'Cadastro de Compras'} info={<CardCadastroCompra/>} />
-                <CaixaInfo title={'Cadastro de Venda'} info={<CadastrarVenda reloadPagamentos={reloadPagamentos} />} />
-                <CaixaInfo title={'Cadastro de Taxas e Impostos'} info={<CadastrarTaxas/>} />
-                <CaixaInfo title={'Cadastro de Responsável'} info={<AlterarResponsavel/>} />
-                <CaixaInfo title={'Cadastro de Funcionário'} info={<CadastrarFuncionario/>} />
-                <CaixaInfo title={'Cadastro de Custos'} info={<CadastrarCusto />} />
-                <CaixaInfo title={'Cadastro de Tipo de Pagamento'} info={<CadastrarTipoPagamento onTipoPagamentoAdded={handleTipoPagamentoAdded} />} />
+                <CaixaInfo title={'Registro de Compras'} info={<CardCadastroCompra/>} />
+                <CaixaInfo title={'Registro de Vendas'} info={<CadastrarVenda reloadPagamentos={reloadPagamentos} />} />
+                <CaixaInfo title={'Registro de Taxas e Impostos'} info={<CadastrarTaxas/>} />
+                <CaixaInfo title={'Registro de Responsável'} info={<AlterarResponsavel/>} />
+                <CaixaInfo title={'Registro de Funcionário'} info={<CadastrarFuncionario/>} />
+                <CaixaInfo title={'Registro de Custos'} info={<CadastrarCusto />} />
+                <CaixaInfo title={'Registro  de Tipos de Pagamento'} info={<CadastrarTipoPagamento onTipoPagamentoAdded={handleTipoPagamentoAdded} />} />
                 
                 </SimpleGrid>
 
